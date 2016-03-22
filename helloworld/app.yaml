@@ -1,0 +1,10 @@
+application: gtass-1256
+version: 1
+runtime: php55
+api_version: 1
+
+handlers:
+- url: /
+  script: guestbook.php
+- url: /sign
+  script: sign.php

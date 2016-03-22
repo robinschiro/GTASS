@@ -1,0 +1,37 @@
+Meeting 3/22/16
+----------------------
+Goal: Determine how to divide the work for the project
+----------------------
+
+
+Code Maintenance
+- Host code on Google cloud platform
+    - ACTION: Create repo
+
+
+Sequence of development:
+- 2.4: Create user interface for the system admin
+    - One admin account, username = admin   
+    - Have dropdowns for selecting semester and year.
+    - At minimum, jquery calendar for date selection.    
+    - When form is submitted, here is order of execution:    
+        - Create all users that don't already exist (i.e. insert rows in User table).
+        - For GC Chair, instead of getting name (first, last), we will request username.
+        - Once all necessary users have been created, insert new entry into Session table.
+    
+-
+    
+Roles:
+    - Back-end:
+        -Sammy
+        -Robin
+    - Front-end:
+        -Julian
+        -Alex
+    
+Things to do:
+
+- Robin to create ER diagram
+- Robin: Create repository for code
+- Julian to create Use Case diagram
+- Julian and Alex: Design a view for admin
