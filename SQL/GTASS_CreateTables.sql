@@ -2,8 +2,8 @@
 
 CREATE TABLE Role
 (
-    RoleID  INTEGER,
-    Name    VARCHAR(20)     NOT NULL,
+    RoleID    INTEGER,
+    RoleName  VARCHAR(20)     NOT NULL,
     
     PRIMARY KEY (RoleID)
 )
@@ -26,7 +26,6 @@ CREATE TABLE User
     RoleID          INTEGER,
     
     PRIMARY KEY     (Username),
-    UNIQUE          (PID),
     FOREIGN KEY     (RoleID)    REFERENCES Role(RoleID)
 )
 
@@ -42,8 +41,8 @@ CREATE TABLE Nominee
     PassedSpeak             INTEGER,
     GPA                     REAL,
 
-    PRIMARY KEY (Username),
-    FOREIGN KEY (Username)      REFERENCES User(Username),
+    PRIMARY KEY (Username)      REFERENCES User(Username),
+    UNIQUE      (PID)),
     FOREIGN KEY (PassedSpeak)   REFERENCES PassedSpeakResponse(ResponseID)
 )
 
@@ -80,14 +79,27 @@ CREATE TABLE PublicationRecord
     FOREIGN KEY (NomineeUsername) REFERENCES Nominee (Username)    
 )
 
+-- GC member account information is saved in the User table.
+CREATE TABLE Session
+(
+    SessionID               VARCHAR(10),
+    NominationDeadline      DATETIME,
+    ResponseDeadline        DATETIME,
+    VerificationDeadline    DATETIME,
+    GCChairUsername         VARCHAR(20),
+        
+    PRIMARY KEY (SessionID),
+    FOREIGN KEY (GCChairUsername) REFERENCES User(Username)
+)
+
+
 -- The Nominee's PID is not a foreign key because the nominee may not have a 
 -- user account yet. If the Nominee's PID (and thus user details) is in the 
 -- system, the associated user information will not be needed ( that is, the
 -- fields will already be filled in).
 CREATE TABLE NominationForm
 (
-    -- The FormID will be auto-incremented for each entry in the table.
-    FormID                  INTEGER,
+    SessionID               INTEGER,
     NominatorUsername       VARCHAR(20)     NOT NULL,
     PID                     VARCHAR(10)     NOT NULL,                
     FirstName               VARCHAR(20)     NOT NULL,
@@ -98,8 +110,9 @@ CREATE TABLE NominationForm
     IsNewGradStudent        BIT,
     Timestamp               DATETIME,
 
-    PRIMARY KEY (FormID),
-    FOREIGN KEY (NominatorUsername) REFERENCES User(Username)   
+    PRIMARY KEY (SessionID, NominatorUsername, PID),
+    FOREIGN KEY (SessionID) REFERENCES Session(SessionID),
+    FOREIGN KEY (NominatorUsername) REFERENCES User(Username)
 )
 
 -- When the nominee is emailed for the first time, he will be prompted to 
@@ -107,15 +120,41 @@ CREATE TABLE NominationForm
 -- as default values when creating the account. Once the account has been
 -- created, the user will be redirected to the info form. Several fields of the 
 -- info form will be filled with details from the nominee's account. Modified
--- field are saved to the corresponding entry in the 'Nominee' table.
+-- fields are saved to the corresponding entry in the 'Nominee' table.
 CREATE TABLE NomineeInfoForm
 (
-    -- The FormID will be auto-incremented for each entry in the table.
-    FormID                  INTEGER,
+    SessionID               INTEGER,
     NominatorUsername       VARCHAR(20),
     NomineeUsername         VARCHAR(20),
     Timestamp               DATETIME        NOT NULL,            
     
-    PRIMARY KEY (FormID),
-    FOREIGN KEY (NominatorUsername) REFERENCES User (Username)
+    PRIMARY KEY (SessionID, NominatorUsername, NomineeeUsername),
+    FOREIGN KEY (SessionID)         REFERENCES Session(SessionID),
+    FOREIGN KEY (NominatorUsername) REFERENCES User(Username),
+    FOREIGN KEY (NomineeeUsername)  REFERENCES Nominee(Username)
 )
+
+
+CREATE TABLE Score
+(
+    SessionID           VARCHAR(10),
+    GCUsername          VARCHAR(20),
+    NomineeeUsername    VARCHAR(20),
+    Score               INTEGER,
+    CHECK (Score >= 1) AND (Score <= 100),
+    
+    PRIMARY KEY (SessionID, GCUsername, NomineeUsername),
+    FOREIGN KEY (SessionID)         REFERENCES Session(SessionID),
+    FOREIGN KEY (GCUsername)        REFERENCES User(Username),
+    FOREIGN KEY (NomineeeUsername)  REFERENCES Nominee(Username)
+)
+
+
+
+
+
+
+
+
+
+
