@@ -1,6 +1,6 @@
 <html>
 <head>
-<link href="sucessLoginAdmin.css" type="text/css" rel="stylesheet" >
+<link href="public/stylesheets/sucessLoginAdmin.css" type="text/css" rel="stylesheet" >
 <title>GTASS</title>
 </head>
 

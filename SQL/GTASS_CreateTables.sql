@@ -118,6 +118,9 @@ CREATE TABLE PublicationRecord
     FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)  
 )
 
+/*
+    Nominator verifies nominees inputted data
+ */
 CREATE TABLE VerificationRecord
 (
     SessionID           INTEGER,
