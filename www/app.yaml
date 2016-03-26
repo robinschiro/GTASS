@@ -5,8 +5,4 @@ api_version: 1
 
 handlers:
 - url: /
-  script: guestbook.php
-- url: /sign
-  script: sign.php
-- url: /test
   script: /view/index.php
