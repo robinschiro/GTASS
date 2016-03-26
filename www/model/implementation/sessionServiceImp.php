@@ -16,7 +16,7 @@ class sessionServiceImp implements sessionService
      * Will insert data to create new session
      * requires data from user table so get that data in admin controller and pass it
      */
-    function createService()
+    function createService($nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername)
     {
         // TODO: Implement createService() method.
     }

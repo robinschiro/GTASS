@@ -11,5 +11,5 @@ interface sessionService
     /**
      * Will insert data to create new session
      */
-    function createService();
+    function createService($nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername);
 }
