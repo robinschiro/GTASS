@@ -29,56 +29,6 @@ CREATE TABLE User
     FOREIGN KEY     (RoleID)    REFERENCES Role(RoleID)
 )
 
-CREATE TABLE Nominee
-(
-    Username                VARCHAR(20),
-    PID                     VARCHAR(10),
-    PhoneNumber             VARCHAR(10),
-    AdvisorFirstName        VARCHAR(20),
-    AdvisorLastName         VARCHAR(20),
-    IsCSGradStudent         BIT,
-    NumberOfSemestersAsGTA  INTEGER,
-    PassedSpeak             INTEGER,
-    GPA                     REAL,
-
-    PRIMARY KEY (Username)      REFERENCES User(Username),
-    UNIQUE      (PID)),
-    FOREIGN KEY (PassedSpeak)   REFERENCES PassedSpeakResponse(ResponseID)
-)
-
-CREATE TABLE PreviousAdvisorRecord
-(
-    NomineeUsername     VARCHAR(20),
-    StartDate           DATETIME,
-    EndDate             DATETIME,
-    AdvisorFirstName    VARCHAR(20)     NOT NULL,
-    AdvisorLastName     VARCHAR(20)     NOT NULL,
-    
-    -- Assumption: A nominee cannot have two advisors during same time period
-    PRIMARY KEY (NomineeUsername, StartDate, EndDate),
-    FOREIGN KEY (NomineeUsername) REFERENCES Nominee (Username)    
-)
-
-CREATE TABLE CourseRecord
-(
-    NomineeUsername     VARCHAR(20),
-    CourseName          VARCHAR(10),
-    Grade               VARCHAR(2)      NOT NULL,
-    
-    PRIMARY KEY (NomineeUsername, CourseName),
-    FOREIGN KEY (NomineeUsername) REFERENCES Nominee (Username)    
-)
-
-CREATE TABLE PublicationRecord
-(
-    NomineeUsername     VARCHAR(20),
-    Title               VARCHAR(100),
-    Citation            VARCHAR(MAX)
-    
-    PRIMARY KEY (NomineeUsername, Title),
-    FOREIGN KEY (NomineeUsername) REFERENCES Nominee (Username)    
-)
-
 -- GC member account information is saved in the User table.
 CREATE TABLE Session
 (
@@ -92,16 +42,12 @@ CREATE TABLE Session
     FOREIGN KEY (GCChairUsername) REFERENCES User(Username)
 )
 
-
--- The Nominee's PID is not a foreign key because the nominee may not have a 
--- user account yet. If the Nominee's PID (and thus user details) is in the 
--- system, the associated user information will not be needed ( that is, the
--- fields will already be filled in).
+-- Assumption: A nominee can have two nominators during the same session.
 CREATE TABLE NominationForm
 (
     SessionID               INTEGER,
+    PID                     VARCHAR(10),
     NominatorUsername       VARCHAR(20)     NOT NULL,
-    PID                     VARCHAR(10)     NOT NULL,                
     FirstName               VARCHAR(20)     NOT NULL,
     LastName                VARCHAR(20)     NOT NULL,
     EmailAddress            VARCHAR(40)     NOT NULL,
@@ -110,36 +56,83 @@ CREATE TABLE NominationForm
     IsNewGradStudent        BIT,
     Timestamp               DATETIME,
 
-    PRIMARY KEY (SessionID, NominatorUsername, PID),
-    FOREIGN KEY (SessionID) REFERENCES Session(SessionID),
+    PRIMARY KEY (SessionID, PID),
+    FOREIGN KEY (SessionID)         REFERENCES Session(SessionID),
     FOREIGN KEY (NominatorUsername) REFERENCES User(Username)
 )
 
--- When the nominee is emailed for the first time, he will be prompted to 
--- create a user account. The information inputted by the nominator will serve
--- as default values when creating the account. Once the account has been
--- created, the user will be redirected to the info form. Several fields of the 
--- info form will be filled with details from the nominee's account. Modified
--- fields are saved to the corresponding entry in the 'Nominee' table.
+-- If a nominee ever needs to update his info form, the corresponding 
+-- verification record must be deleted.
 CREATE TABLE NomineeInfoForm
 (
     SessionID               INTEGER,
-    NominatorUsername       VARCHAR(20),
-    NomineeUsername         VARCHAR(20),
-    Timestamp               DATETIME        NOT NULL,            
-    
-    PRIMARY KEY (SessionID, NominatorUsername, NomineeeUsername),
-    FOREIGN KEY (SessionID)         REFERENCES Session(SessionID),
-    FOREIGN KEY (NominatorUsername) REFERENCES User(Username),
-    FOREIGN KEY (NomineeeUsername)  REFERENCES Nominee(Username)
+    PID                     VARCHAR(10),
+    FirstName               VARCHAR(20),
+    LastName                VARCHAR(20),
+    PhoneNumber             VARCHAR(10),
+    AdvisorFirstName        VARCHAR(20),
+    AdvisorLastName         VARCHAR(20),
+    IsCSGradStudent         BIT,
+    NumberOfSemestersAsGTA  INTEGER,
+    PassedSpeak             INTEGER,
+    GPA                     REAL,
+    Timestamp               DATETIME        NOT NULL,  
+
+    PRIMARY KEY (SessionID, PID) REFERENCES NominationForm(SessionID, PID)
+    FOREIGN KEY (PassedSpeak)    REFERENCES PassedSpeakResponse(ResponseID)
 )
 
+CREATE TABLE PreviousAdvisorRecord
+(
+    SessionID           INTEGER,
+    PID                 VARCHAR(10),
+    StartDate           DATETIME,
+    EndDate             DATETIME,
+    AdvisorFirstName    VARCHAR(20)     NOT NULL,
+    AdvisorLastName     VARCHAR(20)     NOT NULL,
+    
+    -- Assumption: A nominee cannot have two advisors during same time period
+    PRIMARY KEY (SessionID, PID, StartDate, EndDate),
+    FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)
+)
+
+CREATE TABLE CourseRecord
+(
+    SessionID           INTEGER,
+    PID                 VARCHAR(10),
+    CourseName          VARCHAR(10),
+    Grade               VARCHAR(2)      NOT NULL,
+    
+    PRIMARY KEY (SessionID, PID, CourseName),
+    FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)   
+)
+
+CREATE TABLE PublicationRecord
+(
+    SessionID           INTEGER,
+    PID                 VARCHAR(10),
+    Title               VARCHAR(100),
+    Citation            VARCHAR(MAX)
+    
+    PRIMARY KEY (SessionID, PID, Title),
+    FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)  
+)
+
+CREATE TABLE VerificationRecord
+(
+    SessionID           INTEGER,
+    PID                 VARCHAR(10),
+    Timestamp           DATETIME        NOT NULL,
+
+    PRIMARY KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)
+)
 
 CREATE TABLE Score
 (
     SessionID           VARCHAR(10),
     GCUsername          VARCHAR(20),
     NomineeeUsername    VARCHAR(20),
+    Comment             VARCHAR(MAX),
     Score               INTEGER,
     CHECK (Score >= 1) AND (Score <= 100),
     
@@ -148,13 +141,5 @@ CREATE TABLE Score
     FOREIGN KEY (GCUsername)        REFERENCES User(Username),
     FOREIGN KEY (NomineeeUsername)  REFERENCES Nominee(Username)
 )
-
-
-
-
-
-
-
-
 
 
