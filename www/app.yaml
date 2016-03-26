@@ -8,3 +8,5 @@ handlers:
   script: guestbook.php
 - url: /sign
   script: sign.php
+- url: /test
+  script: /view/index.php
