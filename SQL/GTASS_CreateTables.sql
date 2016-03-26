@@ -42,7 +42,7 @@ CREATE TABLE Session
     FOREIGN KEY (GCChairUsername) REFERENCES User(Username)
 )
 
--- Assumption: A nominee can have two nominators during the same session.
+-- Assumption: A nominee cannot have two nominators during the same session.
 CREATE TABLE NominationForm
 (
     SessionID               INTEGER,
@@ -63,16 +63,16 @@ CREATE TABLE NominationForm
 
 -- If a nominee ever needs to update his info form, the corresponding 
 -- verification record must be deleted.
+-- Also, if the nominee chooses to update his FirstName, LastName or
+-- IsCSGradStudent attributes, the update must be performed on the corresponding
+-- NominationForm row. The timestamp of that row should not be updated.
 CREATE TABLE NomineeInfoForm
 (
     SessionID               INTEGER,
     PID                     VARCHAR(10),
-    FirstName               VARCHAR(20),
-    LastName                VARCHAR(20),
     PhoneNumber             VARCHAR(10),
     AdvisorFirstName        VARCHAR(20),
     AdvisorLastName         VARCHAR(20),
-    IsCSGradStudent         BIT,
     NumberOfSemestersAsGTA  INTEGER,
     PassedSpeak             INTEGER,
     GPA                     REAL,
