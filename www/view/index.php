@@ -1,7 +1,7 @@
 <?php
-//    require_once('../model/implementation/userServiceImp.php');
-//    $userServ = new userServiceImp();
-//    $userServ->createUser("myUsername", "myPassword","myfirstname", "mylastname", "myemail@email.com");
+   require_once('../model/implementation/userServiceImp.php');
+   $userServ = new userServiceImp();
+   $userServ->createUser("myUsername", "myPassword","myfirstname", "mylastname", "myemail@email.com");
 ?>
 
 <html lang="en">
