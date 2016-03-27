@@ -6,3 +6,9 @@ api_version: 1
 handlers:
 - url: /
   script: /view/index.php
+
+- url: /admin
+  script: /view/adminFormTest.php
+
+- url: /createsession
+  script: /controller/adminController.php

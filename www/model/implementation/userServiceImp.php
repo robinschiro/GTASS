@@ -8,7 +8,7 @@
  */
 
 require_once('../connection.php');
-require_once('../model/userService.php');
+require_once('model/userService.php');
 
 class userServiceImp implements userService
 {
@@ -27,15 +27,15 @@ class userServiceImp implements userService
                                         ':fname' => htmlspecialchars($firstName),
                                         ':lname' => htmlspecialchars($lastName) ,
                                         ':eAddress' => htmlspecialchars($emailAddress),
-                                        ':rID' => 1  //default to normal user??
+                                        ':rID' => 2  //default to normal user??
             ));
 
-            echo 'user seems to be created';
+            echo 'user seems to be created <br>';
 
             return;
         }
 
-        echo 'db == null';
+        echo 'db == null <br>';
 
     }
 
@@ -46,5 +46,21 @@ class userServiceImp implements userService
     function getUser($username)
     {
         // TODO: Implement getUser() method.
+    }
+
+    /**
+     *
+     */
+    function login()
+    {
+        // TODO: Implement login() method.
+    }
+
+    /**
+     * destroy session
+     */
+    function logout()
+    {
+        // TODO: Implement logout() method.
     }
 }

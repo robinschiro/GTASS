@@ -22,13 +22,22 @@ class user
      * @param $password
      * @param $email
      */
-    public function __construct($username, $firstName, $lastName, $password, $email)
+//    public function __construct($username, $firstName, $lastName, $password, $email)
+//    {
+//        $this->username = $username;
+//        $this->firstName = $firstName;
+//        $this->lastName = $lastName;
+//        $this->password = $password;
+//        $this->email = $email;
+//    }
+
+    public function __construct()
     {
-        $this->username = $username;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->password = $password;
-        $this->email = $email;
+        $this->username = null;
+        $this->firstName = null;
+        $this->lastName = null;
+        $this->password = null;
+        $this->email = null;
     }
 
     /**
@@ -110,19 +119,5 @@ class user
     {
         $this->email = $email;
     }
-
-
-    /*
-     * Returns list of all users - test
-     */
-    public static function all(){
-        $db = Db::getInstance();
-        $req = $db->query('SELECT * FROM * guestbook.users');
-
-        foreach ($req->fetchAll as $post){
-            echo $post;
-        }
-    }
-
 
 }

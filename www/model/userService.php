@@ -24,6 +24,15 @@ interface userService {
      */
     function getUser($username);
 
+    /**
+     * 
+     */
+    function login();
+
+    /**
+     * destroy session
+     */
+    function logout();
 
 
 }

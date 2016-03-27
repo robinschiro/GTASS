@@ -8,6 +8,7 @@
  */
 
 require_once('../connection.php');
+require_once('model/sessionService.php');
 
 class sessionServiceImp implements sessionService
 {
