@@ -66,8 +66,11 @@ class userServiceImp implements userService
         //connect to db
         $db = db_connect();
 
+        //TODO: add try catch on queries
+        //TODO: look at taskmaster example of using list of objects for posts
+
         //query user
-        $statement = $db->prepare('SELECT Username, Password, RoleID FROM user');
+        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User');
         $statement->execute();
         $result = $statement->fetchAll();
         $passDB = $result[0]['Password'];

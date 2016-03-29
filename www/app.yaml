@@ -21,3 +21,6 @@ handlers:
 
 - url: /logout
   script: /controller/loginController.php
+
+- url: /test
+  script: /view/adminFormTest.php
