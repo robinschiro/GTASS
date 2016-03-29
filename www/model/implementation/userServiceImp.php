@@ -66,14 +66,23 @@ class userServiceImp implements userService
         //connect to db
         $db = db_connect();
 
+//        if($db == null){
+//            echo "db is null that's the issue<br>";
+//        }
+
         //TODO: add try catch on queries
         //TODO: look at taskmaster example of using list of objects for posts
 
         //query user
-        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User');
+        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User WHERE Username=:user');
+        $statement->bindValue(':user', $username);
         $statement->execute();
         $result = $statement->fetchAll();
         $passDB = $result[0]['Password'];
+
+//        echo $result[0]['Username'];
+//        echo $result[0]['Password'];
+//        echo $result[0]['RoleID'];
 
         //echo 'user seems to be created <br>';
 
