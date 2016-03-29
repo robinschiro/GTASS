@@ -28,7 +28,7 @@ class userServiceImp implements userService
     {
         $db = db_connect();
         if ($db != null) {
-            $statement = $db->prepare('INSERT INTO user (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
+            $statement = $db->prepare('INSERT INTO User (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
                                         VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
             $statement->execute(array(':uname' => htmlspecialchars($username),
                 ':pass' => htmlspecialchars($password),
@@ -67,17 +67,20 @@ class userServiceImp implements userService
         $db = db_connect();
 
         //query user
-        $statement = $db->prepare('SELECT Username, Password, RoleID FROM user');
+        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User');
         $statement->execute();
         $result = $statement->fetchAll();
         $passDB = $result[0]['Password'];
-
+        
+        echo 'Attempting login...<br>';
+        
         //echo 'user seems to be created <br>';
 
         //compare passwords
         if (!$this->verifyPassword($_POST['password'], $passDB)){
 
             //should return error.  Stating not valid username/password
+            echo 'Invalid username/password<br>';
             return;
         }
 
