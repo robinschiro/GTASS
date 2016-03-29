@@ -27,12 +27,20 @@ interface userService {
     /**
      * 
      */
-    function login();
+    function login($username, $password);
 
     /**
      * destroy session
      */
     function logout();
+
+    /**
+     * Ensures that he password in the db and the provided password
+     * are equivalent
+     *
+     * @return True or False
+     */
+    function verifyPassword($passIn, $passDB);
 
 
 }

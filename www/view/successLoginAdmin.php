@@ -7,7 +7,7 @@
 <body>
 <p class="header" align="right">
 <!-- should be variable, but then again, there's only one admin account... -->
-  Signed in as Admin<br>
+  Signed in as <?php $_SESSION['username'] ?>(Admin)<br>
     <a href="/~alex/GTASS/view/index.php">Sign out</a>
 </p>
 

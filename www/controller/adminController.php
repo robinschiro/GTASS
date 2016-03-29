@@ -20,7 +20,7 @@
 require_once('../model/implementation/emailServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
-require_once ('../entity/user.php');
+
 
 
 //createSession will be a hidden input field in the create session form
@@ -95,23 +95,23 @@ class adminController
         $pass = array();
         $email = array();
 
-        foreach ($_POST['uname'] as $u){
+        foreach ($_POST['uname'] as $u) {
             array_push($unameList, $u);
         }
 
-        foreach ($_POST['firstname'] as $f){
+        foreach ($_POST['firstname'] as $f) {
             array_push($fnameList, $f);
         }
 
-        foreach($_POST['lastname'] as $l){
+        foreach ($_POST['lastname'] as $l) {
             array_push($lnameList, $l);
         }
 
-        foreach($_POST['password'] as $p){
+        foreach ($_POST['password'] as $p) {
             array_push($pass, $p);
         }
 
-        foreach($_POST['email'] as $e){
+        foreach ($_POST['email'] as $e) {
             array_push($email, $e);
         }
 

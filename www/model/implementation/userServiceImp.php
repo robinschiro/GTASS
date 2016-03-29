@@ -10,6 +10,14 @@
 require_once('../connection.php');
 require_once('model/userService.php');
 
+//not sure where should be placed
+//starts a user session
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
+}
+
+
+
 class userServiceImp implements userService
 {
 
@@ -19,15 +27,15 @@ class userServiceImp implements userService
     function createUser($username, $password, $firstName, $lastName, $emailAddress)
     {
         $db = db_connect();
-        if($db != null){
+        if ($db != null) {
             $statement = $db->prepare('INSERT INTO user (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
                                         VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
-            $statement->execute(array(  ':uname' => htmlspecialchars($username),
-                                        ':pass' => htmlspecialchars($password),
-                                        ':fname' => htmlspecialchars($firstName),
-                                        ':lname' => htmlspecialchars($lastName) ,
-                                        ':eAddress' => htmlspecialchars($emailAddress),
-                                        ':rID' => 2  //default to normal user??
+            $statement->execute(array(':uname' => htmlspecialchars($username),
+                ':pass' => htmlspecialchars($password),
+                ':fname' => htmlspecialchars($firstName),
+                ':lname' => htmlspecialchars($lastName),
+                ':eAddress' => htmlspecialchars($emailAddress),
+                ':rID' => 2  //default to normal user??
             ));
 
             echo 'user seems to be created <br>';
@@ -50,10 +58,39 @@ class userServiceImp implements userService
 
     /**
      *
+     *
+     * Needs error handling: what if not valid connection or no results from query
      */
-    function login()
+    function login($username, $password)
     {
-        // TODO: Implement login() method.
+        //connect to db
+        $db = db_connect();
+
+        //query user
+        $statement = $db->prepare('SELECT Username, Password, RoleID FROM user');
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $passDB = $result[0]['Password'];
+
+        //echo 'user seems to be created <br>';
+
+        //compare passwords
+        if (!$this->verifyPassword($_POST['password'], $passDB)){
+
+            //should return error.  Stating not valid username/password
+            return;
+        }
+
+        /*
+         * if valid create session
+         *
+         * These values can be used through out application.
+         * Use role to determine which view to go to after
+         * successful login.
+         */
+        $_SESSION["username"] = $result[0]['Username'];
+        $_SESSION["role"] = $result[0]['RoleID'];
+
     }
 
     /**
@@ -62,5 +99,24 @@ class userServiceImp implements userService
     function logout()
     {
         // TODO: Implement logout() method.
+    }
+
+    /**
+     * Ensures that he password in the db and the provided password
+     * are equivalent
+     *
+     * @return True or False
+     */
+    function verifyPassword($passIn, $passDB)
+    {
+        /*
+         * Eventually will have to hash password passed since
+         * stored password will be hashed
+         */
+
+        if ($passIn == $passDB)
+            return true;
+
+        return false;
     }
 }

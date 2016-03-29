@@ -8,7 +8,17 @@ handlers:
   script: /view/index.php
 
 - url: /admin
-  script: /view/adminFormTest.php
+  script: /view/successLoginAdmin.php
 
 - url: /createsession
   script: /controller/adminController.php
+
+- url: /GC
+  script: /view/gcHomeView.php
+
+- url: /login
+  script: /controller/loginController.php
+
+- url: /logout
+  script: /controller/loginController.php
+
