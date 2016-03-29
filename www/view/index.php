@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="public/stylesheets/index.css" type="text/css" rel="stylesheet">
+    <link href="index.css" type="text/css" rel="stylesheets">
     <title>GTASS Login</title>
 </head>
 
