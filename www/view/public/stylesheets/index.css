@@ -26,9 +26,18 @@ p.header {
 
 p.login {
   margin-top: 70px;
+  margin-left: 20px;
   margin-bottom: 50px;
   font-family: sans-serif;
   font-size: 28px;
+}
+
+div.inputBoxBorders {
+  margin-top: 70px;
+  margin-left: 20px;
+  margin-bottom: 50px;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
 p.loginIn {

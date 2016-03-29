@@ -6,6 +6,7 @@ function db_connect(){
         strpos($_SERVER['SERVER_SOFTWARE'], 'Google App Engine') !== false
     ) {
         // Connect from App Engine.
+        //port needed????
         try {
             $db = new pdo('mysql:unix_socket=/cloudsql/gtass-1256:us-east1:gtass-1;dbname=GTASS_DB', 'root', '');
         } catch (PDOException $ex) {
@@ -13,7 +14,7 @@ function db_connect(){
             die('App Engine: Unable to connect.');
         }
 
-        echo 'Connected to cloud sql db<b>';
+        //echo 'Connected to cloud sql db<b>';
     } else {
         // Connect from a development environment.
         try {
@@ -25,7 +26,7 @@ function db_connect(){
             die('Dev: Unable to connect');
         }
 
-        echo 'Connected to local sql db<br><br>';
+        //echo 'Connected to local sql db<b>';
     }
 
     return $db;

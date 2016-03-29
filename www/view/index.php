@@ -15,14 +15,16 @@
         User Login
     </p>
     <form action="/login" method="POST">
-        <!--    <p class="loginIn">-->
-        username: <input id="username" type="text" name="username" class="textBoxes" required="required">
-        <br><br>
-        password: <input id="password" type="password" name="password" class="textBoxes2" required="required">
-        <br><br>
+        <div class="inputBoxBorders">
+            username: <input id="username" type="text" name="username" class="textBoxes" required="required">
+            <br><br>
+            password: <input id="password" type="password" name="password" class="textBoxes2" required="required">
+            <br><br>
+            <input type="submit" value="Login">
+        </div>
         <input type="hidden" name="login">
         <!--    <p class="submit" align="center">-->
-        <input type="submit" value="Login">
+
 
         <!--    </p>-->
     </form>

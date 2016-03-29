@@ -40,6 +40,7 @@ class loginController
 
     function login()
     {
+        //echo 'login function called <br>';
         $this->userSrv->login($_POST['username'], $_POST['password']);
 
         //successful login??

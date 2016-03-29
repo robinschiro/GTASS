@@ -28,7 +28,7 @@ class userServiceImp implements userService
     {
         $db = db_connect();
         if ($db != null) {
-            $statement = $db->prepare('INSERT INTO User (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
+            $statement = $db->prepare('INSERT INTO user (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
                                         VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
             $statement->execute(array(':uname' => htmlspecialchars($username),
                 ':pass' => htmlspecialchars($password),
@@ -66,21 +66,30 @@ class userServiceImp implements userService
         //connect to db
         $db = db_connect();
 
+//        if($db == null){
+//            echo "db is null that's the issue<br>";
+//        }
+
+        //TODO: add try catch on queries
+        //TODO: look at taskmaster example of using list of objects for posts
+
         //query user
-        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User');
+        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User WHERE Username=:user');
+        $statement->bindValue(':user', $username);
         $statement->execute();
         $result = $statement->fetchAll();
         $passDB = $result[0]['Password'];
-        
-        echo 'Attempting login...<br>';
-        
+
+//        echo $result[0]['Username'];
+//        echo $result[0]['Password'];
+//        echo $result[0]['RoleID'];
+
         //echo 'user seems to be created <br>';
 
         //compare passwords
         if (!$this->verifyPassword($_POST['password'], $passDB)){
 
             //should return error.  Stating not valid username/password
-            echo 'Invalid username/password<br>';
             return;
         }
 
