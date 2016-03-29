@@ -126,7 +126,7 @@ class adminController
         }
 
         //Send email to users using above arrays to create email
-        //$this->emailServ->sendEmail("sammyr2011@yahoo.com", "database project test", "Hello World, It worked!!!");
+        $this->emailServ->sendEmail("sammyr2011@yahoo.com", "database project test", "Hello World, It worked!!!");
 
         //create session
         //$this->sessionServ->createService();

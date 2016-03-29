@@ -21,4 +21,3 @@ handlers:
 
 - url: /logout
   script: /controller/loginController.php
-

@@ -12,6 +12,8 @@ function db_connect(){
             echo $ex->getMessage();
             die('App Engine: Unable to connect.');
         }
+
+        echo 'Connected to cloud sql db<b>';
     } else {
         // Connect from a development environment.
         try {
@@ -22,6 +24,8 @@ function db_connect(){
         } catch (PDOException $ex) {
             die('Dev: Unable to connect');
         }
+
+        echo 'Connected to local sql db<b>';
     }
 
     return $db;
