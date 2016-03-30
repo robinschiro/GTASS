@@ -7,7 +7,7 @@
 
 <body>
 <p class="header" align="left">
-    GTASS
+    GTASS - Graduate Teaching Assistant Selection System
 </p>
 
 <div class="CENTER">

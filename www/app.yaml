@@ -5,22 +5,25 @@ api_version: 1
 
 handlers:
 - url: /
-  script: /view/index.php
+  script: view/index.php
 
 - url: /admin
-  script: /view/successLoginAdmin.php
+  script: view/successLoginAdmin.php
 
 - url: /createsession
-  script: /controller/adminController.php
+  script: controller/adminController.php
 
 - url: /GC
-  script: /view/gcHomeView.php
+  script: view/gcHomeView.php
 
 - url: /login
-  script: /controller/loginController.php
+  script: controller/loginController.php
 
 - url: /logout
-  script: /controller/loginController.php
+  script: controller/loginController.php
 
 - url: /test
-  script: /view/adminFormTest.php
+  script: view/adminFormTest.php
+  
+- url: /public
+  static_dir: view/public
