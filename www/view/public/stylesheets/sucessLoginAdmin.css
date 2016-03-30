@@ -4,7 +4,7 @@ body {
 }
 
 div.CENTER {
-  width:60%;
+  width:84%;
   margin-top: 10%;
   margin-right: auto;;
   margin-left: auto;
@@ -12,6 +12,15 @@ div.CENTER {
   border: 1px solid #FFFFFF;
   background-color: #FFFFFF;
 }
+
+#dynamicInput {
+  width:98%;
+  margin-right: auto;;
+  margin-left: auto;
+  border: 1px solid #FFFFFF;
+  background-color: #FFFFFF;
+}
+
 
 p.header {
   margin-top: auto;
@@ -49,7 +58,7 @@ p.submit {
 }
 p.forgotten {
   display: block;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
   margin-right: 150px;
   margin-left: 80px;
   width: 1000px;

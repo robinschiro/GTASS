@@ -68,8 +68,10 @@ session_start();
         <input type="text" placeholder="first name" name="firstname[0]">
         <input type="text" placeholder="last name" name="lastname[0]">
         <input type="text" placeholder="email" name="email[0]">
+        Chairman <input type="radio" value="Yes" name="chairmanBool">
+    </form>
     </div>
-	<input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
+    <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
 	<br><br>
 	<br><br>
 	<p class="submit" align="center">
