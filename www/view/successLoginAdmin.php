@@ -19,7 +19,7 @@ session_start();
 	$( "#datepicker3" ).datepicker();
   });
   </script>
-  
+
 </head>
 
 <body>
@@ -57,10 +57,10 @@ session_start();
     Response Deadline: <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
     Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
     <br><br>
-	
+
 	<!--javascript-->
 	<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
-	
+
 	<!--dynamically adding new fields-->
 	<div id="dynamicInput">
         GC 1: <input type="text" placeholder="username" name="uname[0]">
