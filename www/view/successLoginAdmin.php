@@ -67,7 +67,7 @@ session_start();
         <input type="password" placeholder="password" name="password[0]">
         <input type="text" placeholder="first name" name="firstname[0]">
         <input type="text" placeholder="last name" name="lastname[0]">
-        <input type="text" placeholder="email" name="email[0c]">
+        <input type="text" placeholder="email" name="email[0]">
     </div>
 	<input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
 	<br><br>
@@ -82,7 +82,7 @@ session_start();
   <input type="hidden" name="createSession">
 
   <!-- Initially 1 will be incremented each time a new gc member is added -->
-  <input type="hidden" name="gcCount" value="1">
+  <input type="hidden" name="gcCount" value="1" id="gcCount">
 
   </form>
   <p class="forgotten">

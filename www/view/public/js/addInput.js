@@ -10,5 +10,5 @@ function addInput(divName) {
         "<input type='text' placeholder='email' name='email[" + counter + "]'>";
     document.getElementById(divName).appendChild(newdiv);
     counter++;
-
+    document.getElementById('gcCount').setAttribute('value', counter);
 }

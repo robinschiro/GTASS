@@ -126,7 +126,7 @@ class adminController
 
             //Send email to users using above arrays to create email
             $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
-            echo 'Sent email to '.$unameList[$i];
+            echo 'Sent email to '.$unameList[$i] + '<br>';
         }
 
 
