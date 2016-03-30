@@ -10,7 +10,7 @@ handlers:
 - url: /admin
   script: view/successLoginAdmin.php
 
-- url: /createsession
+- url: /createSession
   script: controller/adminController.php
 
 - url: /GC

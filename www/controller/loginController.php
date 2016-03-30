@@ -47,12 +47,12 @@ class loginController
         if(isset($_SESSION['username'])){
 
             //if logged in user is an admin
-            if($_SESSION["role"] == 1){
+            if($_SESSION['role'] == 1){
                 //redirect to admin view
                 header("Location: /admin");  //go go admin page
             }
             //if logged in user is a GC member
-            else if($_SESSION["role"] == 2){
+            else if($_SESSION['role'] == 2){
                 //redirect to GC view
                 header("Location: /GC");
             }

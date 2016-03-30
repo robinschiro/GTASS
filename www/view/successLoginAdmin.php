@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <html>
 <head>
 <link href="public/stylesheets/sucessLoginAdmin.css" type="text/css" rel="stylesheet" >
@@ -19,23 +25,23 @@
 <body>
 <p class="header" align="right">
 <!-- should be variable, but then again, there's only one admin account... -->
-  Signed in as <?php $_SESSION['username'] ?>(Admin)<br>
+    <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
     <a href="/logout">Sign out</a>
 </p>
 
 <div class="CENTER">
 <p class="Form" align="left">
   Form Creation
-  <form action="" method="POST">
+  <form action="/createSession" method="POST">
   <p class="semester_year">
-    semester:
+    Semester:
     <select>
         <option value="Fall">Fall</option>
         <option value="Spring">Spring</option>
         <option value="Summer">Summer</option>
     </select>
     <br><br>
-    year:
+    Year:
      <select>
         <option value="2010">2010</option>
         <option value="2011">2011</option>
@@ -51,8 +57,6 @@
     Response Deadline: <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
     Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
     <br><br>
-	<br><br>
-	<br><br>
 	
 	<!--javascript-->
 	<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
@@ -60,7 +64,7 @@
 	<!--dynamically adding new fields-->
 	<div="dynamicInput">
         GC 1:<input type="text" placeholder="username" name="uname[]">
-        <<input type="text" placeholder="first name" name="firstname[]">
+        <input type="text" placeholder="first name" name="firstname[]">
         <input type="password" placeholder="password" name="password[]">
         <input type="text" placeholder="last name" name="lastname[]">
         <input type="text" placeholder="email" name="email[]">

@@ -16,9 +16,9 @@
     </p>
     <form action="/login" method="POST">
         <div class="inputBoxBorders">
-            username: <input id="username" type="text" name="username" class="textBoxes" required="required">
+            Username: <input id="username" type="text" name="username" class="textBoxes" required="required">
             <br><br>
-            password: <input id="password" type="password" name="password" class="textBoxes2" required="required">
+            Password: <input id="password" type="password" name="password" class="textBoxes2" required="required">
             <br><br>
             <input type="submit" value="Login">
         </div>

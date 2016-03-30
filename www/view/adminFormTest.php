@@ -10,7 +10,7 @@
  * Use the same naming convention used in the input names!
  */
 ?>
-<form action="/createsession" method="post">
+<form action="/createSession" method="post">
 
     <input type="datetime" placeholder="insert date time" name="nomDeadline"><br>
     <input type="datetime" placeholder="insert date time" name="resDeadline"><br>

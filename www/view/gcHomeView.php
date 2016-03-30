@@ -9,10 +9,13 @@
  *
  * Use the same naming convention used in the input names!
  */
+
+session_start();
+
 ?>
 
 
-<h1>GC member <?php $_SESSION['username'] ?>  successfully logged in!</h1>
+<h1><?php echo 'GC member '.$_SESSION['username'].' successfully logged in!';?></h1>
 
 <div>
     <a href="/logout">logout</a>

@@ -100,8 +100,8 @@ class userServiceImp implements userService
          * Use role to determine which view to go to after
          * successful login.
          */
-        $_SESSION["username"] = $result[0]['Username'];
-        $_SESSION["role"] = $result[0]['RoleID'];
+        $_SESSION['username'] = $result[0]['Username'];
+        $_SESSION['role'] = $result[0]['RoleID'];
 
     }
 
