@@ -38,7 +38,7 @@ class userServiceImp implements userService
                 ':rID' => 2  //default to normal user??
             ));
 
-            echo 'user seems to be created <br>';
+            echo 'user '.$username.' has been created <br>';
 
             return;
         }

@@ -63,19 +63,27 @@ session_start();
 	
 	<!--dynamically adding new fields-->
 	<div="dynamicInput">
-        GC 1:<input type="text" placeholder="username" name="uname[]">
-        <input type="text" placeholder="first name" name="firstname[]">
+        GC 1: <input type="text" placeholder="username" name="uname[]">
         <input type="password" placeholder="password" name="password[]">
+        <input type="text" placeholder="first name" name="firstname[]">
         <input type="text" placeholder="last name" name="lastname[]">
         <input type="text" placeholder="email" name="email[]">
     </div>
 	<input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
 	<br><br>
 	<br><br>
-	<p class="submit" align="left">
+	<p class="submit" align="center">
       <input type="submit" value="Create">
     </p>
   </p>
+
+  <!-- This hidden field is used as a POST variable to inform the admin controller
+       that a session needs to be created. -->
+  <input type="hidden" name="createSession">
+
+  <!-- Initially 1 will be incremented each time a new gc member is added -->
+  <input type="hidden" name="gcCount" value="1">
+
   </form>
   <p class="forgotten">
     <!-- leave this -->

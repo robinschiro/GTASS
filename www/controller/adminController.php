@@ -68,7 +68,7 @@ class adminController
         $nomDeadline = $_POST['nomDeadline'];
         $resDeadline = $_POST['resDeadline'];
         $verDeadline = $_POST['verDeadline'];
-        $chairman = $_POST['chairman'];
+//        $chairman = $_POST['chairman'];
 
         //create users
         /*
@@ -123,10 +123,13 @@ class adminController
                 $lnameList[$i],
                 $email[$i]
             );
+
+            //Send email to users using above arrays to create email
+            $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
+            echo 'Sent email to '.$unameList[$i];
         }
 
-        //Send email to users using above arrays to create email
-        $this->emailServ->sendEmail("sammyr2011@yahoo.com", "database project test", "Hello World, It worked!!!");
+
 
         //create session
         //$this->sessionServ->createService();
