@@ -28,7 +28,7 @@ class userServiceImp implements userService
     {
         $db = db_connect();
         if ($db != null) {
-            $statement = $db->prepare('INSERT INTO user (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
+            $statement = $db->prepare('INSERT INTO User (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
                                         VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
             $statement->execute(array(':uname' => htmlspecialchars($username),
                 ':pass' => htmlspecialchars($password),
@@ -38,12 +38,12 @@ class userServiceImp implements userService
                 ':rID' => 2  //default to normal user??
             ));
 
-            echo 'user '.$username.' has been created <br>';
+            //echo 'user '.$username.' has been created <br>';
 
             return;
         }
 
-        echo 'db == null <br>';
+        //echo 'db == null <br>';
 
     }
 

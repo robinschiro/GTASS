@@ -62,12 +62,12 @@ session_start();
 	<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 	
 	<!--dynamically adding new fields-->
-	<div="dynamicInput">
-        GC 1: <input type="text" placeholder="username" name="uname[]">
-        <input type="password" placeholder="password" name="password[]">
-        <input type="text" placeholder="first name" name="firstname[]">
-        <input type="text" placeholder="last name" name="lastname[]">
-        <input type="text" placeholder="email" name="email[]">
+	<div id="dynamicInput">
+        GC 1: <input type="text" placeholder="username" name="uname[0]">
+        <input type="password" placeholder="password" name="password[0]">
+        <input type="text" placeholder="first name" name="firstname[0]">
+        <input type="text" placeholder="last name" name="lastname[0]">
+        <input type="text" placeholder="email" name="email[0c]">
     </div>
 	<input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
 	<br><br>
