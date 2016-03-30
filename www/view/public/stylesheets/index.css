@@ -38,6 +38,8 @@ div.inputBoxBorders {
   margin-bottom: 50px;
   font-family: sans-serif;
   font-size: 14px;
+  width: 300px;
+  margin: 0 auto;
 }
 
 p.loginIn {
