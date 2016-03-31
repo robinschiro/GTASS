@@ -31,14 +31,14 @@ session_start();
 
 <div class="CENTER">
 <p class="Form" align="left">
-  Form Creation
+  Session Creation
   <form action="/createSession" method="POST">
   <p class="semester_year">
     Semester:
     <select>
-        <option value="Fall">Fall</option>
-        <option value="Spring">Spring</option>
-        <option value="Summer">Summer</option>
+        <option>Fall</option>
+        <option>Spring</option>
+        <option>Summer</option>
     </select>
     <br><br>
     Year:
@@ -53,12 +53,15 @@ session_start();
     </select>
     <br><br>
 	<!--Date Picker -->
-    Nomination Deadline: <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
-    Response Deadline: <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
+    Nomination Deadline:   <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
+    Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
     Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
     <br><br>
 
-	<!--javascript-->
+    <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
+
+
+    <!--javascript-->
 	<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 
 	<!--dynamically adding new fields-->
@@ -72,8 +75,6 @@ session_start();
     <br><br>
     </form>
     </div>
-    <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
-	<br><br>
 	<br><br>
 	<p class="submit" align="center">
       <input type="submit" value="Create">
