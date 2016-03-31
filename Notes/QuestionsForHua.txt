@@ -1,0 +1,20 @@
+Questions for Hua About Project
+-------------------------------
+
+.) Can a student be nominated by more than one nominator in a single session?
+    - If no, then we don't need a Nominee table. We would simply save the nominee info form.
+    - Hua: Send message saying "this person has been nominated else: (give other nominator's name)"
+
+.) Does admin create nominators' accounts?
+    - Hua: we should treat nominators like the GC members. Send an email to nominator when account is created.
+    
+.) When you say "If a nominee misses the deadline, GTAMS displays the “missing deadline” message to caution the nominee at the end of the nominee session.", what exactly is the "nominee session"? Do you mean that the message should be displayed to the nominee as soon as he submits the form? 
+    - Hua: Yes, show message on page saying the application missed the deadline.
+
+Comments:
+    - Hua: You can have someone who is both a nominator and a GC member. 
+        - The user table should not have a 'RoleID' column. Instead, have two columns, 'IsNominator', 'IsGCMember'
+    - HUA: When nominee is filling out his form, the pieces of information that are shared with nominator form should be pre-filled and disabled (the student should not be able to modify them).
+    - HUA: Only the GC chair can put a check in the "Accepted' column of the score table.
+        - However, the GC chair has access to the list of GC members. The GC chair can provide any GC member with ability to modify the Accepted column.
+   - In Nominator form, have attribute for GTA hours (i.e. 10 hours, 20, etc.)
