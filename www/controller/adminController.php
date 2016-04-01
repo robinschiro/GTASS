@@ -21,6 +21,7 @@ require_once('../model/implementation/emailServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
 
+
 //createSession will be a hidden input field in the create session form
 if (isset($_POST['createSession'])) {
 
@@ -65,7 +66,7 @@ class adminController
         $nomDeadline = $_POST['nomDeadline'];
         $resDeadline = $_POST['resDeadline'];
         $verDeadline = $_POST['verDeadline'];
-//        $chairman = $_POST['chairman'];
+        $chairman = $_POST['chairman'];
 
         //create users
         /*
@@ -123,14 +124,27 @@ class adminController
 
             //Send email to users using above arrays to create email
             $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
-            echo 'Sent email to '.$unameList[$i] + '<br>';
+            echo 'Sent email to ' . $unameList[$i] + '<br>';
         }
-
 
 
         //create session
         //$this->sessionServ->createService();
 
+        //redirect to current session static page
+
     }
+
+    /**
+     * Returns a session object
+     *
+     * called in the static session page
+     */
+    function currentSession(){
+        //get current session
+        //return $this->sessionServ->getService();
+        
+    }
+
 
 }

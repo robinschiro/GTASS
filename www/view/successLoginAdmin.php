@@ -69,7 +69,7 @@ session_start();
         <input type="text" placeholder="first name" name="firstname[0]">
         <input type="text" placeholder="last name" name="lastname[0]">
         <input type="text" placeholder="email" name="email[0]">
-        Chairman <input type="radio" value="Yes" name="chairmanBool">
+        Chairman <input type="radio" value="0" name="chairman">
         <br><br>
     </div>
 

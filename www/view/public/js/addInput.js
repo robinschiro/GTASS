@@ -8,7 +8,7 @@ function addInput(divName) {
         "<input type='text' placeholder='first name' name='firstname[" + counter + "]'>" + " " +
         "<input type='text' placeholder='last name' name='lastname[" + counter + "]'>" + " " +
         "<input type='text' placeholder='email' name='email[" + counter + "]'>" + " " +
-        "Chairman <input type='radio' value='Yes' name='chairmanBool'>" + " <br><br>";
+        "Chairman <input type='radio' value='" + counter + "' name='chairmanBool'>" + " <br><br>";
     document.getElementById(divName).appendChild(newdiv);
     counter++;
     document.getElementById('gcCount').setAttribute('value', counter);
