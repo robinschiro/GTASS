@@ -21,8 +21,6 @@ require_once('../model/implementation/emailServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
 
-
-
 //createSession will be a hidden input field in the create session form
 if (isset($_POST['createSession'])) {
 
@@ -31,7 +29,6 @@ if (isset($_POST['createSession'])) {
     $adminCtrl = new adminController();
     $adminCtrl->createSession();
 }
-
 
 class adminController
 {
@@ -68,7 +65,8 @@ class adminController
         $nomDeadline = $_POST['nomDeadline'];
         $resDeadline = $_POST['resDeadline'];
         $verDeadline = $_POST['verDeadline'];
-//        $chairman = $_POST['chairman'];
+        $chairmanNumber = $_POST['chairman'];  //returns the number in the the list of added users
+        $chairman = null;
 
         //create users
         /*
@@ -121,19 +119,110 @@ class adminController
                 $pass[$i],
                 $fnameList[$i],
                 $lnameList[$i],
-                $email[$i]
+                $email[$i],
+                2       //gc member
             );
+
+            if($i == $chairmanNumber){
+                $chairman = $unameList[$i];  //use in the create service function
+            }
 
             //Send email to users using above arrays to create email
             $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
-            echo 'Sent email to '.$unameList[$i] + '<br>';
+            echo 'Sent email to ' . $unameList[$i] + '<br>';
         }
-
 
 
         //create session
         //$this->sessionServ->createService();
 
+        //redirect to current session static page
+
     }
 
+    /**
+     * Returns a session object
+     *
+     * called in the static session page
+     */
+    function currentSession()
+    {
+        //get current session
+        //return $this->sessionServ->getService();
+
+    }
+
+    /**
+     * Will add new nominators to user table
+     */
+    function addNominators()
+    {
+        //use $_POST[' '] to grab values (names are assumed)
+        //$nomDeadline = $_POST['nomDeadline'];
+        //$resDeadline = $_POST['resDeadline'];
+        //$verDeadline = $_POST['verDeadline'];
+        //$chairman = $_POST['chairman'];
+
+        //create users
+        /*
+         * Test:
+         * http://www.open-source-web.com/php/php-foreach-loop-through-post-request/
+         *
+         * if I do:
+         * foreach ($_POST as $key => $value) {
+         *     Do something with $key and $value
+         * }
+         *
+         * I'll know order
+         *
+         * along with count
+         * name="name[2]"
+         *
+         */
+
+        echo '<br><br>';
+
+        $unameList = array();
+        $fnameList = array();
+        $lnameList = array();
+        $pass = array();
+        $email = array();
+
+        foreach ($_POST['uname'] as $u) {
+            array_push($unameList, $u);
+        }
+
+        foreach ($_POST['firstname'] as $f) {
+            array_push($fnameList, $f);
+        }
+
+        foreach ($_POST['lastname'] as $l) {
+            array_push($lnameList, $l);
+        }
+
+        foreach ($_POST['password'] as $p) {
+            array_push($pass, $p);
+        }
+
+        foreach ($_POST['email'] as $e) {
+            array_push($email, $e);
+        }
+
+        for ($i = 0; $i < $_POST['gcCount']; $i++) {
+            $this->userServ->createUser(
+                $unameList[$i],
+                $pass[$i],
+                $fnameList[$i],
+                $lnameList[$i],
+                $email[$i],
+                3       //nominator
+            );
+
+            //Send email to users using above arrays to create email
+            $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are now a nominator. Your GTASS account has been created.");
+            echo 'Sent email to ' . $unameList[$i] + '<br>';
+        }
+
+
+    }
 }

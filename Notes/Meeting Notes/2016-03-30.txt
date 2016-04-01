@@ -1,0 +1,58 @@
+Meeting 3/30/16
+-----------------------
+
+-Need to finish Admin page
+    - Fill out session service
+    - Create page with form to create Nominator accounts.
+    - Add navigation bar
+        -  Add buttons for all functions (e.g. 'Create Session', 'Create Nominator Accounts'...)
+    - Create page to show read-only values of the current session
+        - Somewhere on the page, there should be a 'Close' button to close the session.
+    - By default, show the current session. If there is none, take admin to form creation page
+    - Look at 'Create' button, fix bug
+        
+- Need to create interface for Nominators
+    - Front end: Create HTML for form
+        - Alex and Julian to figure out how to split work
+    - Back-end:
+        - Nominator controller
+            - Take POST values from form, put into SQL table.
+        - Nominator service
+    - Pages
+        - Have initial view be score table of this nominator's nominees
+            - Have a PHP page for score table that is included in the view.
+        - Create form to nominate nominees
+
+- Need view for Nominee form
+
+        
+- Need simple HTML for emails that will be generating for users
+    - Email nominee with link to form
+    - Email GC members\Nominator with Account Info
+    - Email Nominator when nominee submits form
+    - Email nominee to fill out form if within two days of deadline
+    
+    
+
+
+    
+    
+    
+ACTIONS
+- Julian to write progress report (due 3/31)
+- Julian to create nominee form
+- Juilan to create score table view
+- Alex to work on email HTML
+- Alex to create nominator form
+- Alex to work on sidebar
+    - This sidebar will be on all pages
+- Robin to finish filling out Session implementation
+- Robin to create pages to display read-only values for current session.
+- Robin to create outline for score table
+    - Will split function implementation with Sammy
+- Sammy to write Nominee service and start on controller
+    - Will create interface, then we'll split the functions
+- Sammy to create page that allows admin to create Nominator accounts.
+
+
+    

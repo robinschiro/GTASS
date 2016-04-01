@@ -16,7 +16,7 @@ interface userService {
     /**
      * Creates a new user and stores it in the db
      */
-    function createUser($username, $password, $firstName, $lastName, $emailAddress);
+    function createUser($username, $password, $firstName, $lastName, $emailAddress, $role);
 
     /**
      * @param $username primary key to find user in db

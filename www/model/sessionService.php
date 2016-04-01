@@ -12,4 +12,9 @@ interface sessionService
      * Will insert data to create new session
      */
     function createService($nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername);
+
+    /**
+     * Will return a service object.  Should only be one in table
+     */
+    function getService();
 }
