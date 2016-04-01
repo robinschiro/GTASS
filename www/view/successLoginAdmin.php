@@ -35,14 +35,14 @@ session_start();
   <form action="/createSession" method="POST">
   <p class="semester_year">
     Semester:
-    <select>
-        <option>Fall</option>
-        <option>Spring</option>
-        <option>Summer</option>
+    <select name="Semester">
+        <option value="Fall">Fall</option>
+        <option value="Spring">Spring</option>
+        <option value="Summer">Summer</option>
     </select>
     <br><br>
     Year:
-     <select>
+     <select name="Year">
         <option value="2010">2010</option>
         <option value="2011">2011</option>
         <option value="2012">2012</option>
@@ -52,17 +52,15 @@ session_start();
         <option value="2016">2016</option>
     </select>
     <br><br>
+        
 	<!--Date Picker -->
     Nomination Deadline:   <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
     Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
     Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
+        
     <br><br>
 
     <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
-
-
-    <!--javascript-->
-	<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 
 	<!--dynamically adding new fields-->
 	<div id="dynamicInput">
@@ -72,13 +70,14 @@ session_start();
         <input type="text" placeholder="last name" name="lastname[0]">
         <input type="text" placeholder="email" name="email[0]">
         Chairman <input type="radio" value="Yes" name="chairmanBool">
-    <br><br>
-    </form>
+        <br><br>
     </div>
-	<br><br>
-	<p class="submit" align="center">
-      <input type="submit" value="Create">
+
+    <p class="submit" align="center">
+        <input type="submit" value="Create">
     </p>
+
+	<br><br>
   </p>
 
   <!-- This hidden field is used as a POST variable to inform the admin controller
@@ -89,11 +88,15 @@ session_start();
   <input type="hidden" name="gcCount" value="1" id="gcCount">
 
   </form>
+
   <p class="forgotten">
     <!-- leave this -->
   </p>
 </p>
 </div>
+
+<!--javascript-->
+<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

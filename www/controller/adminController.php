@@ -21,8 +21,6 @@ require_once('../model/implementation/emailServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
 
-
-
 //createSession will be a hidden input field in the create session form
 if (isset($_POST['createSession'])) {
 
@@ -31,7 +29,6 @@ if (isset($_POST['createSession'])) {
     $adminCtrl = new adminController();
     $adminCtrl->createSession();
 }
-
 
 class adminController
 {
