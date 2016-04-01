@@ -125,7 +125,7 @@ class session
     /**
      * @param array $gcUsersList
      */
-    public function addGcUsersList($user)
+    public function addtoGcUsersList($user)
     {
         array_push($this->gcUsersList, $user);
     }

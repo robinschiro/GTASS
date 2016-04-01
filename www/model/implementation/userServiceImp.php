@@ -24,7 +24,7 @@ class userServiceImp implements userService
     /**
      * Creates a new user and stores it in the db
      */
-    function createUser($username, $password, $firstName, $lastName, $emailAddress)
+    function createUser($username, $password, $firstName, $lastName, $emailAddress, $role)
     {
         $db = db_connect();
         if ($db != null) {
@@ -35,7 +35,7 @@ class userServiceImp implements userService
                 ':fname' => htmlspecialchars($firstName),
                 ':lname' => htmlspecialchars($lastName),
                 ':eAddress' => htmlspecialchars($emailAddress),
-                ':rID' => 2  //default to normal user??
+                ':rID' => htmlspecialchars($role)  //default to normal user??
             ));
 
             //echo 'user '.$username.' has been created <br>';
