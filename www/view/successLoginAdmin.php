@@ -23,11 +23,23 @@ session_start();
 </head>
 
 <body>
-<p class="header" align="right">
+
+<div class="WRAPPER">
+
+<div class="TOP" align="right">
 <!-- should be variable, but then again, there's only one admin account... -->
     <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
     <a href="/logout">Sign out</a>
 </p>
+</div>
+
+<div class="LEFT">
+    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Home</a></p>
+    <p class="sidebar_selected" align="center"><b>Session Creation</b></p>
+    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Lorem</a></p>
+    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
+    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
+</div>
 
 <div class="CENTER">
 <p class="Form" align="left">
@@ -52,12 +64,12 @@ session_start();
         <option value="2016">2016</option>
     </select>
     <br><br>
-        
+
 	<!--Date Picker -->
     Nomination Deadline:   <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
     Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
     Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
-        
+
     <br><br>
 
     <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
@@ -94,7 +106,8 @@ session_start();
   </p>
 </p>
 </div>
-
+<!-- end center div -->
+</div>
 <!--javascript-->
 <script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 
