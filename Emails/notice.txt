@@ -1,0 +1,1 @@
+the date is probably not necessary in all these emails since that information is already logged as metadata and shows up in nearly all email viewing clients
