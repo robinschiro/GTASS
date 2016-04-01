@@ -80,10 +80,6 @@ class userServiceImp implements userService
         $result = $statement->fetchAll();
         $passDB = $result[0]['Password'];
 
-//        echo $result[0]['Username'];
-//        echo $result[0]['Password'];
-//        echo $result[0]['RoleID'];
-
         //echo 'user seems to be created <br>';
 
         //compare passwords
