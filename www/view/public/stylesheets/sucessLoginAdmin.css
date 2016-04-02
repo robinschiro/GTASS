@@ -5,18 +5,20 @@ body {
 }
 
 div.WRAPPER {
+  overflow: scroll;
   height: 100%;
-  overflow: hidden;
 }
 div.LEFT {
   width: 14%;
+  overflow: hidden;
   float: left;
-  min-height: 100%;
+  /*min-height: 92%;*/
   background: #e0e0d1;
+  border: 2px dashed black;
 }
 div.TOP {
   top: 0px;
-  height: 76px;
+  height: 8%;
   background: red;
   font-family: sans-serif;
   font-size: 14;
@@ -29,6 +31,13 @@ div.CENTER {
   margin-left: 24%;
   margin-bottom: auto;
   border: 1px solid #FFFFFF;
+  background-color: #FFFFFF;
+}
+div.BOTTOM {
+  width:66%;
+  margin-top: -5%;
+  margin-left: 24%;
+  margin-bottom: 10%;
   background-color: #FFFFFF;
 }
 
@@ -67,7 +76,7 @@ p.semester_year {
 }
 p.submit {
   display: block;
-  margin-bottom: -40px;
+  margin-bottom: -90px;
   margin-left: 30px;
   font-family: sans-serif;
   font-size: 14px;

@@ -24,7 +24,7 @@ session_start();
 
 <body>
 
-<div class="WRAPPER">
+<div class="WRAPPER" >
 
 <div class="TOP" align="right">
 <!-- should be variable, but then again, there's only one admin account... -->
@@ -85,9 +85,7 @@ session_start();
         <br><br>
     </div>
 
-    <p class="submit" align="center">
-        <input type="submit" value="Create">
-    </p>
+
 
 	<br><br>
   </p>
@@ -107,6 +105,13 @@ session_start();
 </p>
 </div>
 <!-- end center div -->
+
+<div class="BOTTOM">
+<p class="submit" align="center">
+    <input type="submit" value="Create">
+</p>
+</div>
+
 </div>
 <!--javascript-->
 <script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
