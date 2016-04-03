@@ -12,7 +12,7 @@ interface nominatorService
      * Will insert a nominee into the NominationForm table
      *  
      */
-    function nominateUser();
+    function nominateUser($session, $PID, $nominatorusername, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
 
     /**
      * Returns a list of nominated users

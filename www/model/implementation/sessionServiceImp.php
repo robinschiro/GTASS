@@ -26,15 +26,13 @@ class sessionServiceImp implements sessionService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if ( NULL == $db )
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
         // Attempt to insert the session into the Session table.
-        try
-        {
+        try {
             // First, set 'isCurrent' for all existing sessions to 0.
             $statement = $db->prepare('UPDATE Session
                                        SET    IsCurrent = 0');
@@ -44,20 +42,19 @@ class sessionServiceImp implements sessionService
             // The GC Chair should already be in the User table at this point.
             $statement = $db->prepare('INSERT INTO Session (SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairUsername, IsCurrent)
                                        VALUES (:id, :nomDeadline, :resDeadline, :verDeadline, :GCname, :isCurrent )');
-            $statement->execute(array(':id'          => htmlspecialchars($sessionID),
-                                      ':nomDeadline' => htmlspecialchars($nominationDeadline),
-                                      ':resDeadline' => htmlspecialchars($responseDeadline),
-                                      ':verDeadline' => htmlspecialchars($verificationDeadline),
-                                      ':GCname'      => htmlspecialchars($GCChairUsername),
-                                      ':isCurrent'   => '1'     ));
+            $statement->execute(array(':id' => htmlspecialchars($sessionID),
+                ':nomDeadline' => htmlspecialchars($nominationDeadline),
+                ':resDeadline' => htmlspecialchars($responseDeadline),
+                ':verDeadline' => htmlspecialchars($verificationDeadline),
+                ':GCname' => htmlspecialchars($GCChairUsername),
+                ':isCurrent' => '1'));
 
             // Create the corresponding entries in the GCMembersInSession table for each GC Member.
-            foreach ($unameList as $uname)
-            {
+            foreach ($unameList as $uname) {
                 $statement = $db->prepare('INSERT INTO GCMembersInSession (SessionID, GCUsername)
                                            VALUES (:id, :GCname)');
-                $statement->execute(array(':id'          => htmlspecialchars($sessionID),
-                                          ':GCname'      => htmlspecialchars($uname)));
+                $statement->execute(array(':id' => htmlspecialchars($sessionID),
+                    ':GCname' => htmlspecialchars($uname)));
 
 //                print_r($statement->errorInfo());
             }
@@ -65,9 +62,7 @@ class sessionServiceImp implements sessionService
 
 //            echo 'Potential error: <br>';
 //            print_r($statement->errorInfo());
-        }
-        catch ( PDOException $ex )
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when creating session: ';
             print_r($statement->errorInfo());
         }
@@ -78,16 +73,14 @@ class sessionServiceImp implements sessionService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if ( NULL == $db )
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
         $userServ = new userServiceImp();
 
-        try
-        {
+        try {
             // Only one session should be 'Current' at a time.
             $statement = $db->prepare('SELECT SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairUsername, IsCurrent
                                    FROM   Session 
@@ -108,40 +101,34 @@ class sessionServiceImp implements sessionService
             $statement->execute(array(':id' => htmlspecialchars($sessionID)));
             $resultTable = $statement->fetchAll();
             $numMembers = sizeof($resultTable);
-            for ($i = 0; $i < $numMembers; $i++)
-            {
+            for ($i = 0; $i < $numMembers; $i++) {
                 $uname = $resultTable[$i]['GCUsername'];
                 $gcMember = $userServ->getUser($uname);
 
-                if ( $gcChairUsername == $uname )
-                {
+                if ($gcChairUsername == $uname) {
                     $gcChairUser = $gcMember;
-                }
-                else
-                {
+                } else {
                     array_push($gcMemberUsers, $gcMember);
                 }
             }
 
             return new session($sessionID, $gcChairUser, $nominationDeadline, $respondDeadline, $verificationDeadline, $gcMemberUsers);
-        }
-        catch ( PDOException $ex )
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving current session: ';
             print_r($statement->errorInfo());
         }
 
         /**
-        Steps:
-        1) get only service in table.
-        2) get all users
-        - create new array like $userlist = array().
-        - for each user found create a user object, $tempUser
-        - use array_push($userlist, $tempUser) to add new user object to array
-        - for the field $gcUsersList in the session object it is an array so
-        each time you want to add a new one you use array_push(objectname->$gcUsersList, user)
-        - use foreach() to loop through user array and add to session field variable $gcUsersList array
-        3) return object
+         * Steps:
+         * 1) get only service in table.
+         * 2) get all users
+         * - create new array like $userlist = array().
+         * - for each user found create a user object, $tempUser
+         * - use array_push($userlist, $tempUser) to add new user object to array
+         * - for the field $gcUsersList in the session object it is an array so
+         * each time you want to add a new one you use array_push(objectname->$gcUsersList, user)
+         * - use foreach() to loop through user array and add to session field variable $gcUsersList array
+         * 3) return object
          */
     }
 }
