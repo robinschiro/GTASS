@@ -27,24 +27,57 @@ class userServiceImp implements userService
     function createUser($username, $password, $firstName, $lastName, $emailAddress, $role)
     {
         $db = db_connect();
-        if ($db != null) {
-            $statement = $db->prepare('INSERT INTO User (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
-                                        VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
-            $statement->execute(array(':uname' => htmlspecialchars($username),
-                ':pass' => htmlspecialchars($password),
-                ':fname' => htmlspecialchars($firstName),
-                ':lname' => htmlspecialchars($lastName),
-                ':eAddress' => htmlspecialchars($emailAddress),
-                ':rID' => htmlspecialchars($role)  //default to normal user??
-            ));
+        if ($db != null)
+        {
+            try
+            {
+                $statement = $db->prepare('INSERT INTO User (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
+                                           VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
+                $statement->execute(array(':uname' => htmlspecialchars($username),
+                                          ':pass' => htmlspecialchars($password),
+                                          ':fname' => htmlspecialchars($firstName),
+                                          ':lname' => htmlspecialchars($lastName),
+                                          ':eAddress' => htmlspecialchars($emailAddress),
+                                          ':rID' => htmlspecialchars($role)));
 
-            //echo 'user '.$username.' has been created <br>';
+                print_r($statement->errorInfo());
 
-            return;
+                //echo 'user '.$username.' has been created <br>';
+            }
+            catch ( PDOException $ex )
+            {
+//                echo 'User already exists, error code: ' . $statement->errorCode() . '<br>';
+
+                // If a user with the given username already exists, simply update the existing user's values.
+                if ( '23000' == $statement->errorCode() )
+                {
+                    try
+                    {
+                        $statement = $db->prepare('UPDATE User
+                                                   SET Password = :pass, FirstName = :fname, LastName = :lname, EmailAddress = :eAddress, RoleID = :rID
+                                                   WHERE Username = :uname');
+                        $statement->execute(array(':uname' => htmlspecialchars($username),
+                                                  ':pass' => htmlspecialchars($password),
+                                                  ':fname' => htmlspecialchars($firstName),
+                                                  ':lname' => htmlspecialchars($lastName),
+                                                  ':eAddress' => htmlspecialchars($emailAddress),
+                                                  ':rID' => htmlspecialchars($role)));
+                    }
+                    catch ( PDOException $ex )
+                    {
+                        echo 'Exception when updating user: '.$username.' ';
+                        print_r($statement->errorInfo());
+                    }
+                }
+                else
+                {
+                    echo 'Exception when creating user: '.$username.' ';
+                    print_r($statement->errorInfo());
+                }
+            }
         }
 
-        //echo 'db == null <br>';
-
+        return;
     }
 
     /**

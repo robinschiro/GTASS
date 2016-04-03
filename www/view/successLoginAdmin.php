@@ -30,13 +30,12 @@ session_start();
 <!-- should be variable, but then again, there's only one admin account... -->
     <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
     <a href="/logout">Sign out</a>
-</p>
 </div>
 
 <div class="LEFT">
     <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Home</a></p>
     <p class="sidebar_selected" align="center"><b>Session Creation</b></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Lorem</a></p>
+    <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
     <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
     <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
 </div>
@@ -45,57 +44,58 @@ session_start();
 <p class="Form" align="left">
   Session Creation
   <form action="/createSession" method="POST">
-  <p class="semester_year">
-    Semester:
-    <select name="Semester">
-        <option value="Fall">Fall</option>
-        <option value="Spring">Spring</option>
-        <option value="Summer">Summer</option>
-    </select>
-    <br><br>
-    Year:
-     <select name="Year">
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-        <option value="2014">2014</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-    </select>
-    <br><br>
-
-	<!--Date Picker -->
-    Nomination Deadline:   <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
-    Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
-    Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
-
-    <br><br>
-
-    <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
-
-	<!--dynamically adding new fields-->
-	<div id="dynamicInput">
-        GC 1: <input type="text" placeholder="username" name="uname[0]">
-        <input type="password" placeholder="password" name="password[0]">
-        <input type="text" placeholder="first name" name="firstname[0]">
-        <input type="text" placeholder="last name" name="lastname[0]">
-        <input type="text" placeholder="email" name="email[0]">
-        Chairman <input type="radio" value="0" name="chairman">
+      <p class="semester_year">
+        Semester:
+        <select name="Semester">
+            <option value="Fall">Fall</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+        </select>
         <br><br>
-    </div>
+        Year:
+         <select name="Year">
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+        </select>
+        <br><br>
 
+        <!--Date Picker -->
+        Nomination Deadline:   <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
+        Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
+        Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
 
+        <br><br>
 
-	<br><br>
-  </p>
+        <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
 
-  <!-- This hidden field is used as a POST variable to inform the admin controller
-       that a session needs to be created. -->
-  <input type="hidden" name="createSession">
+        <!--dynamically adding new fields-->
+        <div id="dynamicInput">
+            GC 1: <input type="text" placeholder="username" name="uname[0]">
+            <input type="password" placeholder="password" name="password[0]">
+            <input type="text" placeholder="first name" name="firstname[0]">
+            <input type="text" placeholder="last name" name="lastname[0]">
+            <input type="text" placeholder="email" name="email[0]">
+            Chairman <input type="radio" value="0" name="chairman">
+            <br><br>
+        </div>
+        <br><br>
+      </p>
 
-  <!-- Initially 1 will be incremented each time a new gc member is added -->
-  <input type="hidden" name="gcCount" value="1" id="gcCount">
+      <p class="submit" align="center">
+        <input type="submit" value="Create">
+      </p>
+
+      <!-- This hidden field is used as a POST variable to inform the admin controller
+           that a session needs to be created. -->
+      <input type="hidden" name="createSession">
+
+      <!-- Initially 1 will be incremented each time a new gc member is added -->
+      <input type="hidden" name="gcCount" value="1" id="gcCount">
 
   </form>
 
@@ -106,11 +106,7 @@ session_start();
 </div>
 <!-- end center div -->
 
-<div class="BOTTOM">
-<p class="submit" align="center">
-    <input type="submit" value="Create">
-</p>
-</div>
+
 
 </div>
 <!--javascript-->

@@ -24,7 +24,7 @@ require_once('../model/implementation/userServiceImp.php');
 //createSession will be a hidden input field in the create session form
 if (isset($_POST['createSession'])) {
 
-    echo 'createSession is set<br>';
+//    echo 'createSession is set<br>';
 
     $adminCtrl = new adminController();
     $adminCtrl->createSession();
@@ -51,6 +51,12 @@ class adminController
         $this->emailServ = new emailServiceImp();
     }
 
+    // This will convert a date string in the format 'm/d/Y' to a format compatible with SQL.
+    private function ConvertToSQLDate($dateString)
+    {
+        return DateTime::createFromFormat('m/d/Y', $dateString)->format('Y-m-d');
+    }
+
     /**
      * Will make use of the User, Session, Email,... services
      *
@@ -58,13 +64,11 @@ class adminController
      */
     public function createSession()
     {
-
-        echo ' createSession() called <br>';
-
         //use $_POST[' '] to grab values (names are assumed)
-        $nomDeadline = $_POST['nomDeadline'];
-        $resDeadline = $_POST['resDeadline'];
-        $verDeadline = $_POST['verDeadline'];
+        $sessionID = $_POST['Semester'].$_POST['Year'];
+        $nomDeadline = $this->ConvertToSQLDate($_POST['nomDeadline']);
+        $resDeadline = $this->ConvertToSQLDate($_POST['resDeadline']);
+        $verDeadline = $this->ConvertToSQLDate($_POST['verDeadline']);
         $chairmanNumber = $_POST['chairman'];  //returns the number in the the list of added users
         $chairman = null;
 
@@ -85,7 +89,7 @@ class adminController
          *
          */
 
-        echo '<br><br>';
+//        echo '<br><br>';
 
         $unameList = array();
         $fnameList = array();
@@ -129,15 +133,17 @@ class adminController
 
             //Send email to users using above arrays to create email
             $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
-            echo 'Sent email to ' . $unameList[$i] + '<br>';
+//            echo 'Sent email to ' . $unameList[$i] . '<br>';
         }
 
 
         //create session
-        //$this->sessionServ->createService();
+        $this->sessionServ->createSession($sessionID, $nomDeadline, $resDeadline, $verDeadline, $chairman, $unameList);
+
+//        echo '<br> Redirecting to current session <br>';
 
         //redirect to current session static page
-
+        header("Location: /currentSession");
     }
 
     /**

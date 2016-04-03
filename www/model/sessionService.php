@@ -9,12 +9,13 @@
 interface sessionService
 {
     /**
-     * Will insert data to create new session
+     * Inserts data into the Session table to create new session.
+     * The newly created session will be set to be 'current'
      */
-    function createService($nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername);
+    function createSession($sessionID, $nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername, $unameList);
 
     /**
-     * Will return a service object.  Should only be one in table
+     * Returns a Session object that contains information about the current session.
      */
-    function getService();
+    function getCurrentSession();
 }

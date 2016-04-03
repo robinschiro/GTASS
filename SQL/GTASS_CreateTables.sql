@@ -22,6 +22,7 @@ CREATE TABLE User
     LastName        VARCHAR(20),
     EmailAddress    VARCHAR(40),
     RoleID          INTEGER,
+    IsActive        BIT,
     
     PRIMARY KEY     (Username),
     FOREIGN KEY     (RoleID)    REFERENCES Role(RoleID)
@@ -35,6 +36,7 @@ CREATE TABLE Session
     ResponseDeadline        DATETIME,
     VerificationDeadline    DATETIME,
     GCChairUsername         VARCHAR(20),
+    IsCurrent               BIT,
         
     PRIMARY KEY (SessionID),
     FOREIGN KEY (GCChairUsername) REFERENCES User(Username)
@@ -142,4 +144,15 @@ CREATE TABLE Score
     PRIMARY KEY (SessionID, PID, GCUsername),
     FOREIGN KEY (SessionID, PID)    REFERENCES NominationForm(SessionID, PID),
     FOREIGN KEY (GCUsername)        REFERENCES User(Username)
+);
+
+CREATE TABLE GCMembersInSession
+(
+    SessionID           VARCHAR(10),
+	GCUserName	        VARCHAR(20),
+    
+    PRIMARY KEY (SessionID, GCUsername),
+    FOREIGN KEY (SessionID)     REFERENCES Session(SessionID)
+        ON DELETE CASCADE,
+    FOREIGN KEY (GCUsername)    REFERENCES User(Username)
 );

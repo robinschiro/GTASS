@@ -22,8 +22,8 @@ handlers:
 - url: /logout
   script: controller/loginController.php
 
-- url: /test
-  script: view/adminFormTest.php
-  
+- url: /currentSession
+  script: view/currentSession.php
+
 - url: /public
   static_dir: view/public
