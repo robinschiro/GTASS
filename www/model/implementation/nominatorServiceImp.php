@@ -6,6 +6,9 @@
  * Date: 3/31/2016
  * Time: 9:35 PM
  */
+
+require_once('model/nominatorService.php');
+
 class nominatorServiceImp implements nominatorService
 {
 
