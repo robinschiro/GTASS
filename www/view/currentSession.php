@@ -69,7 +69,7 @@
                     <br><br>
 
                 <b>GC Members</b> <br><br>
-                <table>
+                <table border="1" cellpadding="5" cellspacing="5">
                     <tr>
                         <th>Username</th>
                         <th>First Name</th>
