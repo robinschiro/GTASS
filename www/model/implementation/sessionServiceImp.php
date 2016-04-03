@@ -14,6 +14,12 @@ require_once('model/implementation/userServiceImp.php');
 
 class sessionServiceImp implements sessionService
 {
+    private function ConvertFromSQLDate($dateSQL)
+    {
+        return DateTime::createFromFormat('Y-m-d H:i:s', $dateSQL)->format('m/d/Y');
+    }
+    
+    
     /**
      * @param $sessionID
      * @param $nominationDeadline
@@ -58,13 +64,7 @@ class sessionServiceImp implements sessionService
                                            VALUES (:id, :GCname)');
                 $statement->execute(array(':id'          => htmlspecialchars($sessionID),
                                           ':GCname'      => htmlspecialchars($uname)));
-
-//                print_r($statement->errorInfo());
             }
-
-
-//            echo 'Potential error: <br>';
-//            print_r($statement->errorInfo());
         }
         catch ( PDOException $ex )
         {
@@ -96,9 +96,9 @@ class sessionServiceImp implements sessionService
             $resultTable = $statement->fetchAll();
             $sessionID = $resultTable[0]['SessionID'];
             $gcChairUsername = $resultTable[0]['GCChairUsername'];
-            $nominationDeadline = $resultTable[0]['NominationDeadline'];
-            $respondDeadline = $resultTable[0]['ResponseDeadline'];
-            $verificationDeadline = $resultTable[0]['VerificationDeadline'];
+            $nominationDeadline = $this->ConvertFromSQLDate($resultTable[0]['NominationDeadline']);
+            $responseDeadline = $this->ConvertFromSQLDate($resultTable[0]['ResponseDeadline']);
+            $verificationDeadline = $this->ConvertFromSQLDate($resultTable[0]['VerificationDeadline']);
             $gcMemberUsers = array();
 
             // Query for the usernames of all GC members in this session.
@@ -123,7 +123,7 @@ class sessionServiceImp implements sessionService
                 }
             }
 
-            return new session($sessionID, $gcChairUser, $nominationDeadline, $respondDeadline, $verificationDeadline, $gcMemberUsers);
+            return new session($sessionID, $gcChairUser, $nominationDeadline, $responseDeadline, $verificationDeadline, $gcMemberUsers);
         }
         catch ( PDOException $ex )
         {

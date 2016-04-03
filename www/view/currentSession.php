@@ -1,3 +1,5 @@
+<!-- This view is rendered by the adminController. The $session variable must be initialized before
+     rendering this view -->
 <html>
     <head>
         <link href="public/stylesheets/sucessLoginAdmin.css" type="text/css" rel="stylesheet" >
@@ -7,7 +9,6 @@
     <body>
         <div class="WRAPPER" >
             <div class="TOP" align="right">
-            <!-- should be variable, but then again, there's only one admin account... -->
                 <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
                 <a href="/logout">Sign out</a>
             </div>
@@ -25,12 +26,70 @@
                     Current Session
                 </p>
 
-                <!-- Display a table with the session details -->
-                <div>
+                <p class="semester_year">
+                    Semester and Year: <?php echo $session->id  ?>
+                    <br><br>
+
+                    <!-- Deadlines -->
+                    <table>
+                        <tr>
+                            <td>Nomination Deadline: </td>
+                            <td><?php echo $session->nominationDeadline ?></td>
+                        </tr>
+                        <tr>
+                            <td>Response Deadline: </td>
+                            <td><?php echo $session->responseDeadline ?></td>
+                        </tr>
+                        <tr>
+                            <td>Verification Deadline: </td>
+                            <td><?php echo $session->verificationDeadline ?></td>
+                        </tr>
+                    </table>
+                    <br><br>
+
+                    <b>GC Chair</b> <br><br>
+                    <table>
+                        <tr>
+                            <td>Username: </td>
+                            <td><?php echo $session->gcChair->getUsername() ?></td>
+                        </tr>
+                        <tr>
+                            <td>First Name: </td>
+                            <td><?php echo $session->gcChair->getFirstName() ?></td>
+                        </tr>
+                        <tr>
+                            <td>Last Name: </td>
+                            <td><?php echo $session->gcChair->getLastName() ?></td>
+                        </tr>
+                        <tr>
+                            <td>Email Address: </td>
+                            <td><?php echo $session->gcChair->getEmail() ?></td>
+                        </tr>
+                    </table>
+                    <br><br>
+
+                <b>GC Members</b> <br><br>
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                    </tr>
                     <?php
-                    print_r($session);
+                        foreach ($session->gcUsersList as $gcUser )
+                        {
+                            echo '<tr>' .
+                                      '<td>' . $gcUser->getUsername() . '</td>' .
+                                      '<td>' . $gcUser->getFirstName() . '</td>' .
+                                      '<td>' . $gcUser->getLastName() . '</td>' .
+                                      '<td>' . $gcUser->getEmail() . '</td>' .
+                                 '</tr>';
+                        }
                     ?>
-                </div>
+
+                </table>
+                <br><br>
             </div>
 
 

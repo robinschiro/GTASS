@@ -8,10 +8,10 @@
  */
 class session
 {
-    var $semester;
+    var $id;
     var $gcChair;
     var $nominationDeadline;
-    var $respondDeadline;
+    var $responseDeadline;
     var $verificationDeadline;
     var $gcUsersList;
 
@@ -26,10 +26,10 @@ class session
      */
     public function __construct($semester, $gcChair, $nominationDeadline, $respondDeadline, $verificationDeadline, $gcUsersList)
     {
-        $this->semester = $semester;
+        $this->id = $semester;
         $this->gcChair = $gcChair;
         $this->nominationDeadline = $nominationDeadline;
-        $this->respondDeadline = $respondDeadline;
+        $this->responseDeadline = $respondDeadline;
         $this->verificationDeadline = $verificationDeadline;
         $this->gcUsersList = $gcUsersList;
     }
@@ -39,7 +39,7 @@ class session
      */
     public function getSemester()
     {
-        return $this->semester;
+        return $this->id;
     }
 
     /**
@@ -47,7 +47,7 @@ class session
      */
     public function setSemester($semester)
     {
-        $this->semester = $semester;
+        $this->id = $semester;
     }
 
     /**
@@ -85,17 +85,17 @@ class session
     /**
      * @return mixed
      */
-    public function getRespondDeadline()
+    public function getResponseDeadline()
     {
-        return $this->respondDeadline;
+        return $this->responseDeadline;
     }
 
     /**
-     * @param mixed $respondDeadline
+     * @param mixed $responseDeadline
      */
-    public function setRespondDeadline($respondDeadline)
+    public function setResponseDeadline($responseDeadline)
     {
-        $this->respondDeadline = $respondDeadline;
+        $this->responseDeadline = $responseDeadline;
     }
 
     /**
