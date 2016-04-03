@@ -3,6 +3,7 @@
 <html>
     <head>
         <link href="public/stylesheets/sucessLoginAdmin.css" type="text/css" rel="stylesheet" >
+        <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
         <title>GTASS</title>
     </head>
 
@@ -27,11 +28,12 @@
                 </p>
 
                 <p class="semester_year">
-                    Semester and Year: <?php echo $session->id  ?>
-                    <br><br>
 
-                    <!-- Deadlines -->
                     <table>
+                        <tr>
+                            <td>Semester and Year: </td>
+                            <td><?php echo $session->id  ?></td>
+                        </tr>
                         <tr>
                             <td>Nomination Deadline: </td>
                             <td><?php echo $session->nominationDeadline ?></td>
@@ -69,7 +71,7 @@
                     <br><br>
 
                 <b>GC Members</b> <br><br>
-                <table border="1" cellpadding="5" cellspacing="5">
+                <table class="userList">
                     <tr>
                         <th>Username</th>
                         <th>First Name</th>
@@ -77,6 +79,19 @@
                         <th>Email Address</th>
                     </tr>
                     <?php
+
+                    // Sample data for format testing.
+//                        for ($i = 0; $i < 10; $i ++ )
+//                        {
+//                            echo '<tr>' .
+//                                '<td>' . $i . 'SampleName</td>' .
+//                                '<td>First Name</td>' .
+//                                '<td>Last Name</td>' .
+//                                '<td>sample@sample.com</td>' .
+//                                '</tr>';
+//                        }
+
+                        // Iterate through each member and display the corresponding data.
                         foreach ($session->gcUsersList as $gcUser )
                         {
                             echo '<tr>' .
