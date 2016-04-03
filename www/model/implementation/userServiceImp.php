@@ -39,10 +39,6 @@ class userServiceImp implements userService
                                           ':lname' => htmlspecialchars($lastName),
                                           ':eAddress' => htmlspecialchars($emailAddress),
                                           ':rID' => htmlspecialchars($role)));
-
-                print_r($statement->errorInfo());
-
-                //echo 'user '.$username.' has been created <br>';
             }
             catch ( PDOException $ex )
             {
@@ -86,7 +82,28 @@ class userServiceImp implements userService
      */
     function getUser($username)
     {
-        // TODO: Implement getUser() method.
+        // Retrieve access to the database.
+        $db = db_connect();
+        if ( NULL == $db )
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        // Query the db for the user's information.
+        $statement = $db->prepare('SELECT Password, FirstName, LastName, EmailAddress, RoleID
+                                   FROM   User 
+                                   WHERE  Username = :uname');
+        $statement->execute(array(':uname' => $username));
+        $resultTable = $statement->fetchAll();
+        $password = $resultTable[0]['Password'];
+        $firstName = $resultTable[0]['FirstName'];
+        $lastName = $resultTable[0]['LastName'];
+        $emailAddress = $resultTable[0]['EmailAddress'];
+        $roleID = $resultTable[0]['RoleID'];
+        
+        // Return a new User object with the queried info.
+        return new user($username, $firstName, $lastName, $password, $emailAddress, $roleID);
     }
 
     /**

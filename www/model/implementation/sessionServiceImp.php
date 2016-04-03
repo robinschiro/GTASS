@@ -10,6 +10,7 @@
 require_once('../connection.php');
 require_once('model/sessionService.php');
 require_once('entity/session.php');
+require_once('model/implementation/userServiceImp.php');
 
 class sessionServiceImp implements sessionService
 {
@@ -75,6 +76,61 @@ class sessionServiceImp implements sessionService
 
     function getCurrentSession()
     {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if ( NULL == $db )
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        $userServ = new userServiceImp();
+
+        try
+        {
+            // Only one session should be 'Current' at a time.
+            $statement = $db->prepare('SELECT SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairUsername, IsCurrent
+                                   FROM   Session 
+                                   WHERE  IsCurrent = 1');
+            $statement->execute();
+            $resultTable = $statement->fetchAll();
+            $sessionID = $resultTable[0]['SessionID'];
+            $gcChairUsername = $resultTable[0]['GCChairUsername'];
+            $nominationDeadline = $resultTable[0]['NominationDeadline'];
+            $respondDeadline = $resultTable[0]['ResponseDeadline'];
+            $verificationDeadline = $resultTable[0]['VerificationDeadline'];
+            $gcMemberUsers = array();
+
+            // Query for the usernames of all GC members in this session.
+            $statement = $db->prepare('SELECT GCUsername
+                                   FROM   GCMembersInSession 
+                                   WHERE  SessionID = :id');
+            $statement->execute(array(':id' => htmlspecialchars($sessionID)));
+            $resultTable = $statement->fetchAll();
+            $numMembers = sizeof($resultTable);
+            for ($i = 0; i < $numMembers; $i++)
+            {
+                $uname = $resultTable[$i]['GCUsername'];
+                $gcMember = $userServ->getUser($uname);
+
+                if ( $gcChairUsername == $uname )
+                {
+                    $gcChairUser = $gcMember;
+                }
+                else
+                {
+                    array_push($gcMemberUsers, $gcMember);
+                }
+            }
+
+            return new session($sessionID, $gcChairUser, $nominationDeadline, $respondDeadline, $verificationDeadline, $gcMemberUsers);
+        }
+        catch ( PDOException $ex )
+        {
+            echo 'Exception when retrieving current session: ';
+            print_r($statement->errorInfo());
+        }
+
         /**
         Steps:
         1) get only service in table.

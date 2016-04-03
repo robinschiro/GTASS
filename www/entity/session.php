@@ -31,7 +31,7 @@ class session
         $this->nominationDeadline = $nominationDeadline;
         $this->respondDeadline = $respondDeadline;
         $this->verificationDeadline = $verificationDeadline;
-        $this->gcUsersList = array();   //array_push();
+        $this->gcUsersList = $gcUsersList;
     }
 
     /**

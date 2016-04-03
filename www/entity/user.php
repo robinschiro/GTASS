@@ -13,6 +13,7 @@ class user
     private $lastName;
     private $password; //hash password before storing
     private $email;
+    private $roleID;
 
     /**
      * user constructor.
@@ -22,23 +23,24 @@ class user
      * @param $password
      * @param $email
      */
-//    public function __construct($username, $firstName, $lastName, $password, $email)
-//    {
-//        $this->username = $username;
-//        $this->firstName = $firstName;
-//        $this->lastName = $lastName;
-//        $this->password = $password;
-//        $this->email = $email;
-//    }
-
-    public function __construct()
+    public function __construct($username, $firstName, $lastName, $password, $email, $roleID)
     {
-        $this->username = null;
-        $this->firstName = null;
-        $this->lastName = null;
-        $this->password = null;
-        $this->email = null;
+        $this->username = $username;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->password = $password;
+        $this->email = $email;
+        $this->roleID = $roleID;
     }
+
+//    public function __construct()
+//    {
+//        $this->username = null;
+//        $this->firstName = null;
+//        $this->lastName = null;
+//        $this->password = null;
+//        $this->email = null;
+//    }
 
     /**
      * @return mixed
