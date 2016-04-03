@@ -1,0 +1,17 @@
+PHP and SQL Tips and Tricks:
+
+
+.) Performing an UPDATE
+
+When performing an update, format statement like following:
+
+$statement = $db->prepare('UPDATE Session
+                           SET    IsCurrent = 0');
+                           
+                           
+DO NOT FORMAT IT LIKE THIS:
+
+$statement = $db->prepare('UPDATE Session
+                           SET    Session.IsCurrent = 0');            
+
+Notice the 'Session.' in front of 'IsCurrent'. If you format it like this, the update will not occur.                           

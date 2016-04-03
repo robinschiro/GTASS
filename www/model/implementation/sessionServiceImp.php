@@ -108,7 +108,7 @@ class sessionServiceImp implements sessionService
             $statement->execute(array(':id' => htmlspecialchars($sessionID)));
             $resultTable = $statement->fetchAll();
             $numMembers = sizeof($resultTable);
-            for ($i = 0; i < $numMembers; $i++)
+            for ($i = 0; $i < $numMembers; $i++)
             {
                 $uname = $resultTable[$i]['GCUsername'];
                 $gcMember = $userServ->getUser($uname);
