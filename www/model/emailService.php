@@ -26,7 +26,13 @@ interface emailService
      * @param $headers
      * @return void
      */
-    function sendEmail($to, $subject, $body);
+    function sendEmail($to, $type, $data);
+
+    /**
+     * @param $to - email to send email
+     * @param $data - array of data that will be added to message
+     */
+    function sendEmailtoNominatorsandGC($to, $data);
 }
 
 

@@ -18,22 +18,44 @@ class emailServiceImp implements emailService
      * @param $to
      * @param $subject
      * @param $body
-     * @param $headers
+     * @param $type from 1 - 4 determines what type of email to send
      * @return void
      */
-    function sendEmail($to, $subject, $body)
+    function sendEmail($to, $type, $data)
     {
+        //send email to new Nominators and GC members
+        //includes their username and password
+        if ($type == 1) {
+            //echo 'Type == 1<br>';
+            //echo 'username = ' . $data[0] . '<br>';
+            //echo 'password = ' . $data[1] . '<br>';
+
+            $this->sendEmailtoNominatorsandGC($to, $data);
+        }
+        if ($type == 2) {
+
+        }
+
+    }
+
+    function sendEmailtoNominatorsandGC($to, $data)
+    {
+
+        //data will store necessary data for email service
+        $username = $data[0];
+        $password = $data[1];
+
+        $body = "You are now a Nominator or GC member!<br><br> username: " . $username . "<br>password: " . $password;
+
         try {
             $message = new Message();
             $message->setSender("noreply@gtass-1256.appspotmail.com");
             $message->addTo($to);
-            $message->setSubject($subject);
-            $message->setTextBody($body);
+            $message->setSubject("Welcome to GTASS!");
+            $message->setHtmlBody($body);
             $message->send();
         } catch (InvalidArgumentException $e) {
             echo $e->getMessage();
         }
-
-        //mail($to,$subject, $body);
     }
 }

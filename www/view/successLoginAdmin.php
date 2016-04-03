@@ -43,7 +43,7 @@ session_start();
 <div class="CENTER">
 <p class="Form" align="left">
   Session Creation
-  <form action="/createSession" method="POST">
+  <form action="/adminCtrl" method="POST">
       <p class="semester_year">
         Semester:
         <select name="Semester">

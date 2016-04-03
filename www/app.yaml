@@ -1,5 +1,5 @@
 application: gtass-1256
-version: 1
+version: s1
 runtime: php55
 api_version: 1
 
@@ -10,7 +10,7 @@ handlers:
 - url: /admin
   script: view/successLoginAdmin.php
 
-- url: /createSession
+- url: /adminCtrl
   script: controller/adminController.php
 
 - url: /GC

@@ -20,6 +20,7 @@
 require_once('../model/implementation/emailServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
+require_once('../model/implementation/nominatorServiceImp.php');
 
 //createSession will be a hidden input field in the create session form
 if (isset($_POST['createSession'])) {
@@ -37,6 +38,7 @@ class adminController
     var $userServ;
     var $sessionServ;
     var $emailServ;
+    var $nominationServ;
 
     /**
      * Instantiate Services
@@ -49,6 +51,7 @@ class adminController
         $this->userServ = new userServiceImp();
         $this->sessionServ = new sessionServiceImp();
         $this->emailServ = new emailServiceImp();
+        $this->nominationServ = new nominatorServiceImp();
     }
 
     // This will convert a date string in the format 'm/d/Y' to a format compatible with SQL.
@@ -131,8 +134,14 @@ class adminController
                 $chairman = $unameList[$i];  //use in the create service function
             }
 
+            $tempData = array();
+            array_push($tempData, $unameList[$i]);
+            array_push($tempData, $pass[$i]);
+
+
             //Send email to users using above arrays to create email
-            $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
+            //$this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
+            $this->emailServ->sendEmail($email[$i], 1, $tempData);
 //            echo 'Sent email to ' . $unameList[$i] . '<br>';
         }
 
@@ -226,7 +235,7 @@ class adminController
             );
 
             //Send email to users using above arrays to create email
-            $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are now a nominator. Your GTASS account has been created.");
+            //$this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are now a nominator. Your GTASS account has been created.");
             echo 'Sent email to ' . $unameList[$i] + '<br>';
         }
 

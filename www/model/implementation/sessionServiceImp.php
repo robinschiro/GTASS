@@ -65,7 +65,6 @@ class sessionServiceImp implements sessionService
                 $statement->execute(array(':id'          => htmlspecialchars($sessionID),
                                           ':GCname'      => htmlspecialchars($uname)));
             }
-        }
         catch ( PDOException $ex )
         {
             echo 'Exception when creating session: ';
@@ -132,16 +131,16 @@ class sessionServiceImp implements sessionService
         }
 
         /**
-        Steps:
-        1) get only service in table.
-        2) get all users
-        - create new array like $userlist = array().
-        - for each user found create a user object, $tempUser
-        - use array_push($userlist, $tempUser) to add new user object to array
-        - for the field $gcUsersList in the session object it is an array so
-        each time you want to add a new one you use array_push(objectname->$gcUsersList, user)
-        - use foreach() to loop through user array and add to session field variable $gcUsersList array
-        3) return object
+         * Steps:
+         * 1) get only service in table.
+         * 2) get all users
+         * - create new array like $userlist = array().
+         * - for each user found create a user object, $tempUser
+         * - use array_push($userlist, $tempUser) to add new user object to array
+         * - for the field $gcUsersList in the session object it is an array so
+         * each time you want to add a new one you use array_push(objectname->$gcUsersList, user)
+         * - use foreach() to loop through user array and add to session field variable $gcUsersList array
+         * 3) return object
          */
     }
 }
