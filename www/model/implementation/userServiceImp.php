@@ -9,6 +9,7 @@
 
 require_once('../connection.php');
 require_once('model/userService.php');
+require_once('entity/user.php');
 
 //not sure where should be placed
 //starts a user session
