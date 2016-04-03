@@ -54,5 +54,3 @@ ACTIONS
     - Will create interface, then we'll split the functions
 - Sammy to create page that allows admin to create Nominator accounts.
 
-
-    

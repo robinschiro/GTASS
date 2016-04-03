@@ -131,8 +131,14 @@ class adminController
                 $chairman = $unameList[$i];  //use in the create service function
             }
 
+            $tempData = array();
+            array_push($tempData, $unameList[$i]);
+            array_push($tempData, $pass[$i]);
+
+
             //Send email to users using above arrays to create email
-            $this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
+            //$this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are a GC member. Your GTASS account has been created.");
+            $this->emailServ->sendEmail($email[$i], 1, $tempData);
 //            echo 'Sent email to ' . $unameList[$i] . '<br>';
         }
 
