@@ -71,7 +71,7 @@ session_start();
 
         <br><br><br>
 
-        <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
+        <input type="button" value="Add Another GC" onClick="addInput('extraInputs');">
 
         <!--dynamically adding new fields-->
         <div id="dynamicInput">
@@ -80,9 +80,12 @@ session_start();
             <input type="text" placeholder="first name" name="firstname[0]">
             <input type="text" placeholder="last name" name="lastname[0]">
             <input type="text" placeholder="email" name="email[0]">
-            Chairman <input type="radio" value="0" name="chairman">
+            Chairman <input type="radio" value="0" name="chairmanBool">
+			<input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
             <br><br>
         </div>
+		<div id="extraInputs">
+		</div>
         <br><br>
       </p>
 
