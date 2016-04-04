@@ -50,8 +50,8 @@ session_start();
          -->
 
 
-        <form action="/adminCtrl" method="post">
 
+        <form action="/adminCtrl" method="post">
             <div id="dynamicInput">
                 <label for="fname">First Name: </label>
                 <input type="text" name="fname[0]" placeholder="Nominee's First Name" id="fname">
@@ -60,9 +60,9 @@ session_start();
                 <label for="pid">PID: </label>
                 <input type="text" name="pid[0]" placeholder="Nominee's PID" id="pid">
                 <label for="email">Email: </label>
-                <input type="text" name="email[0]" placeholder="Nominee's Email" id="email">
+                <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
                 <label for="rank">Rank Nominee: </label>
-                <input type="number" name="fname[0]" placeholder="Rank" min="0" max="100" id="rank">
+                <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
 
                 CS Graduate:
                 <label for="yes">yes</label>
@@ -76,6 +76,9 @@ session_start();
                 <label for="nonew">no</label>
                 <input type="radio" name="newgrad[0]" id="nonew" value="no">
             </div>
+
+            <!-- button for adding values dynamically -->
+            <input type="button" value="Add Another Nominee" onClick="addInputNominator('dynamicInput');">
 
             <!-- Tells the controller which function to call -->
             <input type="hidden" name="createNominator">
@@ -96,7 +99,7 @@ session_start();
 
 </div>
 <!--javascript-->
-<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
+<script src="public/js/addInputNominator.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

@@ -69,7 +69,7 @@ session_start();
         Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
         Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
 
-        <br><br>
+        <br><br><br>
 
         <input type="button" value="Add Another GC" onClick="addInput('dynamicInput');">
 
