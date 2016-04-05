@@ -12,16 +12,16 @@ function addInputNominator(divName) {
         "<input type='text' name='email[" + counter  + "]' placeholder='Nominee&#39s Email' id='email'>" + " " + "<br>" +
         "<label for='rank'>Rank Nominee: </label>" +
         "<input type='number' name='rank[" + counter  + "]' placeholder='Rank'  min='0' max='100' id='rank'>" + " " +
-        "CS Graduate: " + "<label for='yes'>yes </label>" +
-        "<input type='radio' value='yes' name='csgrad['" + counter + "']' id='yes'>" + " " +
-        "<label for='no'>no </label>" +
-        "<input type='radio' value='no' name='csgrad['" + counter + "']' id='no' >" + " " +
-        "New Graduate: " + "<label for='yesnew'>yes </label>" +
-        "<input type='radio' value='yes' name='newgrad['" + counter + "']' id='yes'>" + " " +
-        "<label for='nonew'>no </label>" +
-        "<input type='radio' value='no' name='newgrad['" + counter + "']' id='no' >" + " <br><br>";
+        "CS Graduate: " + "<label for='yes" + counter  + "'>yes </label>" +
+        "<input type='radio' value='1' name='csgrad[" + counter + "]' id='yes" + counter  + "'>" + " " +
+        "<label for='no" + counter  + "'>no </label>" +
+        "<input type='radio' value='0' name='csgrad[" + counter + "]' id='no" + counter  + "' >" + " " +
+        "New Graduate: " + "<label for='yesnew" + counter  + "'>yes </label>" +
+        "<input type='radio' value='1' name='newgrad[" + counter + "]' id='yesnew" + counter  + "'>" + " " +
+        "<label for='nonew" + counter  + "'>no </label>" +
+        "<input type='radio' value='0' name='newgrad[" + counter + "]' id='nonew" + counter  + "' >" + " <br><br>";
 
     document.getElementById(divName).appendChild(newdiv);
     counter++;
-    document.getElementById('gcCount').setAttribute('value', counter);
+    document.getElementById('count').setAttribute('value', counter);
 }

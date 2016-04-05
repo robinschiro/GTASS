@@ -32,8 +32,9 @@ class emailServiceImp implements emailService
 
             $this->sendEmailtoNominatorsandGC($to, $data);
         }
+        //to nominees
         if ($type == 2) {
-
+            $this->sendEmailtoNominees($to, $data);
         }
 
     }
@@ -52,6 +53,22 @@ class emailServiceImp implements emailService
             $message->setSender("noreply@gtass-1256.appspotmail.com");
             $message->addTo($to);
             $message->setSubject("Welcome to GTASS!");
+            $message->setHtmlBody($body);
+            $message->send();
+        } catch (InvalidArgumentException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function sendEmailtoNominees($to, $data)
+    {
+        $body = "You have been nominated to become a GTA!<br>Follow the link below:<br><br>gtass-1256.appspot.com/nomineeForm?id=" . $data;
+
+        try {
+            $message = new Message();
+            $message->setSender("noreply@gtass-1256.appspotmail.com");
+            $message->addTo($to);
+            $message->setSubject("You have been nominated to become a GTA!");
             $message->setHtmlBody($body);
             $message->send();
         } catch (InvalidArgumentException $e) {
