@@ -8,7 +8,7 @@ handlers:
   script: view/index.php
 
 - url: /admin
-  script: view/successLoginAdmin.php
+  script: view/createSession.php
 
 - url: /adminCtrl
   script: controller/adminController.php
