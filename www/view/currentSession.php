@@ -1,5 +1,14 @@
 <!-- This view is rendered by the adminController. The $session variable must be initialized before
      rendering this view -->
+
+<?php
+require_once ('../controller/adminController.php');
+
+ $controller = new adminController();
+ $session = $controller->sessionServ->getCurrentSession();
+?>
+
+
 <html>
     <head>
         <link href="public/stylesheets/sucessLoginAdmin.css" type="text/css" rel="stylesheet" >

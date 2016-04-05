@@ -33,6 +33,13 @@ interface emailService
      * @param $data - array of data that will be added to message
      */
     function sendEmailtoNominatorsandGC($to, $data);
+
+
+    /**
+     * @param $to email to send messsage to
+     * @param $data pid of student used in link
+     */
+    function sendEmailtoNominees($to, $data);
 }
 
 
