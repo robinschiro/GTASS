@@ -1,5 +1,8 @@
 <html>
-<head></head>
+<head>
+    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+
+</head>
 <body>
 
 <?php

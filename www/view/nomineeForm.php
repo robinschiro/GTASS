@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<link href="public/stylesheets/createSession.css" type="text/css" rel="stylesheet" >
+        <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 		<title> Nominee Form </title>
 	</head>
 	<body>

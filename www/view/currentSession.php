@@ -11,7 +11,6 @@ require_once ('../controller/adminController.php');
 
 <html>
     <head>
-        <link href="public/stylesheets/createSession.css" type="text/css" rel="stylesheet" >
         <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
         <title>GTASS</title>
     </head>
@@ -36,7 +35,7 @@ require_once ('../controller/adminController.php');
                     Current Session
                 </p>
 
-                <p class="semester_year">
+                <p class="information">
 
                     <table>
                         <tr>

@@ -7,6 +7,7 @@ session_start();
 <html>
 <head>
 <link href="public/stylesheets/nominatorView.css" type="text/css" rel="stylesheet">
+<link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 <title>GTASS</title>
 <!-- Source needed for datepicker-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -44,7 +45,7 @@ session_start();
 <p class="Form" align="left">
   Nomination View
   <form action="/createSession" method="POST">
-      <p class="semester_year">
+      <p class="information">
         Semester:
         <select name="Semester">
             <option value="Fall">Fall</option>

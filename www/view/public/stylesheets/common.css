@@ -9,3 +9,107 @@ table.userList td, table.userList th
     padding: 5px;
 }
 
+body {
+    background-color: #ACB7AC;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.WRAPPER {
+    overflow: scroll;
+    height: 100%;
+}
+div.LEFT {
+    width: 14%;
+    overflow: hidden;
+    float: left;
+    /*min-height: 92%;*/
+    background: #e0e0d1;
+    border: 2px dashed black;
+}
+div.TOP {
+    top: 0px;
+    height: 8%;
+    background: red;
+    font-family: sans-serif;
+    font-size: 14;
+    border: 2px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+div.CENTER {
+    width:66%;
+    margin-top: 10%;
+    margin-left: 24%;
+    margin-bottom: auto;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+div.BOTTOM {
+    width:66%;
+    margin-top: -5%;
+    margin-left: 24%;
+    margin-bottom: 10%;
+    background-color: #FFFFFF;
+}
+
+p.sidebar {
+    font-family: Trebuchet MS;
+}
+
+p.sidebar_selected {
+    font-family: Trebuchet MS;
+    color: red;
+}
+
+#dynamicInput {
+    width:98%;
+    margin-right: auto;;
+    margin-left: auto;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+
+p.Form {
+    margin-top: 60px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    font-size: 28px;
+}
+
+p.information {
+    display: block;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+p.submit {
+    display: block;
+    margin-bottom: -90px;
+    margin-left: 30px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+p.forgotten {
+    display: block;
+    margin-bottom: 60px;
+    margin-right: 150px;
+    margin-left: 80px;
+    width: 1000px;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: blue;
+}
+
+.textBoxes {
+    width: 300px;
+    height: 30px;
+}
+
+.textBoxes2 {
+    width: 300px;
+    height: 30px;
+    margin-left: 3px;
+}
