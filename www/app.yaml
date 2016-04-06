@@ -7,7 +7,7 @@ handlers:
 - url: /
   script: view/index.php
 
-- url: /admin
+- url: /createSession
   script: view/createSession.php
 
 - url: /adminCtrl
@@ -36,9 +36,15 @@ handlers:
 
 - url: /currentSession
   script: view/currentSession.php
-  
+
 - url: /nomineeForm
-  script: view/nomineeForm.php 
+  script: view/nomineeForm.php
+
+- url: /nominatorForm
+  script: view/nominatorForm.php
+
+- url: /adminForm
+  script: view/adminForm.php
 
 - url: /public
   static_dir: view/public
