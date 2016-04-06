@@ -18,7 +18,7 @@ require_once ('../controller/adminController.php');
     <body>
         <div class="WRAPPER" >
             <div class="TOP" align="right">
-                <?php echo 'Signed in as '.$_SESSION['userID'].' (admin)';?><br>
+                <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
                 <a href="/logout">Sign out</a>
             </div>
 

@@ -12,12 +12,46 @@
 
 session_start();
 
+/* Get access to the details of the current session */
+require_once ('../controller/adminController.php');
+
+$controller = new adminController();
+$session = $controller->sessionServ->getCurrentSession();
 ?>
 
-<link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 
-<h1><?php echo 'GC member '.$_SESSION['userID'].' successfully logged in!';?></h1>
+<html>
+    <head>
+        <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+        <title>GTASS</title>
+    </head>
 
-<div>
-    <a href="/logout">logout</a>
-</div>
+    <body>
+        <div class="WRAPPER" >
+            <div class="TOP" align="right">
+                <?php echo 'Signed in as '.$_SESSION['username'];?><br>
+                <a href="/logout">Sign out</a>
+            </div>
+
+            <div class="LEFT">
+                <p class="sidebar_selected" align="center"><b>Score Table</b></p>
+            </div>
+
+            <div class="CENTER">
+                <p class="Form" align="left">
+                    <?php echo 'Score Table for ' . $session->getSemester(); ?>
+                </p>
+
+                <?php
+                    include '../view/scoreTable.php';
+                ?>
+
+
+                <br><br>
+            </div>
+
+
+            <!-- end center div -->
+        </div>
+    </body>
+</html>

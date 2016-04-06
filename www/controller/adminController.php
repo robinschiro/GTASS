@@ -156,11 +156,8 @@ class adminController
         //create session
         $this->sessionServ->createSession($sessionID, $nomDeadline, $resDeadline, $verDeadline, $chairman, $unameList);
 
-        // Retrieve the current session.
-        $session = $this->sessionServ->getCurrentSession();
-
         //redirect to current session static page
-        include '../view/currentSession.php';
+        header('Location: /currentSession');
     }
 
     /**

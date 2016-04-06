@@ -176,8 +176,8 @@ class userServiceImp implements userService
          * successful login.
          */
         $_SESSION['userID'] = $result[0]['UserID'];
+        $_SESSION['username'] = $username;
         $_SESSION['role'] = $result[0]['RoleID'];
-
     }
 
     /**
