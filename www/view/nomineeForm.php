@@ -12,18 +12,18 @@
 		
 		
 		
-		
+		<form action="/" method="POST">
 		<div class="Center" > 
-			Nominee First Name: <span class="permanent"> <?php echo $_GET["fname"]; ?> 
-			Nominee Last Name: <span class="permanent"> <?php echo $_GET["lname"]; ?>  <br> 
-            Nominator First Name: <span class="permanent"> <?php echo $_GET["LastName"]; ?> 
-            Nominator Last Name: <span class="permanent"> <?php echo $_GET["LastName"]; ?>  <br>
+			Nominee First Name: <span class="permanent"><span id="inside"> <?php echo $_GET["fname"]; ?></span> </span> 
+			Nominee Last Name: <span class="permanent"> <span id="inside"><?php echo $_GET["lname"]; ?>  </span> </span> <br> 
+            Nominator First Name: <span class="permanent"> <span id="inside"><?php echo $_GET["LastName"]; ?> </span> </span>
+            Nominator Last Name: <span class="permanent"> <span id="inside"><?php echo $_GET["LastName"]; ?></span> </span>  <br>
             Advisor First Name: <input type="text" placeholder="First Name" name="advisorFirstName">
 			Advisor Last Name: <input type="text" placeholder="Last Name" name="advisorLastName"> <br>
-            PID: <span class="permanent"><?php echo $_GET["pid"]; ?> <br>
-            Email: <span class="permanent"> <?php echo $_GET["email"]; ?> <br>
+            PID: <span class="permanent"><span id="inside"><?php echo $_GET["pid"]; ?></span></span>  <br>
+            Email: <span class="permanent"> <span id="inside"><?php echo $_GET["email"]; ?></span></span>  <br>
             Phone: <input type="text" placeholder="Phone Number" name="PhoneNumber"><br>
-			Computer Science Major:<span class="permanent"> <?php echo $_GET["csGrad"]; ?> <br>
+			Computer Science Major:<span class="permanent"> <?php echo $_GET["csGrad"]; ?></span>  <br>
 			Passed Speaking Test: 
 			<label for="yes">yes</label>
             <input type="radio" name="PassedSpeak" value="1">
@@ -62,5 +62,10 @@
 			<input type='hidden' name='Username' value='Username'/> 
 			
 		</div>
+		
+		<p class="submit" align="center">
+        <input type="submit" value="Submit">
+		</form>
+      </p>
 	</body>
 </html>
