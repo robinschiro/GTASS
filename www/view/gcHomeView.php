@@ -16,7 +16,7 @@ session_start();
 
 <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 
-<h1><?php echo 'GC member '.$_SESSION['username'].' successfully logged in!';?></h1>
+<h1><?php echo 'GC member '.$_SESSION['userID'].' successfully logged in!';?></h1>
 
 <div>
     <a href="/logout">logout</a>

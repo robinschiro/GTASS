@@ -77,11 +77,7 @@ class userServiceImp implements userService
         return;
     }
 
-    /**
-     * @param $username primary key to find user in db
-     * @return user row then must be saved in user object
-     */
-    function getUser($username)
+    function getUserByUsername($username)
     {
         // Retrieve access to the database.
         $db = db_connect();
@@ -92,11 +88,43 @@ class userServiceImp implements userService
         }
 
         // Query the db for the user's information.
-        $statement = $db->prepare('SELECT Password, FirstName, LastName, EmailAddress, RoleID
+        $statement = $db->prepare('SELECT UserID, Password, FirstName, LastName, EmailAddress, RoleID
                                    FROM   User 
-                                   WHERE  Username = :uname');
-        $statement->execute(array(':uname' => $username));
+                                   WHERE  Username = :username');
+        $statement->execute(array(':username' => $username));
         $resultTable = $statement->fetchAll();
+        $userID = $resultTable[0]['UserID'];
+        $password = $resultTable[0]['Password'];
+        $firstName = $resultTable[0]['FirstName'];
+        $lastName = $resultTable[0]['LastName'];
+        $emailAddress = $resultTable[0]['EmailAddress'];
+        $roleID = $resultTable[0]['RoleID'];
+
+        // Return a new User object with the queried info.
+        return new user($userID, $username, $firstName, $lastName, $password, $emailAddress, $roleID);
+    }
+
+    /**
+     * @param $userID primary key to find user in db
+     * @return user row then must be saved in user object
+     */
+    function getUserByID($userID)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if ( NULL == $db )
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        // Query the db for the user's information.
+        $statement = $db->prepare('SELECT Username, Password, FirstName, LastName, EmailAddress, RoleID
+                                   FROM   User 
+                                   WHERE  UserID = :userID');
+        $statement->execute(array(':userID' => $userID));
+        $resultTable = $statement->fetchAll();
+        $username = $resultTable[0]['Username'];
         $password = $resultTable[0]['Password'];
         $firstName = $resultTable[0]['FirstName'];
         $lastName = $resultTable[0]['LastName'];
@@ -104,7 +132,7 @@ class userServiceImp implements userService
         $roleID = $resultTable[0]['RoleID'];
         
         // Return a new User object with the queried info.
-        return new user($username, $firstName, $lastName, $password, $emailAddress, $roleID);
+        return new user($userID, $username, $firstName, $lastName, $password, $emailAddress, $roleID);
     }
 
     /**
@@ -125,7 +153,7 @@ class userServiceImp implements userService
         //TODO: look at taskmaster example of using list of objects for posts
 
         //query user
-        $statement = $db->prepare('SELECT Username, Password, RoleID FROM User WHERE Username=:user');
+        $statement = $db->prepare('SELECT UserID, Password, RoleID FROM User WHERE Username=:user');
         $statement->bindValue(':user', $username);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -147,7 +175,7 @@ class userServiceImp implements userService
          * Use role to determine which view to go to after
          * successful login.
          */
-        $_SESSION['username'] = $result[0]['Username'];
+        $_SESSION['userID'] = $result[0]['UserID'];
         $_SESSION['role'] = $result[0]['RoleID'];
 
     }

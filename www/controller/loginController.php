@@ -44,7 +44,7 @@ class loginController
         $this->userSrv->login($_POST['username'], $_POST['password']);
 
         //successful login??
-        if(isset($_SESSION['username'])){
+        if(isset($_SESSION['userID'])){
 
             //if logged in user is an admin
             if($_SESSION['role'] == 1){

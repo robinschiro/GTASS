@@ -36,6 +36,9 @@ handlers:
 
 - url: /currentSession
   script: view/currentSession.php
+  
+- url: /nomineeForm
+  script: view/nomineeForm.php 
 
 - url: /public
   static_dir: view/public

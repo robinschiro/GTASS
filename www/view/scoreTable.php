@@ -1,13 +1,15 @@
 <html>
-<head>
-    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+    <head>
+        <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 
-</head>
-<body>
+    </head>
+    <body>
 
-<?php
-    // the score table...
-?>
+        <?php
+            // the score table...
+        ?>
 
-</body>
+        
+
+    </body>
 </html>

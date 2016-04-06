@@ -56,7 +56,7 @@ class emailServiceImp implements emailService
             $message->setHtmlBody($body);
             $message->send();
         } catch (InvalidArgumentException $e) {
-            echo $e->getMessage();
+            echo $e->getMessage() . 'Recipient: ' . $to;
         }
     }
 

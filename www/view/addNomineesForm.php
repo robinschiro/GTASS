@@ -28,7 +28,7 @@ session_start();
 
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
-        <?php echo 'Signed in as ' . $_SESSION['username'] . ' (admin)'; ?><br>
+        <?php echo 'Signed in as ' . $_SESSION['userID'] . ' (admin)'; ?><br>
         <a href="/logout">Sign out</a>
     </div>
 

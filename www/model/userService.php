@@ -19,11 +19,17 @@ interface userService {
     function createUser($username, $password, $firstName, $lastName, $emailAddress, $role);
 
     /**
-     * @param $username primary key to find user in db
+     * @param $userID primary key to find user in db
      * @return user row then must be saved in user object
      */
-    function getUser($username);
+    function getUserByID($userID);
 
+    /**
+     * @param $username is a unique attribute of a User tuple
+     * @return user object with user's details.
+     */
+    function getUserByUsername($username);
+    
     /**
      * 
      */

@@ -8,6 +8,7 @@
  */
 class user
 {
+    private $userID;
     private $username;
     private $firstName;
     private $lastName;
@@ -23,8 +24,9 @@ class user
      * @param $password
      * @param $email
      */
-    public function __construct($username, $firstName, $lastName, $password, $email, $roleID)
+    public function __construct($userID, $username, $firstName, $lastName, $password, $email, $roleID)
     {
+        $this->userID = $userID;
         $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -41,6 +43,22 @@ class user
 //        $this->password = null;
 //        $this->email = null;
 //    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserID()
+    {
+        return $this->userID;
+    }
+
+    /**
+     * @param mixed $userID
+     */
+    public function setUserID($userID)
+    {
+        $this->userID = $userID;
+    }
 
     /**
      * @return mixed

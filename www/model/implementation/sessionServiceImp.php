@@ -25,10 +25,10 @@ class sessionServiceImp implements sessionService
      * @param $nominationDeadline
      * @param $responseDeadline
      * @param $verificationDeadline
-     * @param $GCChairUsername
-     * @param $unameList
+     * @param $gcChairUsername
+     * @param $gcMemberUsernameList
      */
-    function createSession($sessionID, $nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername, $unameList)
+    function createSession($sessionID, $nominationDeadline, $responseDeadline, $verificationDeadline, $gcChairUsername, $gcMemberUsernameList)
     {
         // Retrieve access to the database.
         $db = db_connect();
@@ -41,34 +41,69 @@ class sessionServiceImp implements sessionService
         // Attempt to insert the session into the Session table.
         try
         {
-            // First, set 'isCurrent' for all existing sessions to 0.
+            $userServ = new userServiceImp();
+
+            // First, verify that all users associated with this session exist in the User table.
+            // Retrieve their IDs.
+            $gcChairID = $userServ->getUserByUsername($gcChairUsername)->getUserID();
+            $gcMemberIDList = array();
+            foreach ($gcMemberUsernameList as $gcMemberUsername)
+            {
+                array_push($gcMemberIDList, $userServ->getUserByUsername($gcMemberUsername)->getUserID());
+            }
+        }
+        catch ( PDOException $ex )
+        {
+            echo 'Exception when verifying that users being added to session already exist.';
+        }
+
+        try
+        {
+
+            // Then, set 'isCurrent' for all existing sessions to 0.
             $statement = $db->prepare('UPDATE Session
                                        SET    IsCurrent = 0');
             $statement->execute();
 
             // Insert the newly defined session into the Session table.
             // The GC Chair should already be in the User table at this point.
-            $statement = $db->prepare('INSERT INTO Session (SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairUsername, IsCurrent)
-                                       VALUES (:id, :nomDeadline, :resDeadline, :verDeadline, :GCname, :isCurrent )');
+            $statement = $db->prepare('INSERT INTO Session (SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairID, IsCurrent)
+                                       VALUES (:id, :nomDeadline, :resDeadline, :verDeadline, :gcChairID, :isCurrent )');
             $statement->execute(array(':id' => htmlspecialchars($sessionID),
                 ':nomDeadline' => htmlspecialchars($nominationDeadline),
                 ':resDeadline' => htmlspecialchars($responseDeadline),
                 ':verDeadline' => htmlspecialchars($verificationDeadline),
-                ':GCname' => htmlspecialchars($GCChairUsername),
+                ':gcChairID' => htmlspecialchars($gcChairID),
                 ':isCurrent' => '1'));
-
-            // Create the corresponding entries in the GCMembersInSession table for each GC Member.
-            foreach ($unameList as $uname)
+        }
+        catch( PDOException $ex )
+        {
+            // If a session with the given key already exists, inform the admin.
+            if ( '23000' == $statement->errorCode() )
             {
-                $statement = $db->prepare('INSERT INTO GCMembersInSession (SessionID, GCUsername)
-                                           VALUES (:id, :GCname)');
+
+            }
+            else
+            {
+                echo 'Exception when creating session: ';
+                print_r($statement->errorInfo());
+            }
+        }
+
+        try
+        {
+            // Create the corresponding entries in the GCMembersInSession table for each GC Member.
+            foreach ($gcMemberIDList as $gcMemberID)
+            {
+                $statement = $db->prepare('INSERT INTO GCMembersInSession (SessionID, GCMemberID)
+                                           VALUES (:id, :gcMemberID)');
                 $statement->execute(array(':id' => htmlspecialchars($sessionID),
-                    ':GCname' => htmlspecialchars($uname)));
+                    ':gcMemberID' => htmlspecialchars($gcMemberID)));
             }
         }
         catch ( PDOException $ex )
         {
-            echo 'Exception when creating session: ';
+            echo 'Exception when adding GC members to session: ';
             print_r($statement->errorInfo());
         }
 
@@ -89,20 +124,20 @@ class sessionServiceImp implements sessionService
         try
         {
             // Only one session should be 'Current' at a time.
-            $statement = $db->prepare('SELECT SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairUsername, IsCurrent
+            $statement = $db->prepare('SELECT SessionID, NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairID, IsCurrent
                                    FROM   Session 
                                    WHERE  IsCurrent = 1');
             $statement->execute();
             $resultTable = $statement->fetchAll();
             $sessionID = $resultTable[0]['SessionID'];
-            $gcChairUsername = $resultTable[0]['GCChairUsername'];
+            $gcChairID = $resultTable[0]['GCChairID'];
             $nominationDeadline = $this->ConvertFromSQLDate($resultTable[0]['NominationDeadline']);
             $responseDeadline = $this->ConvertFromSQLDate($resultTable[0]['ResponseDeadline']);
             $verificationDeadline = $this->ConvertFromSQLDate($resultTable[0]['VerificationDeadline']);
             $gcMemberUsers = array();
 
             // Query for the usernames of all GC members in this session.
-            $statement = $db->prepare('SELECT GCUsername
+            $statement = $db->prepare('SELECT GCMemberID
                                    FROM   GCMembersInSession 
                                    WHERE  SessionID = :id');
             $statement->execute(array(':id' => htmlspecialchars($sessionID)));
@@ -110,10 +145,10 @@ class sessionServiceImp implements sessionService
             $numMembers = sizeof($resultTable);
             for ($i = 0; $i < $numMembers; $i++)
             {
-                $uname = $resultTable[$i]['GCUsername'];
-                $gcMember = $userServ->getUser($uname);
+                $gcUserID = $resultTable[$i]['GCMemberID'];
+                $gcMember = $userServ->getUserByID($gcUserID);
 
-                if ( $gcChairUsername == $uname )
+                if ( $gcChairID == $gcUserID )
                 {
                     $gcChairUser = $gcMember;
                 }

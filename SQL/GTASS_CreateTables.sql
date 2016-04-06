@@ -16,6 +16,7 @@ CREATE TABLE PassedSpeakResponse
 
 CREATE TABLE User
 (
+    UserID          INT             AUTO_INCREMENT,
     Username        VARCHAR(20),
     Password        VARCHAR(20)     NOT NULL,
     FirstName       VARCHAR(20),
@@ -24,7 +25,8 @@ CREATE TABLE User
     RoleID          INTEGER,
     IsActive        BIT,
     
-    PRIMARY KEY     (Username),
+    PRIMARY KEY     (UserID),
+    UNIQUE          (Username),
     FOREIGN KEY     (RoleID)    REFERENCES Role(RoleID)
 );
 
@@ -35,11 +37,11 @@ CREATE TABLE Session
     NominationDeadline      DATETIME,
     ResponseDeadline        DATETIME,
     VerificationDeadline    DATETIME,
-    GCChairUsername         VARCHAR(20),
+    GCChairID               INT,
     IsCurrent               BIT,
         
     PRIMARY KEY (SessionID),
-    FOREIGN KEY (GCChairUsername) REFERENCES User(Username)
+    FOREIGN KEY (GCChairID) REFERENCES User(UserID)
 );
 
 -- Assumption: A nominee cannot have two nominators during the same session.
@@ -47,7 +49,7 @@ CREATE TABLE NominationForm
 (
     SessionID               VARCHAR(10),
     PID                     VARCHAR(10),
-    NominatorUsername       VARCHAR(20)     NOT NULL,
+    NominatorID             INT             NOT NULL,
     FirstName               VARCHAR(20)     NOT NULL,
     LastName                VARCHAR(20)     NOT NULL,
     EmailAddress            VARCHAR(40)     NOT NULL,
@@ -58,7 +60,7 @@ CREATE TABLE NominationForm
 
     PRIMARY KEY (SessionID, PID),
     FOREIGN KEY (SessionID)         REFERENCES Session(SessionID),
-    FOREIGN KEY (NominatorUsername) REFERENCES User(Username)
+    FOREIGN KEY (NominatorID)       REFERENCES User(UserID)
 );
 
 -- If a nominee ever needs to update his info form, the corresponding 
@@ -136,23 +138,23 @@ CREATE TABLE Score
 (
     SessionID           VARCHAR(10),
     PID                 VARCHAR(10),
-    GCUsername          VARCHAR(20),
+    GCMemberID          INT,
     Comment             VARCHAR(1000),
     Score               INTEGER,
     CHECK (Score >= 1 AND Score <= 100),
     
-    PRIMARY KEY (SessionID, PID, GCUsername),
+    PRIMARY KEY (SessionID, PID, GCMemberID),
     FOREIGN KEY (SessionID, PID)    REFERENCES NominationForm(SessionID, PID),
-    FOREIGN KEY (GCUsername)        REFERENCES User(Username)
+    FOREIGN KEY (GCMemberID)        REFERENCES User(UserID)
 );
 
 CREATE TABLE GCMembersInSession
 (
     SessionID           VARCHAR(10),
-	GCUserName	        VARCHAR(20),
+	GCMemberID	        INT,
     
-    PRIMARY KEY (SessionID, GCUsername),
+    PRIMARY KEY (SessionID, GCMemberID),
     FOREIGN KEY (SessionID)     REFERENCES Session(SessionID)
         ON DELETE CASCADE,
-    FOREIGN KEY (GCUsername)    REFERENCES User(Username)
+    FOREIGN KEY (GCMemberID)    REFERENCES User(UserID)
 );

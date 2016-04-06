@@ -12,7 +12,7 @@ interface sessionService
      * Inserts data into the Session table to create new session.
      * The newly created session will be set to be 'current'
      */
-    function createSession($sessionID, $nominationDeadline, $responseDeadline, $verificationDeadline, $GCChairUsername, $unameList);
+    function createSession($sessionID, $nominationDeadline, $responseDeadline, $verificationDeadline, $gcChairUsername, $gcMemberUsernameList);
 
     /**
      * Returns a Session object that contains information about the current session.

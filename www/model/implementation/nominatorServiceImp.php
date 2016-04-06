@@ -16,7 +16,7 @@ class nominatorServiceImp implements nominatorService
      * Will insert a nominee into the NominationForm table
      *
      */
-    function nominateUser($session, $PID, $nominatorusername, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad)
+    function nominateUser($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad)
     {
         // Retrieve access to the database.
         $db = db_connect();
@@ -27,13 +27,13 @@ class nominatorServiceImp implements nominatorService
 
         // Attempt to insert into NominationForm
         try {
-            $statement = $db->prepare('INSERT INTO NominationForm (SessionID, PID, NominatorUsername, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp)
-                                       VALUES (:id, :pid, :nomuser, :fname, :lname, :email, :rank, :csGrad, :newGrad, NOW() )');
+            $statement = $db->prepare('INSERT INTO NominationForm (SessionID, PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp)
+                                       VALUES (:id, :pid, :nomID, :fname, :lname, :email, :rank, :csGrad, :newGrad, NOW() )');
             $statement->execute(
                 array(
                     ':id' => htmlspecialchars($session),
                     ':pid' => htmlspecialchars($PID),
-                    ':nomuser' => htmlspecialchars($nominatorusername),
+                    ':nomID' => htmlspecialchars($nominatorID),
                     ':fname' => htmlspecialchars($firstname),
                     ':lname' => htmlspecialchars($lastname),
                     ':email' => htmlspecialchars($email),
