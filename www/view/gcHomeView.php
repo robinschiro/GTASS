@@ -13,9 +13,9 @@
 session_start();
 
 /* Get access to the details of the current session */
-require_once ('../controller/adminController.php');
+require_once ('../controller/gcMemberController.php');
 
-$controller = new adminController();
+$controller = new gcMemberController();
 $session = $controller->sessionServ->getCurrentSession();
 ?>
 
