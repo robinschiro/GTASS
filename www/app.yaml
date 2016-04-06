@@ -46,5 +46,8 @@ handlers:
 - url: /adminForm
   script: view/adminForm.php
 
+- url: /gcForm
+  script: view/gcForm.php
+
 - url: /public
   static_dir: view/public
