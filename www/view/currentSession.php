@@ -23,8 +23,8 @@ require_once ('../controller/adminController.php');
             </div>
 
             <div class="LEFT">
-                <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Home</a></p>
-                <p class="sidebar" align="center"><a href="/admin">Session Creation</a></p>
+                <p class="sidebar" align="center"><a href="/adminForm">Home</a></p>
+                <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
                 <p class="sidebar_selected" align="center"><b>Current Session</b></p>
                 <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
                 <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
