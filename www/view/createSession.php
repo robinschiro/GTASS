@@ -8,7 +8,7 @@ session_start();
 <head>
 <link href="public/stylesheets/createSession.css" type="text/css" rel="stylesheet" >
 <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
-<title>GTASS</title>
+<title>Create Session</title>
 <!-- Source needed for datepicker-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -34,10 +34,10 @@ session_start();
 </div>
 
 <div class="LEFT">
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Home</a></p>
-    <p class="sidebar_selected" align="center"><b>Session Creation</b></p>
+    <p class="sidebar" align="center"><a href="/adminForm">Home</a></p>
+    <p class="sidebar_selected" align="center">Create Session</p>
     <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
+    <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
     <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
 </div>
 

@@ -28,14 +28,14 @@ session_start();
 
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
-        <?php echo 'Signed in as ' . $_SESSION['userID'] . ' (admin)'; ?><br>
+        <?php echo 'Signed in as ' . $_SESSION['userID'] . ' (nominator)'; ?><br>
         <a href="/logout">Sign out</a>
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Home</a></p>
-        <p class="sidebar_selected" align="center"><b>Session Creation</b></p>
-        <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
+        <p class="sidebar" align="center"><a href="/nominatorForm">Home</a></p>
+        <p class="sidebar_selected" align="center"><b>Add Nominees</b></p>
+        <p class="sidebar" align="center"><a href="/currentSession">Lorem</a></p>
         <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
         <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
     </div>
@@ -50,7 +50,8 @@ session_start();
          -->
 
 
-
+<p class="addNomineeForm" align="left">
+    Add Nominees
         <form action="/nomCtrl" method="post">
             <div id="dynamicInput">
                 <label for="fname">First Name: </label>
@@ -77,6 +78,8 @@ session_start();
                 <input type="radio" name="newgrad[0]" id="nonew" value="0">
             </div>
 
+            <br>
+
             <!-- button for adding values dynamically -->
             <input type="button" value="Add Another Nominee" onClick="addInputNominator('dynamicInput');">
 
@@ -88,8 +91,8 @@ session_start();
             <input type="submit" value="Submit">
 
         </form>
-
-        <p class="forgotten">
+</p>
+        <p class="addNomineeForgotten">
             <!-- leave this -->
         </p>
         </p>

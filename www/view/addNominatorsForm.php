@@ -7,7 +7,7 @@ session_start();
 <html>
 <head>
     <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
-    <title>GTASS</title>
+    <title>Add Nominators</title>
     <!-- Source needed for datepicker-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -33,10 +33,10 @@ session_start();
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Home</a></p>
-        <p class="sidebar_selected" align="center"><b>Session Creation</b></p>
+        <p class="sidebar" align="center"><a href="/adminForm">Home</a></p>
+        <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
         <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
-        <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
+        <p class="sidebar_selected" align="center">Add Nominators</p>
         <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
     </div>
 
@@ -54,7 +54,7 @@ session_start();
             <input type="text" placeholder="email" name="email[0]">
 
             <br><br>
-            
+
             Nominator 1: <input type="text" placeholder="username" name="uname[1]">
             <input type="password" placeholder="password" name="password[1]">
             <input type="text" placeholder="first name" name="firstname[1]">
