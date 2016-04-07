@@ -46,20 +46,19 @@ session_start();
             Add Nominators
             <form action="/adminCtrl" method="POST">
 
+
+        <div id="dynamicInput">
             <!--dynamically adding new fields-->
-            Nominator 1: <input type="text" placeholder="username" name="uname[0]">
+            <input type="button" value="Add Another Nominator" onClick="addInput('dynamicInput');"><br><br>
+
+            Nominator: <input type="text" placeholder="username" name="uname[0]">
             <input type="password" placeholder="password" name="password[0]">
             <input type="text" placeholder="first name" name="firstname[0]">
             <input type="text" placeholder="last name" name="lastname[0]">
             <input type="text" placeholder="email" name="email[0]">
-
+            <input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
             <br><br>
-
-            Nominator 1: <input type="text" placeholder="username" name="uname[1]">
-            <input type="password" placeholder="password" name="password[1]">
-            <input type="text" placeholder="first name" name="firstname[1]">
-            <input type="text" placeholder="last name" name="lastname[1]">
-            <input type="text" placeholder="email" name="email[1]">
+        </div>
 
         <div id="extraInputs">
         </div>
@@ -90,7 +89,7 @@ session_start();
 
 </div>
 <!--javascript-->
-<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
+<script src="public/js/addInputAddNominators.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>
