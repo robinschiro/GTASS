@@ -30,8 +30,8 @@ $scoreTableRowArray = $controller->scoreTableServ->getScoreTableRows($sessionID)
 
         <table class="userList">
             <tr>
-                <th>Nominator Name</th>
-                <th>Nominee Name</th>
+                <th colspan="2">Nominator Name</th>
+                <th colspan="2">Nominee Name</th>
                 <th>Rank</th>
                 <th>Is New</th>
                 <?php
@@ -49,6 +49,20 @@ $scoreTableRowArray = $controller->scoreTableServ->getScoreTableRows($sessionID)
 
 
             </tr>
+            <?php
+            //
+            $scoreRows = $scoreTableRowArray;
+
+            foreach( $scoreRows as $scoreRow )
+            {
+                echo '<tr><td>' . $scoreRow->getNominatorFirstName() . '</td><td>'
+                                . $scoreRow->getNominatorLaststName() . '</td><td>'
+                                . $scoreRow->getNomineeFirstName() . '</td><td>'
+                                . $scoreRow->getNomineeLaststName() . '</td><td>'
+                                . $scoreRow->getNomineeRank() . '</td><td>'
+                                . $scoreRow->getNomineeIsNew() . '</td></tr>';
+            }
+            ?>
 
         </table>
 
