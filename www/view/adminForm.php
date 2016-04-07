@@ -29,7 +29,7 @@
 <div class="LEFT">
     <p class="sidebar_selected" align="center">Home</p>
     <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Current Session</a></p>
+    <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
     <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
     <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
 </div>

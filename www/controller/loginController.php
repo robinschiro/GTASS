@@ -49,7 +49,7 @@ class loginController
             //if logged in user is an admin
             if($_SESSION['role'] == 1){
                 //redirect to admin view
-                header("Location: /admin");  //go go admin page
+                header("Location: /adminForm");  //go go admin page
             }
             //if logged in user is a GC member
             else if($_SESSION['role'] == 2){

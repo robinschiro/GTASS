@@ -5,7 +5,7 @@ Group Members:
 
     Samuel Roman
 
-    Robin Shiro
+    Robin Schiro
 
     Julian Rojas
 

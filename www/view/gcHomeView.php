@@ -16,7 +16,8 @@ session_start();
 require_once ('../controller/gcMemberController.php');
 
 $controller = new gcMemberController();
-$session = $controller->sessionServ->getCurrentSession();
+$currentSession = $controller->sessionServ->getCurrentSession();
+$sessionID = $currentSession->getSemester();
 ?>
 
 
@@ -39,7 +40,7 @@ $session = $controller->sessionServ->getCurrentSession();
 
             <div class="CENTER">
                 <p class="Form" align="left">
-                    <?php echo 'Score Table for ' . $session->getSemester(); ?>
+                    <?php echo 'Score Table for ' . $sessionID; ?>
                 </p>
 
                 <?php

@@ -81,7 +81,8 @@ class sessionServiceImp implements sessionService
             // If a session with the given key already exists, inform the admin.
             if ( '23000' == $statement->errorCode() )
             {
-
+                // Display a message to user saying that the session already exists.
+                echo 'Session with the id ' . $sessionID . ' already exists.';
             }
             else
             {
@@ -107,6 +108,63 @@ class sessionServiceImp implements sessionService
             print_r($statement->errorInfo());
         }
 
+    }
+
+    function getSpecificSession($sessionID)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if ( NULL == $db )
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        $userServ = new userServiceImp();
+
+        try
+        {
+            // Only one session should be 'Current' at a time.
+            $statement = $db->prepare('SELECT NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairID, IsCurrent
+                                   FROM   Session 
+                                   WHERE  SessionID = :sessionID');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID)));
+            $resultTable = $statement->fetchAll();
+            $gcChairID = $resultTable[0]['GCChairID'];
+            $nominationDeadline = $this->ConvertFromSQLDate($resultTable[0]['NominationDeadline']);
+            $responseDeadline = $this->ConvertFromSQLDate($resultTable[0]['ResponseDeadline']);
+            $verificationDeadline = $this->ConvertFromSQLDate($resultTable[0]['VerificationDeadline']);
+            $gcMemberUsers = array();
+
+            // Query for the usernames of all GC members in this session.
+            $statement = $db->prepare('SELECT GCMemberID
+                                   FROM   GCMembersInSession 
+                                   WHERE  SessionID = :id');
+            $statement->execute(array(':id' => htmlspecialchars($sessionID)));
+            $resultTable = $statement->fetchAll();
+            $numMembers = sizeof($resultTable);
+            for ($i = 0; $i < $numMembers; $i++)
+            {
+                $gcUserID = $resultTable[$i]['GCMemberID'];
+                $gcMember = $userServ->getUserByID($gcUserID);
+
+                if ( $gcChairID == $gcUserID )
+                {
+                    $gcChairUser = $gcMember;
+                }
+                else
+                {
+                    array_push($gcMemberUsers, $gcMember);
+                }
+            }
+
+            return new session($sessionID, $gcChairUser, $nominationDeadline, $responseDeadline, $verificationDeadline, $gcMemberUsers);
+        }
+        catch ( PDOException $ex )
+        {
+            echo 'Exception when retrieving session with ID = ' . $sessionID . ': <br>';
+            print_r($statement->errorInfo());
+        }
     }
 
     function getCurrentSession()
