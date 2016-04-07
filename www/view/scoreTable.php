@@ -17,6 +17,8 @@ $controller = new scoreController();
 
 /* '$sessionID' should already be set when the score table is rendered */
 $session = $controller->sessionServ->getSpecificSession($sessionID);
+
+$scoreTableRowArray = $controller->scoreTableServ->getScoreTableRows($sessionID);
 ?>
 
 <html>
@@ -32,7 +34,6 @@ $session = $controller->sessionServ->getSpecificSession($sessionID);
                 <th>Nominee Name</th>
                 <th>Rank</th>
                 <th>Is New</th>
-
                 <?php
                     // The current session should be stored in $session at this point.
                     $gcMembers = $session->getGcUsersList();
@@ -44,12 +45,12 @@ $session = $controller->sessionServ->getSpecificSession($sessionID);
                     }
                 ?>
                 <th>Average Score</th>
+                <th>Comment</th>
 
 
             </tr>
 
         </table>
-        
 
     </body>
 </html>

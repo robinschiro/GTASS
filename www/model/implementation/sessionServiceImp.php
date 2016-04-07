@@ -81,7 +81,8 @@ class sessionServiceImp implements sessionService
             // If a session with the given key already exists, inform the admin.
             if ( '23000' == $statement->errorCode() )
             {
-
+                // Display a message to user saying that the session already exists.
+                echo 'Session with the id ' . $sessionID . ' already exists.';
             }
             else
             {
