@@ -1,0 +1,53 @@
+Meeting Notes 4/6/2016
+----------------------
+
+- Make a view that allows gcMembers (and any other user) to change their username and/or password.
+- Put checks within the views/controllers to enforce the permissions related to each kind of account.
+    - When user logs out, clear session variables.
+    - All checks are done javascript. They occur before the POST.
+        - This is how we will display messages to the user.
+    - Checks for deadlines
+- Security: Implement hashed passwords.
+- Nominee form needs to pull data from database through controller/model
+    - When nominee submits, it inserts new entry into database
+- Need to figure out how to send out email 2 days before deadline.
+- Need to create a nomineeInfo view.
+    - Could probably use scoreController for this
+    - This is what the gcMember sees when he clicks a name in the score table.
+- Need an incompleteNominations view
+    - Accessed by gcMember
+- Need view for gcMember to look at previous sessions.
+    - When gcMember clicks session, he can see the score table for that session.
+- Once nominee submits his form, email is sent to nominator
+- Need view for nominator to approve of nominee responses.
+
+- When nominator logs in, taken to addNominee form
+- When admin logs in, taken to current session
+- When gcMember logs in, taken to score table.
+
+- Add timestamps to all forms
+
+ACTIONS:
+- Sammy and Alex to create user manual
+- Robin and Julian to add description to design documents
+- Robin to make view and create logic for allowing users to change username/password.
+- Sammy to implement checks that enforce account permission (i.e. which pages each type of account can view)
+- Sammy to implement hashed passwords
+- Robin to implement back-end logic for nominee form
+- Sammy to research and/or implement email deadline stuff
+- Julian to create nomineeInfo view
+    - he will also figure out how to have it pop up in a new window when nominee is clicked in score table
+- Alex to create incompleteNominations view
+- Alex to figure out how to put his email templates into variables.
+    - Update email templates to include appropriate links for each kind of user.
+- Julian to create view for gcMembers to look at previous sessions
+    - Sammy to implement back-end logic for this.
+- Alex to create view for nominator to approve of nominee's detailed info.
+- Julian or Alex to make URLS consistent. (i.e. /admin/createSession)
+- Robin to update login controller
+- Everyone who creates a form: Be sure to capture timestamp.
+
+
+IF HAVE TIME:
+- Implement gcChair's special ability (i.e. add Accepted column to score table)
+- Add ability to delegate responsibility
