@@ -1,6 +1,7 @@
 <?php
 
 require_once('../model/implementation/sessionServiceImp.php');
+require_once('../model/implementation/scoreTableServiceImp.php');
 
 
 class scoreController

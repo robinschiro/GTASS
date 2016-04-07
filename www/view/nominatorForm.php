@@ -29,9 +29,7 @@
 <div class="LEFT">
     <p class="sidebar_selected" align="center">Home</p>
     <p class="sidebar" align="center"><a href="/addNominees">Add Nominees</a></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Lorem</a></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
+    <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
 </div>
 
 <!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED -->

@@ -56,11 +56,11 @@ $scoreTableRowArray = $controller->scoreTableServ->getScoreTableRows($sessionID)
             foreach( $scoreRows as $scoreRow )
             {
                 echo '<tr><td>' . $scoreRow->getNominatorFirstName() . '</td><td>'
-                                . $scoreRow->getNominatorLaststName() . '</td><td>'
-                                . $scoreRow->getNomineeFirstName() . '</td><td>'
-                                . $scoreRow->getNomineeLaststName() . '</td><td>'
-                                . $scoreRow->getNomineeRank() . '</td><td>'
-                                . $scoreRow->getNomineeIsNew() . '</td></tr>';
+                                . $scoreRow->getNominatorLastName() . '</td><td>'
+                                . $scoreRow->getNominationForm()->getNomineeFirstName() . '</td><td>'
+                                . $scoreRow->getNominationForm()->getNomineeLastName() . '</td><td>'
+                                . $scoreRow->getNominationForm()->getNomineeRank() . '</td><td>'
+                                . $scoreRow->getNominationForm()->getNomineeIsNew() . '</td></tr>';
             }
             ?>
 

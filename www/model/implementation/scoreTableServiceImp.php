@@ -9,6 +9,10 @@
 
 require_once('../connection.php');
 require_once('model/implementation/userServiceImp.php');
+require_once('model/scoreTableService.php');
+require_once('entity/scoreTableRow.php');
+require_once('entity/nominationForm.php');
+require_once('entity/user.php');
 
 class scoreTableServiceImp implements scoreTableService
 {

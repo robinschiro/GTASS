@@ -35,9 +35,7 @@ session_start();
     <div class="LEFT">
         <p class="sidebar" align="center"><a href="/nominatorForm">Home</a></p>
         <p class="sidebar_selected" align="center"><b>Add Nominees</b></p>
-        <p class="sidebar" align="center"><a href="/currentSession">Lorem</a></p>
-        <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Ipsum</a></p>
-        <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
+        <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
     </div>
 
     <div class="CENTER">

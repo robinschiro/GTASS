@@ -56,6 +56,11 @@ class loginController
                 //redirect to GC view
                 header("Location: /GC");
             }
+            // If logged in as nominator
+            else if ($_SESSION['role'] == 3)
+            {
+                header("Location: /addNominees");
+            }
             //something went wrong session value role is not valid
             else{
                 //do something not sure yet
