@@ -10,6 +10,10 @@
     GTASS - Graduate Teaching Assistant Selection System
 </p>
 
+<div class="TOP" align="center">
+    <image src="public/images/UCF_horizontal_logo.png" width="30%" height="20%"/>
+</div>
+
 <div class="CENTER">
     <p class="login">
         User Login
