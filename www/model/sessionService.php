@@ -18,4 +18,9 @@ interface sessionService
      * Returns a Session object that contains information about the current session.
      */
     function getCurrentSession();
+
+    /**
+     * Returns a Session object that contains information about the session with the given SessionID.
+     */
+    function getSpecificSession($sessionID);
 }
