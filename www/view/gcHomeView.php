@@ -1,16 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sammy
- * Date: 3/26/2016
- * Time: 7:06 PM
- *
- *
- *
- * Use the same naming convention used in the input names!
- */
 
 session_start();
+
+//check role of user
+if($_SESSION['role'] != 2)
+{
+    //if logged in user is a GC member
+    if ($_SESSION['role'] == 1)
+    {
+        //redirect to GC view
+        header("Location: /adminForm");
+    } // If logged in as nominator
+    else if ($_SESSION['role'] == 3)
+    {
+        header("Location: /addNominees");
+    }
+    //Session variable role not recognized as valid
+    else{
+        //user must resign in
+        header("Location: /");
+    }
+}
+?>
+
+<?php
 
 /* Get access to the details of the current session */
 require_once ('../controller/gcMemberController.php');

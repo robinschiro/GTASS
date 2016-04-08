@@ -2,30 +2,36 @@
 
 session_start();
 
+//check role of user
+if($_SESSION['role'] != 3)
+{
+    //if logged in user is a GC member
+    if ($_SESSION['role'] == 2)
+    {
+        //redirect to GC view
+        header("Location: /GC");
+    } // If logged in as admin
+    else if ($_SESSION['role'] == 1)
+    {
+        header("Location: /adminForm");
+    }
+    //Session variable role not recognized as valid
+    else{
+        //user must resign in
+        header("Location: /");
+    }
+}
 ?>
 
 <html>
 <head>
     <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
-    <title>GTASS</title>
-    <!-- Source needed for datepicker-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#datepicker1").datepicker();
-            $("#datepicker2").datepicker();
-            $("#datepicker3").datepicker();
-        });
-    </script>
-
+    <title>Add Nominees</title>
 </head>
 
 <body>
 
 <div class="WRAPPER">
-
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
         <?php echo 'Signed in as ' . $_SESSION['userID'] . ' (nominator)'; ?><br>
@@ -39,66 +45,68 @@ session_start();
     </div>
 
     <div class="CENTER">
+    <!--
+        get username from session variable
+        get session from query
+        in email use pid to create url
+            - /nomineeApplication?id={PID}
+     -->
+     <p class="addNomineeForm" align="left">
+         Add Nominees
 
-        <!--
-            get username from session variable
-            get session from query
-            in email use pid to create url
-                - /nomineeApplication?id={PID}
-         -->
-
-
-<p class="addNomineeForm" align="left">
-    Add Nominees
         <form action="/nomCtrl" method="post">
-            <div id="dynamicInput">
-                <label for="fname">First Name: </label>
-                <input type="text" name="fname[0]" placeholder="Nominee's First Name" id="fname">
-                <label for="lname">Last Name: </label>
-                <input type="text" name="lname[0]" placeholder="Nominee's Last Name" id="lname">
-                <label for="pid">PID: </label>
-                <input type="text" name="pid[0]" placeholder="Nominee's PID" id="pid">
-                <label for="email">Email: </label>
-                <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
-                <label for="rank">Rank Nominee: </label>
-                <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
+        <div id="dynamicInput">
+            <label for="fname">First Name: </label>
+            <input type="text" name="fname[0]" placeholder="Nominee's First Name" id="fname">
+            <label for="lname">Last Name: </label>
+            <input type="text" name="lname[0]" placeholder="Nominee's Last Name" id="lname">
+            <label for="pid">PID: </label>
+            <input type="text" name="pid[0]" placeholder="Nominee's PID" id="pid">
+            <label for="email">Email: </label>
+            <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
+            <label for="rank">Rank Nominee: </label>
+            <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
 
-                CS Graduate:
-                <label for="yes">yes</label>
-                <input type="radio" name="csgrad[0]" id="yes" value="1">
-                <label for="no">no</label>
-                <input type="radio" name="csgrad[0]" id="no" value="0">
+            CS Graduate:
+            <label for="yes">yes</label>
+            <input type="radio" name="csgrad[0]" id="yes" value="1">
+            <label for="no">no</label>
+            <input type="radio" name="csgrad[0]" id="no" value="0">
 
-                New Graduate:
-                <label for="yesnew">yes</label>
-                <input type="radio" name="newgrad[0]" id="yesnew" value="1">
-                <label for="nonew">no</label>
-                <input type="radio" name="newgrad[0]" id="nonew" value="0">
-            </div>
+            New Graduate:
+            <label for="yesnew">yes</label>
+            <input type="radio" name="newgrad[0]" id="yesnew" value="1">
+            <label for="nonew">no</label>
+            <input type="radio" name="newgrad[0]" id="nonew" value="0">
+            <input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
+            <br><br>
+        </div>
 
-            <br>
+        <div id="extraInputs">
+        </div>
 
-            <!-- button for adding values dynamically -->
-            <input type="button" value="Add Another Nominee" onClick="addInputNominator('dynamicInput');">
+        <br>
 
-            <!-- Tells the controller which function to call -->
-            <input type="hidden" name="createNominators">
-            <!-- Increment after each dynamically added nominator form -->
-            <input type="hidden" name="NomCount" value="1" id="count">
+        <!-- button for adding values dynamically -->
+        <input type="button" value="Add Another Nominee" onClick="addInputNominator('extraInputs');">
 
-            <input type="submit" value="Submit">
+        <!-- Tells the controller which function to call -->
+        <input type="hidden" name="createNominators">
+        <!-- Increment after each dynamically added nominator form -->
+        <input type="hidden" name="NomCount" value="1" id="count">
+
+        <input type="submit" value="Submit">
 
         </form>
-</p>
+        </p>
+
         <p class="addNomineeForgotten">
-            <!-- leave this -->
+        <!-- leave this -->
         </p>
-        </p>
-    </div>
-    <!-- end center div -->
-
-
+    </p>
+    </div> <!-- end center div -->
 </div>
+
 <!--javascript-->
 <script src="public/js/addInputNominator.js" language="Javascript" type="text/javascript"></script>
 

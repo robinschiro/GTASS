@@ -11,7 +11,7 @@
 </p>
 
 <div class="TOP" align="center">
-    <image src="public/images/UCF_horizontal_logo.png" width="30%" height="20%"/>
+    <image src="public/images/UCF_horizontal_logo.png" width="35%" height="18%"/>
 </div>
 
 <div class="CENTER">

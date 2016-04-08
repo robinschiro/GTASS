@@ -9,18 +9,6 @@ session_start();
 <link href="public/stylesheets/createSession.css" type="text/css" rel="stylesheet" >
 <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 <title>Create Session</title>
-<!-- Source needed for datepicker-->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script>
-  $(function() {
-    $( "#datepicker1" ).datepicker();
-	$( "#datepicker2" ).datepicker();
-	$( "#datepicker3" ).datepicker();
-  });
-  </script>
-
 </head>
 
 <body>
@@ -66,9 +54,9 @@ session_start();
         <br><br>
 
         <!--Date Picker -->
-        Nomination Deadline:   <input type="datetime" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
-        Response Deadline:     <input type="datetime" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
-        Verification Deadline: <input type="datetime" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
+        Nomination Deadline:   <input type="date" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
+        Response Deadline:     <input type="date" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
+        Verification Deadline: <input type="date" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
 
         <br><br><br>
 
@@ -109,8 +97,6 @@ session_start();
 </p>
 </div>
 <!-- end center div -->
-
-
 
 </div>
 <!--javascript-->

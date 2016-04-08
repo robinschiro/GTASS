@@ -104,10 +104,7 @@ session_start();
     <!-- leave this -->
   </p>
 </p>
-</div>
-<!-- end center div -->
-
-
+</div> <!-- end center div -->
 
 </div>
 <!--javascript-->
