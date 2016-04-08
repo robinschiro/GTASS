@@ -69,6 +69,14 @@ p.sidebar_selected {
     background-color: #FFFFFF;
 }
 
+#extraInputs {
+    width:98%;
+    margin-right: auto;;
+    margin-left: auto;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+
 p.Form {
     margin-top: 60px;
     margin-left: 30px;

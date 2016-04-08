@@ -26,19 +26,7 @@ if($_SESSION['role'] != 3)
 <html>
 <head>
     <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
-    <title>GTASS</title>
-    <!-- Source needed for datepicker-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#datepicker1").datepicker();
-            $("#datepicker2").datepicker();
-            $("#datepicker3").datepicker();
-        });
-    </script>
-
+    <title>Add Nominees</title>
 </head>
 
 <body>
@@ -93,12 +81,15 @@ if($_SESSION['role'] != 3)
                 <input type="radio" name="newgrad[0]" id="yesnew" value="1">
                 <label for="nonew">no</label>
                 <input type="radio" name="newgrad[0]" id="nonew" value="0">
+                <input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
+                <br><br>
             </div>
-
+            <div id="extraInputs">
+            </div>
             <br>
 
             <!-- button for adding values dynamically -->
-            <input type="button" value="Add Another Nominee" onClick="addInputNominator('dynamicInput');">
+            <input type="button" value="Add Another Nominee" onClick="addInputNominator('extraInputs');">
 
             <!-- Tells the controller which function to call -->
             <input type="hidden" name="createNominators">

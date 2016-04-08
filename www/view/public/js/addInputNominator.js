@@ -2,7 +2,7 @@ var counter = 1;
 function addInputNominator(divName) {
 
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = "<br><br><label for='fname'>First Name: </label>" +
+    newdiv.innerHTML = "<label for='fname'>First Name: </label>" +
         "<input type='text' name='fname[" + counter  + "]' placeholder='Nominee&#39s First Name' id='fname'>" + " " +
         "<label for='fname'>Last Name: </label>" +
         "<input type='text' name='lname[" + counter  + "]' placeholder='Nominee&#39s Last Name' id='lname'>" + " " +
@@ -19,9 +19,16 @@ function addInputNominator(divName) {
         "New Graduate: " + "<label for='yesnew" + counter  + "'>yes </label>" +
         "<input type='radio' value='1' name='newgrad[" + counter + "]' id='yesnew" + counter  + "'>" + " " +
         "<label for='nonew" + counter  + "'>no </label>" +
-        "<input type='radio' value='0' name='newgrad[" + counter + "]' id='nonew" + counter  + "' >" + " <br><br>";
+        "<input type='radio' value='0' name='newgrad[" + counter + "]' id='nonew" + counter  + "' >" +
+        "<input type='button' value='Remove' name='remove['" + counter + "']' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'> " + " <br><br>";
 
     document.getElementById(divName).appendChild(newdiv);
     counter++;
     document.getElementById('count').setAttribute('value', counter);
+}
+
+function removeFirst(divName)
+{
+	var ele = document.getElementById('dynamicInput');
+	ele.parentNode.removeChild(ele)
 }

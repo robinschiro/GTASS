@@ -1,9 +1,0 @@
-Admin pages in sidebar
-	-sucessful login page
-	-session creation
-	-
-
-
-things to do
--rename successLoginAdmin to session_creation
--create successLoginAdmin
