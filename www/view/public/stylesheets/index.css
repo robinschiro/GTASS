@@ -1,9 +1,11 @@
-body {
+body
+{
   background-color: #ACB7AC;
   margin: 0px;
 }
 
-div.CENTER {
+div.CENTER
+{
   width:40%;
   margin-top: 2%;
   margin-right: auto;;
@@ -13,7 +15,8 @@ div.CENTER {
   background-color: #FFFFFF;
 }
 
-p.header {
+p.header
+{
   margin-top: auto;
   margin-left: 0px;
   /*margin-left: 230px;*/
@@ -24,7 +27,8 @@ p.header {
   font-size: 26;
 }
 
-p.login {
+p.login
+{
   margin-top: 70px;
   margin-left: 20px;
   margin-bottom: 50px;
@@ -32,7 +36,8 @@ p.login {
   font-size: 28px;
 }
 
-div.inputBoxBorders {
+div.inputBoxBorders
+{
   margin-top: 70px;
   margin-left: 20px;
   margin-bottom: 50px;
@@ -42,7 +47,8 @@ div.inputBoxBorders {
   margin: 0 auto;
 }
 
-p.loginIn {
+p.loginIn
+{
   display: block;
   margin-bottom: 30px;
   margin-left: 30px;
@@ -50,14 +56,18 @@ p.loginIn {
   font-family: sans-serif;
   font-size: 14px;
 }
-p.submit {
+
+p.submit
+{
   display: block;
   margin-bottom: -40px;
 
   font-family: sans-serif;
   font-size: 14px;
 }
-p.forgotten {
+
+p.forgotten
+{
   display: block;
   margin-bottom: 100px;
   margin-right: 150px;
@@ -68,12 +78,14 @@ p.forgotten {
   color: blue;
 }
 
-.textBoxes {
+.textBoxes
+{
   width: 300px;
   height: 30px;
 }
 
-.textBoxes2 {
+.textBoxes2
+{
   width: 300px;
   height: 30px;
   margin-left: 3px;

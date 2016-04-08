@@ -98,8 +98,6 @@ session_start();
 </div>
 <!-- end center div -->
 
-
-
 </div>
 <!--javascript-->
 <script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>

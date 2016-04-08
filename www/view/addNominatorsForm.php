@@ -25,26 +25,12 @@ if($_SESSION['role'] != 1)
 
 <html>
 <head>
-    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet">
     <title>Add Nominators</title>
-    <!-- Source needed for datepicker-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>
-        $(function() {
-            $( "#datepicker1" ).datepicker();
-            $( "#datepicker2" ).datepicker();
-            $( "#datepicker3" ).datepicker();
-        });
-    </script>
-
 </head>
 
 <body>
-
 <div class="WRAPPER" >
-
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
         <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
@@ -98,13 +84,10 @@ if($_SESSION['role'] != 1)
         <p class="forgotten">
             <!-- leave this -->
         </p>
-        </p>
+    </p> <!-- end class="Form" paragraph -->
     </div>
-    <!-- end center div -->
-
-
-
 </div>
+
 <!--javascript-->
 <script src="public/js/addInputAddNominators.js" language="Javascript" type="text/javascript"></script>
 

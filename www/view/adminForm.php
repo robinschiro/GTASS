@@ -56,6 +56,7 @@ if ($_SESSION['role'] != 1) {
         <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
     </div>
 
+    <!-- actually, probably not -->
     <!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED -->
     <!-- FORM ACTION NEEDED --><!-- (Maybe)(NOTICE ME) --><!-- FORM ACTION NEEDED -->
     <!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED -->
@@ -71,10 +72,7 @@ if ($_SESSION['role'] != 1) {
             <!-- leave this -->
         </p>
         </p>
-    </div>
-    <!-- end center div -->
-
-
+    </div> <!-- end center div -->
 </div>
 <!--javascript-->
 <script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
