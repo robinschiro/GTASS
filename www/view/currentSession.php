@@ -1,6 +1,27 @@
-<!-- This view is rendered by the adminController. The $session variable must be initialized before
-     rendering this view -->
+<?php
 
+session_start();
+
+//check role of user
+if($_SESSION['role'] != 1)
+{
+    //if logged in user is a GC member
+    if ($_SESSION['role'] == 2)
+    {
+        //redirect to GC view
+        header("Location: /GC");
+    } // If logged in as nominator
+    else if ($_SESSION['role'] == 3)
+    {
+        header("Location: /addNominees");
+    }
+    //Session variable role not recognized as valid
+    else{
+        //user must resign in
+        header("Location: /");
+    }
+}
+?>
 <?php
 require_once ('../controller/adminController.php');
 

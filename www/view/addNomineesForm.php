@@ -2,6 +2,25 @@
 
 session_start();
 
+//check role of user
+if($_SESSION['role'] != 3)
+{
+    //if logged in user is a GC member
+    if ($_SESSION['role'] == 2)
+    {
+        //redirect to GC view
+        header("Location: /GC");
+    } // If logged in as admin
+    else if ($_SESSION['role'] == 1)
+    {
+        header("Location: /adminForm");
+    }
+    //Session variable role not recognized as valid
+    else{
+        //user must resign in
+        header("Location: /");
+    }
+}
 ?>
 
 <html>
