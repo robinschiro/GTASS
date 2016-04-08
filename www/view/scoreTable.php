@@ -27,28 +27,20 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
 
     </head>
     <body>
+    <form action="/" method="POST">
         <div>
             <?php
+
+            //variables needed to traverse arrays
             $gcMembers = $session->getGcUsersList();
             array_push($gcMembers, $session->getGcChair());
-            
             $gcCount = sizeof($gcMembers);
-
+            $idArray = array();
+            $index = 0;
             foreach( $gcMembers as $gcMember )
-            {
-                echo $gcMember->getLastName();
-                echo $gcMember->getUserID();
-                echo $gcMember->getFirstName();
-                echo $gcMember->getEmail();
-                echo $gcMember->getPassword();
-                echo '<br>';
-
-            }
-            echo '<br>';
-
-            echo $gcCurrentMember->getUserID();
-
-
+                    {
+                        array_push($idArray, $gcMember->getUserID());
+                    }
             ?>
         </div>
         <table class="userList">
@@ -57,7 +49,6 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                 <th colspan="2">Nominee Name</th>
                 <th>Rank</th>
                 <th>Is New</th>
-                <th>Comment</th>
                 <?php
                     // The current session should be stored in $session at this point.
                     //$gcMembers = $session->getGcUsersList();
@@ -76,6 +67,7 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                     }
                 ?>
                 <th>Average Score</th>
+                <th>Comment</th>
 
 
 
@@ -95,20 +87,72 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                 echo  '<td>' . $scoreRow->getNominationForm()->getNomineeLastName() . '</td>';
                 echo  '<td>' . $scoreRow->getNominationForm()->getNomineeRank() . '</td>';
                 echo  '<td>' . $scoreRow->getNominationForm()->getNomineeIsNew() . '</td>';
-                echo  '<td>' . $scoreRow->getComments() . '</td>';
-
-                $iterator = 0;
-
-                for ($i=0; $i < $currentPosition; $i++)
-                {
-                    //echo '<td>' . $scoreRow->getScores($gcMembers->getUserID) . '</td>';
-                    echo '<td>' . $scoreRow->getScores($gcCurrentMember->getUserID()) . '</td>';
-                }
+                addScores($gcCount, $scoreRows, $activeGcPosition, $idArray, $index);
+                printAverages($scoreRow,$idArray);
+                addComments($scoreRow, $gcCurrentMember,$index);
                 echo '</tr>';
+                $index++;
+            }
+            ?>
+
+            <?php
+            function printAverages($scoreRow,$idArray)
+            {
+                $sum = 0;
+                foreach ($idArray as $idItem) {
+                    if ($scoreRow->getScores()[$idItem] != NULL)
+                    {
+                    $sum += $scoreRow->getScores()[$idItem];
+                    }
+                }
+                echo '<td>' . $sum/sizeof($idArray) . '</td>';
+            }
+
+            function addScores($gcCount, $scoreRows, $activeGcPosition, $idArray, $index)
+            {
+                $iterator =0;
+                $counter = 0;
+                foreach ($scoreRows as $scoreRow) {
+
+                    $counter++;
+
+                    if ($counter <= $gcCount)
+                    {
+                        if ($scoreRow->getScores()[$idArray[$iterator]] != 0)
+                        {
+                            echo '<td>' . $scoreRow->getScores()[$idArray[$iterator]] . '</td>';
+                        }
+                        else if (($scoreRow->getScores()[$idArray[$iterator]] == 0) & ($counter == $activeGcPosition))
+                        {
+                            echo "<td><input type='number' name='rank[$index]' min='0' max='100' id='rank'></td>";
+                        }
+                        else
+                        {
+                                echo '<td>' . 0 . '</td>';
+                        }
+
+                    }
+
+                }
+            }
+            //takes current ScoreRow and logged on GC member
+
+            function addComments($scoreRow, $gcCurrentMember, $index)
+            {
+                if ($scoreRow->getComments()[$gcCurrentMember->getUserID()] != 0)
+                {
+                    echo '<td>' . $scoreRow->getComments()[$gcCurrentMember->getUserID()] . '</td>';
+                }
+                else
+                {
+                    echo "<td> 
+                    <textarea rows='1' columns='150' placeholder='Enter Text Here' name='comment[$index]'></textarea></td>";
+                }
             }
             ?>
 
         </table>
-
+        <input type="submit" value="Add Score/Comment">
+    </form>
     </body>
 </html>
