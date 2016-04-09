@@ -63,7 +63,7 @@ class loginController
             // If logged in as nominator
             else if ($_SESSION['role'] == 3)
             {
-                header("Location: /addNominees");
+                header("Location: /nominatorHome");
             }
             //something went wrong session value role is not valid
             else{

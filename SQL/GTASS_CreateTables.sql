@@ -23,7 +23,6 @@ CREATE TABLE User
     LastName        VARCHAR(20),
     EmailAddress    VARCHAR(40),
     RoleID          INTEGER,
-    IsActive        BIT,
     
     PRIMARY KEY     (UserID),
     UNIQUE          (Username),
@@ -54,8 +53,8 @@ CREATE TABLE NominationForm
     LastName                VARCHAR(20)     NOT NULL,
     EmailAddress            VARCHAR(40)     NOT NULL,
     Ranking                 INTEGER,
-    IsCSGradStudent         BIT,
-    IsNewGradStudent        BIT,
+    IsCSGradStudent         TINYINT(1),
+    IsNewGradStudent        TINYINT(1),
     Timestamp               DATETIME,
 
     PRIMARY KEY (SessionID, PID),

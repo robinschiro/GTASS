@@ -53,11 +53,13 @@ interface userService {
      * Will update the user's username and/or password.  If you want to keep
      * one or the other the same simply pass the same password or username.
      *
+     * @param $id
      * @param $username The new username
      * @param $password The new password
-     * @param $userid The user's id
+     * @return
+     * @internal param The $userid user's id
      */
-    function updateUser($username, $password, $id);
+    function updateUser($id, $username, $password, $firstName, $lastName, $emailAddress);
 
 
 }

@@ -214,7 +214,10 @@ class adminController
             //echo 'Sent email to ' . $unameList[$i] + '<br>';
         }
 
-        //redirect to home page
-        header('Location: /adminHome');
+        // Display a success message.
+        $_SESSION['message'] = '<br> All nominator accounts have been successfully created. <br><br>';
+
+        // Redirect to addNominatorsForm page.
+        header('Location: /addNominators');
     }
 }

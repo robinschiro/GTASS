@@ -16,6 +16,12 @@ handlers:
 - url: /nomCtrl
   script: controller/nominatorController.php
 
+- url: /accountCtrl
+  script: controller/accountController.php
+
+- url: /account
+  script: view/account.php
+
 - url: /addNominees
   script: view/addNomineesForm.php
 

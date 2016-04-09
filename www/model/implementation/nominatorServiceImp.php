@@ -44,7 +44,7 @@ class nominatorServiceImp implements nominatorService
             );
 
         } catch (PDOException $ex) {
-            echo 'Exception when creating new nominator: ';
+            echo 'Exception when nominating nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
     }

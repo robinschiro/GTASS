@@ -50,8 +50,6 @@ class nominatorController
      */
     function nominateUsers()
     {
-        //echo "addNominators called...<br>";
-
         //get current session
         $currentSession = $this->sessionServ->getCurrentSession()->getSemester();
 
@@ -120,10 +118,15 @@ class nominatorController
             //pid used in link
             if($csGradList[$i] == 1)
             {
-                echo $emailList[$i] . '<br>';
                 $this->emailServ->sendEmail($emailList[$i], 2, $pidList[$i]);
             }
         }
+
+        // Display a success message.
+        $_SESSION['message'] = '<br> All students have been successfully nominated. <br><br>';
+
+        // Redirect to addNominatorsForm page.
+        header('Location: /addNominees');
 
     }
 }

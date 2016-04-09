@@ -17,6 +17,7 @@
 
 <div class="LEFT">
     <p class="sidebar_selected" align="center">Home</p>
+    <p class="sidebar" align="center"><a href="/account">Account</a></p>
     <p class="sidebar" align="center"><a href="/addNominees">Add Nominees</a></p>
 </div>
 
