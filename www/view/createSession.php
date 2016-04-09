@@ -22,11 +22,10 @@ session_start();
 </div>
 
 <div class="LEFT">
-    <p class="sidebar" align="center"><a href="/adminForm">Home</a></p>
+    <p class="sidebar" align="center"><a href="/adminHome">Home</a></p>
     <p class="sidebar_selected" align="center">Create Session</p>
     <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
     <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
-    <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
 </div>
 
 <div class="CENTER">

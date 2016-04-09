@@ -9,7 +9,7 @@ if($_SESSION['role'] != 1)
     if ($_SESSION['role'] == 2)
     {
         //redirect to GC view
-        header("Location: /GC");
+        header("Location: /gcHome");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3)
     {
@@ -44,11 +44,10 @@ require_once ('../controller/adminController.php');
             </div>
 
             <div class="LEFT">
-                <p class="sidebar" align="center"><a href="/adminForm">Home</a></p>
+                <p class="sidebar" align="center"><a href="/adminHome">Home</a></p>
                 <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
                 <p class="sidebar_selected" align="center">Current Session</p>
                 <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
-                <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
             </div>
 
             <div class="CENTER">

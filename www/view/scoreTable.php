@@ -152,7 +152,7 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
             ?>
 
         </table>
-        <input type="submit" value="Add Score/Comment">
+        <input type="submit" value="Submit Changes">
     </form>
     </body>
 </html>

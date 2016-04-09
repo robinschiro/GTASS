@@ -9,7 +9,7 @@ if($_SESSION['role'] != 2)
     if ($_SESSION['role'] == 1)
     {
         //redirect to GC view
-        header("Location: /adminForm");
+        header("Location: /adminHome");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3)
     {

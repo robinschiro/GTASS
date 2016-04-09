@@ -9,11 +9,11 @@ if($_SESSION['role'] != 3)
     if ($_SESSION['role'] == 2)
     {
         //redirect to GC view
-        header("Location: /GC");
+        header("Location: /gcHome");
     } // If logged in as admin
     else if ($_SESSION['role'] == 1)
     {
-        header("Location: /adminForm");
+        header("Location: /adminHome");
     }
     //Session variable role not recognized as valid
     else{
@@ -39,9 +39,8 @@ if($_SESSION['role'] != 3)
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="/nominatorForm">Home</a></p>
+        <p class="sidebar" align="center"><a href="/nominatorHome">Home</a></p>
         <p class="sidebar_selected" align="center"><b>Add Nominees</b></p>
-        <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
     </div>
 
     <div class="CENTER">

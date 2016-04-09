@@ -9,7 +9,7 @@ if($_SESSION['role'] != 1)
     if ($_SESSION['role'] == 2)
     {
         //redirect to GC view
-        header("Location: /GC");
+        header("Location: /gcHome");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3)
     {
@@ -38,11 +38,10 @@ if($_SESSION['role'] != 1)
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="/adminForm">Home</a></p>
+        <p class="sidebar" align="center"><a href="/adminHome">Home</a></p>
         <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
         <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
         <p class="sidebar_selected" align="center">Add Nominators</p>
-        <p class="sidebar" align="center"><a href="www.google.comORSOMETHING">Dolor</a></p>
     </div>
 
     <div class="CENTER">
@@ -77,7 +76,7 @@ if($_SESSION['role'] != 1)
         <input type="hidden" name="createNominators">
 
         <!-- Initially 1 will be incremented each time a new gc member is added -->
-        <input type="hidden" name="count" value="2" id="gcCount">
+        <input type="hidden" name="count" value="1" id="gcCount">
 
         </form>
 
