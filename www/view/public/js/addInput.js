@@ -3,7 +3,7 @@ function addInput(divName)
 {
   var newdiv = document.createElement('div');
 
-  newdiv.innerHTML = "GC " + (counter + 1) + ": " +
+  newdiv.innerHTML = "GC: " +
   "<input type='text' placeholder='username' name='uname[" + counter + "]'>" + " " +
   "<input type='password' placeholder='password' name='password[" + counter + "]'>" + " " +
   "<input type='text' placeholder='first name' name='firstname[" + counter + "]'>" + " " +
@@ -20,5 +20,6 @@ function addInput(divName)
 function removeFirst(divName)
 {
 	var ele = document.getElementById('dynamicInput');
-	ele.parentNode.removeChild(ele)
+	ele.parentNode.removeChild(ele);
+  counter--;
 }

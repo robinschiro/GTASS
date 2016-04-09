@@ -64,7 +64,7 @@ session_start();
 
         <!--dynamically adding new fields-->
         <div id="dynamicInput">
-            GC 1: <input type="text" placeholder="username" name="uname[0]">
+            GC: <input type="text" placeholder="username" name="uname[0]">
             <input type="password" placeholder="password" name="password[0]">
             <input type="text" placeholder="first name" name="firstname[0]">
             <input type="text" placeholder="last name" name="lastname[0]">
