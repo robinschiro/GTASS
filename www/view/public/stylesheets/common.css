@@ -9,17 +9,20 @@ table.userList td, table.userList th
     padding: 5px;
 }
 
-body {
+body 
+{
     background-color: #ACB7AC;
     margin: 0px;
     padding: 0px;
 }
 
-div.WRAPPER {
+div.WRAPPER
+{
     overflow: scroll;
     height: 100%;
 }
-div.LEFT {
+div.LEFT
+{
     width: 14%;
     overflow: hidden;
     float: left;
@@ -27,7 +30,8 @@ div.LEFT {
     background: #e0e0d1;
     border: 2px dashed black;
 }
-div.TOP {
+div.TOP
+{
     top: 0px;
     height: 8%;
     background: red;
@@ -36,7 +40,8 @@ div.TOP {
     border: 2px solid #FFFFFF;
     background-color: #FFFFFF;
 }
-div.CENTER {
+div.CENTER
+{
     width:66%;
     margin-top: 10%;
     margin-left: 24%;
@@ -44,7 +49,8 @@ div.CENTER {
     border: 1px solid #FFFFFF;
     background-color: #FFFFFF;
 }
-div.BOTTOM {
+div.BOTTOM
+{
     width:66%;
     margin-top: -5%;
     margin-left: 24%;
@@ -52,16 +58,19 @@ div.BOTTOM {
     background-color: #FFFFFF;
 }
 
-p.sidebar {
+p.sidebar
+{
     font-family: Trebuchet MS;
 }
 
-p.sidebar_selected {
+p.sidebar_selected
+{
     font-family: Trebuchet MS;
     color: red;
 }
 
-#dynamicInput {
+#dynamicInput
+{
     width:98%;
     margin-right: auto;;
     margin-left: auto;
@@ -69,7 +78,17 @@ p.sidebar_selected {
     background-color: #FFFFFF;
 }
 
-p.Form {
+#extraInputs
+{
+    width:98%;
+    margin-right: auto;;
+    margin-left: auto;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+
+p.Form
+{
     margin-top: 60px;
     margin-left: 30px;
     margin-bottom: 20px;
@@ -77,7 +96,8 @@ p.Form {
     font-size: 28px;
 }
 
-p.addNomineeForm {
+p.addNomineeForm
+{
     margin-top: 30px;
     margin-left: 7px;
     margin-bottom: 20px;
@@ -85,7 +105,8 @@ p.addNomineeForm {
     font-size: 28px;
 }
 
-p.information {
+p.information
+{
     display: block;
     margin-bottom: 30px;
     margin-left: 30px;
@@ -93,14 +114,16 @@ p.information {
     font-family: sans-serif;
     font-size: 14px;
 }
-p.submit {
+p.submit
+{
     display: block;
     margin-bottom: -90px;
     margin-left: 30px;
     font-family: sans-serif;
     font-size: 14px;
 }
-p.forgotten {
+p.forgotten
+{
     display: block;
     margin-bottom: 60px;
     margin-right: 150px;
@@ -111,7 +134,8 @@ p.forgotten {
     color: blue;
 }
 
-p.addNomineeForgotten {
+p.addNomineeForgotten
+{
     display: block;
     margin-bottom: 30px;
     margin-right: 150px;
@@ -122,23 +146,28 @@ p.addNomineeForgotten {
     color: blue;
 }
 
-.textBoxes {
+.textBoxes
+{
     width: 300px;
     height: 30px;
 }
 
-.textBoxes2 {
+.textBoxes2
+{
     width: 300px;
     height: 30px;
     margin-left: 3px;
 }
 
 }
-.permanent input{
+.permanent input
+{
     margin-top: 5px;
     width: 400px;
 }
-#inside{
+
+#inside
+{
     -moz-appearance: textfield;
     -webkit-appearance: textfield;
     background-color: white;

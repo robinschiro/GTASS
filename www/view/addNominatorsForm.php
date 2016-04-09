@@ -25,26 +25,12 @@ if($_SESSION['role'] != 1)
 
 <html>
 <head>
-    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet">
     <title>Add Nominators</title>
-    <!-- Source needed for datepicker-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>
-        $(function() {
-            $( "#datepicker1" ).datepicker();
-            $( "#datepicker2" ).datepicker();
-            $( "#datepicker3" ).datepicker();
-        });
-    </script>
-
 </head>
 
 <body>
-
 <div class="WRAPPER" >
-
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
         <?php echo 'Signed in as '.$_SESSION['username'].' (admin)';?><br>
@@ -61,15 +47,10 @@ if($_SESSION['role'] != 1)
 
     <div class="CENTER">
         <p class="Form" align="left">
-
             Add Nominators
-            <form action="/adminCtrl" method="POST">
-
-
+        <form action="/adminCtrl" method="POST">
         <div id="dynamicInput">
             <!--dynamically adding new fields-->
-            <input type="button" value="Add Another Nominator" onClick="addInput('dynamicInput');"><br><br>
-
             Nominator: <input type="text" placeholder="username" name="uname[0]">
             <input type="password" placeholder="password" name="password[0]">
             <input type="text" placeholder="first name" name="firstname[0]">
@@ -81,6 +62,9 @@ if($_SESSION['role'] != 1)
 
         <div id="extraInputs">
         </div>
+
+        <input type="button" value="Add Another Nominator" onClick="addInput('extraInputs');"><br><br>
+
         <br><br>
         </p>
 
@@ -100,13 +84,10 @@ if($_SESSION['role'] != 1)
         <p class="forgotten">
             <!-- leave this -->
         </p>
-        </p>
+    </p> <!-- end class="Form" paragraph -->
     </div>
-    <!-- end center div -->
-
-
-
 </div>
+
 <!--javascript-->
 <script src="public/js/addInputAddNominators.js" language="Javascript" type="text/javascript"></script>
 
