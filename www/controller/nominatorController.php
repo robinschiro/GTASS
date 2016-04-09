@@ -100,7 +100,6 @@ class nominatorController
             //correct info found
             //echo "<br>" . $i . ") " . $currentSession . " " . $pidList[$i] . " " . $_SESSION['userID'] . " " . $fnameList[$i] . " " . $lnameList[$i] . " " . $emailList[$i] . " " . $rankList[$i] . " " . $csGradList[$i] . " " . $newGradList[$i];
 
-            //TODO: service is not inserting correct values for csGrad and newGrad so fix it!
             $this->nominationServ->nominateUser
             (
                 $currentSession,

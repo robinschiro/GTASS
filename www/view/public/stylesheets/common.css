@@ -36,7 +36,7 @@ div.TOP
     height: 8%;
     background: red;
     font-family: sans-serif;
-    font-size: 14;
+    font-size: 14px;
     border: 2px solid #FFFFFF;
     background-color: #FFFFFF;
 }
@@ -157,8 +157,6 @@ p.addNomineeForgotten
     width: 300px;
     height: 30px;
     margin-left: 3px;
-}
-
 }
 .permanent input
 {
