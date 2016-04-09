@@ -13,15 +13,14 @@ require_once('entity/user.php');
 
 //not sure where should be placed
 //starts a user session
-if(session_status() == PHP_SESSION_NONE){
+if (session_status() == PHP_SESSION_NONE)
+{
     session_start();
 }
 
 
-
 class userServiceImp implements userService
 {
-
     /**
      * Creates a new user and stores it in the db
      */
@@ -35,18 +34,17 @@ class userServiceImp implements userService
                 $statement = $db->prepare('INSERT INTO User (Username, Password, FirstName, LastName, EmailAddress, RoleID) 
                                            VALUES (:uname, :pass, :fname, :lname, :eAddress, :rID)');
                 $statement->execute(array(':uname' => htmlspecialchars($username),
-                                          ':pass' => htmlspecialchars($password),
-                                          ':fname' => htmlspecialchars($firstName),
-                                          ':lname' => htmlspecialchars($lastName),
-                                          ':eAddress' => htmlspecialchars($emailAddress),
-                                          ':rID' => htmlspecialchars($role)));
+                    ':pass' => htmlspecialchars($password),
+                    ':fname' => htmlspecialchars($firstName),
+                    ':lname' => htmlspecialchars($lastName),
+                    ':eAddress' => htmlspecialchars($emailAddress),
+                    ':rID' => htmlspecialchars($role)));
             }
-            catch ( PDOException $ex )
+            catch (PDOException $ex)
             {
-//                echo 'User already exists, error code: ' . $statement->errorCode() . '<br>';
 
                 // If a user with the given username already exists, simply update the existing user's values.
-                if ( '23000' == $statement->errorCode() )
+                if ('23000' == $statement->errorCode())
                 {
                     try
                     {
@@ -54,21 +52,20 @@ class userServiceImp implements userService
                                                    SET Password = :pass, FirstName = :fname, LastName = :lname, EmailAddress = :eAddress, RoleID = :rID
                                                    WHERE Username = :uname');
                         $statement->execute(array(':uname' => htmlspecialchars($username),
-                                                  ':pass' => htmlspecialchars($password),
-                                                  ':fname' => htmlspecialchars($firstName),
-                                                  ':lname' => htmlspecialchars($lastName),
-                                                  ':eAddress' => htmlspecialchars($emailAddress),
-                                                  ':rID' => htmlspecialchars($role)));
+                            ':pass' => htmlspecialchars($password),
+                            ':fname' => htmlspecialchars($firstName),
+                            ':lname' => htmlspecialchars($lastName),
+                            ':eAddress' => htmlspecialchars($emailAddress),
+                            ':rID' => htmlspecialchars($role)));
                     }
-                    catch ( PDOException $ex )
+                    catch (PDOException $ex)
                     {
-                        echo 'Exception when updating user: '.$username.' ';
+                        echo 'Exception when updating user: ' . $username . ' ';
                         print_r($statement->errorInfo());
                     }
-                }
-                else
+                } else
                 {
-                    echo 'Exception when creating user: '.$username.' ';
+                    echo 'Exception when creating user: ' . $username . ' ';
                     print_r($statement->errorInfo());
                 }
             }
@@ -81,7 +78,7 @@ class userServiceImp implements userService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if ( NULL == $db )
+        if (NULL == $db)
         {
             echo '<br> Null db <br>';
             return;
@@ -112,7 +109,7 @@ class userServiceImp implements userService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if ( NULL == $db )
+        if (NULL == $db)
         {
             echo '<br> Null db <br>';
             return;
@@ -130,42 +127,60 @@ class userServiceImp implements userService
         $lastName = $resultTable[0]['LastName'];
         $emailAddress = $resultTable[0]['EmailAddress'];
         $roleID = $resultTable[0]['RoleID'];
-        
+
         // Return a new User object with the queried info.
         return new user($userID, $username, $firstName, $lastName, $password, $emailAddress, $roleID);
     }
 
     /**
      *
-     *
      * Needs error handling: what if not valid connection or no results from query
+     *
+     * @param $username
+     * @param $password
+     *
      */
     function login($username, $password)
     {
         //connect to db
         $db = db_connect();
 
-//        if($db == null){
-//            echo "db is null that's the issue<br>";
-//        }
-
         //TODO: add try catch on queries
         //TODO: look at taskmaster example of using list of objects for posts
 
         //query user
-        $statement = $db->prepare('SELECT UserID, Password, RoleID FROM User WHERE Username=:user');
+        $statement = $db->prepare('SELECT UserID, Username, Password, FirstName, LastName, EmailAddress, RoleID FROM User WHERE Username=:user');
         $statement->bindValue(':user', $username);
         $statement->execute();
         $result = $statement->fetchAll();
-        $passDB = $result[0]['Password'];
+        $hashpassDB = $result[0]['Password'];
+        $userDB = $result[0]['Username'];
+        $useridDB = $result[0]['UserID'];
+        $firstName = $result[0]['FirstName'];
+        $lastName = $result[0]['LastName'];
+        $emailAddress = $result[0]['EmailAddress'];
 
-        //echo 'user seems to be created <br>';
+        //if password was stored before hashing was implemented
+        //hash the password and store it.
+        if (password_needs_rehash($hashpassDB, PASSWORD_BCRYPT))
+        {
+            //clear text password equal?
+            if ($password == $hashpassDB)
+            {
+                //update hashpassDB variable with hashed password
+                $hashpassDB = password_hash($password, PASSWORD_BCRYPT);
 
-        //compare passwords
-        if (!$this->verifyPassword($_POST['password'], $passDB)){
+                //check if update user is called if not updated
 
-            //should return error.  Stating not valid username/password
-            return;
+                //update with hashed password in DB
+                $this->updateUser($useridDB, $userDB, $hashpassDB);
+            }
+        }
+
+        //passwords don't match up?
+        if (!password_verify($password, $hashpassDB))
+        {
+            //return some type of error
         }
 
         /*
@@ -205,5 +220,38 @@ class userServiceImp implements userService
             return true;
 
         return false;
+    }
+
+    /**
+     * Will update the user's username and/or password.  If you want to keep
+     * one or the other the same simply pass the same password or username.
+     *
+     * @param $id The user's id
+     * @param $username The new username
+     * @param $password The new password
+     */
+    function updateUser($id, $username, $password, $firstName, $lastName, $emailAddress)
+    {
+        $db = db_connect();
+        try
+        {
+            //query user
+            $statement = $db->prepare('UPDATE User SET Username = :newusername, Password = :newpass, FirstName = :newFirstName, LastName = :newLastName, EmailAddress = :newEmailAddress WHERE UserID=:uid');
+            $statement->execute(
+                array(
+                    ':uid' => htmlspecialchars($id),
+                    ':newusername' => htmlspecialchars($username),
+                    ':newpass' => $password,
+                    ':newFirstName' => htmlspecialchars($firstName),
+                    ':newLastName' => htmlspecialchars($lastName),
+                    ':newEmailAddress' => htmlspecialchars($emailAddress)
+                )
+            );
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when updating user info. <br><br>UserID = ' . $id . '<br>username = ' . $username . '<br>password = ' . $password . '<br><br>';
+            print_r($statement->errorInfo());
+        }
     }
 }

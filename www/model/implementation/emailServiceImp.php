@@ -46,7 +46,11 @@ class emailServiceImp implements emailService
         $username = $data[0];
         $password = $data[1];
 
-        $body = "You are now a Nominator or GC member!<br><br> username: " . $username . "<br>password: " . $password;
+        $body = "You are now a Nominator or GC member!<br><br>
+                 Username:  $username <br> 
+                 Password: $password <br><br>
+                 Follow the link below to change your account credentials:<br><br>
+                 gtass-1256.appspot.com?goToAccount";
 
         try {
             $message = new Message();

@@ -31,7 +31,6 @@ if (isset($_POST['createSession'])) {
 
 else if(isset ($_POST['createNominators']))
 {
-    echo "createNominators is set...<br>";
     $adminCtrl = new adminController();
     $adminCtrl->addNominators();
 }
@@ -62,7 +61,18 @@ class adminController
     // This will convert a date string in the format 'm/d/Y' to a format compatible with SQL.
     private function ConvertToSQLDate($dateString)
     {
-        return DateTime::createFromFormat('m/d/Y', $dateString)->format('Y-m-d');
+        $SQLDate = '2000-01-01';
+
+        try
+        {
+            $SQLDate = DateTime::createFromFormat('m/d/Y', $dateString)->format('Y-m-d');
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+        
+        return $SQLDate;
     }
 
     /**
@@ -76,30 +86,11 @@ class adminController
 
         //use $_POST[' '] to grab values (names are assumed)
         $sessionID = $_POST['Semester'] . $_POST['Year'];
-        $nomDeadline = $this->ConvertToSQLDate($_POST['nomDeadline']);
-        $resDeadline = $this->ConvertToSQLDate($_POST['resDeadline']);
-        $verDeadline = $this->ConvertToSQLDate($_POST['verDeadline']);
+        $nomDeadline = $_POST['nomDeadline'];
+        $resDeadline = $_POST['resDeadline'];
+        $verDeadline = $_POST['verDeadline'];
         $chairmanNumber = $_POST['chairman'];  //returns the number in the the list of added users
         $chairman = null;
-
-        //create users
-        /*
-         * Test:
-         * http://www.open-source-web.com/php/php-foreach-loop-through-post-request/
-         *
-         * if I do:
-         * foreach ($_POST as $key => $value) {
-         *     Do something with $key and $value
-         * }
-         *
-         * I'll know order
-         *
-         * along with count
-         * name="name[2]"
-         *
-         */
-
-//        echo '<br><br>';
 
         $unameList = array();
         $fnameList = array();
@@ -130,7 +121,7 @@ class adminController
         for ($i = 0; $i < $_POST['gcCount']; $i++) {
             $this->userServ->createUser(
                 $unameList[$i],
-                $pass[$i],
+                password_hash($pass[$i], PASSWORD_BCRYPT),
                 $fnameList[$i],
                 $lnameList[$i],
                 $email[$i],
@@ -177,8 +168,6 @@ class adminController
      */
     function addNominators()
     {
-        echo '<br><br>';
-
         $unameList = array();
         $fnameList = array();
         $lnameList = array();
@@ -208,7 +197,7 @@ class adminController
         for ($i = 0; $i < $_POST['count']; $i++) {
             $this->userServ->createUser(
                 $unameList[$i],
-                $pass[$i],
+                password_hash($pass[$i], PASSWORD_BCRYPT),  //insert hashed password
                 $fnameList[$i],
                 $lnameList[$i],
                 $email[$i],
@@ -225,6 +214,10 @@ class adminController
             //echo 'Sent email to ' . $unameList[$i] + '<br>';
         }
 
+        // Display a success message.
+        $_SESSION['message'] = '<br> All nominator accounts have been successfully created. <br><br>';
 
+        // Redirect to addNominatorsForm page.
+        header('Location: /addNominators');
     }
 }

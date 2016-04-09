@@ -9,11 +9,11 @@ if($_SESSION['role'] != 3)
     if ($_SESSION['role'] == 2)
     {
         //redirect to GC view
-        header("Location: /GC");
+        header("Location: /gcHome");
     } // If logged in as admin
     else if ($_SESSION['role'] == 1)
     {
-        header("Location: /adminForm");
+        header("Location: /adminHome");
     }
     //Session variable role not recognized as valid
     else{
@@ -34,14 +34,13 @@ if($_SESSION['role'] != 3)
 <div class="WRAPPER">
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
-        <?php echo 'Signed in as ' . $_SESSION['userID'] . ' (nominator)'; ?><br>
+        <?php echo 'Signed in as ' . $_SESSION['username'] . ' (nominator)'; ?><br>
         <a href="/logout">Sign out</a>
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="/nominatorForm">Home</a></p>
+        <p class="sidebar" align="center"><a href="/nominatorHome">Home</a></p>
         <p class="sidebar_selected" align="center"><b>Add Nominees</b></p>
-        <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
     </div>
 
     <div class="CENTER">
@@ -55,6 +54,14 @@ if($_SESSION['role'] != 3)
          Add Nominees
 
         <form action="/nomCtrl" method="post">
+
+        <p class="information">
+            <?php
+            echo $_SESSION['message'];
+            $_SESSION['message'] = '';
+            ?>
+        </p>
+
         <div id="dynamicInput">
             <label for="fname">First Name: </label>
             <input type="text" name="fname[0]" placeholder="Nominee's First Name" id="fname">
@@ -68,16 +75,17 @@ if($_SESSION['role'] != 3)
             <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
 
             CS Graduate:
-            <label for="yes">yes</label>
-            <input type="radio" name="csgrad[0]" id="yes" value="1">
-            <label for="no">no</label>
-            <input type="radio" name="csgrad[0]" id="no" value="0">
+            <select name="csgrad[0]">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
 
             New Graduate:
-            <label for="yesnew">yes</label>
-            <input type="radio" name="newgrad[0]" id="yesnew" value="1">
-            <label for="nonew">no</label>
-            <input type="radio" name="newgrad[0]" id="nonew" value="0">
+            <select name="newgrad[0]">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
             <input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
             <br><br>
         </div>
@@ -88,14 +96,19 @@ if($_SESSION['role'] != 3)
         <br>
 
         <!-- button for adding values dynamically -->
-        <input type="button" value="Add Another Nominee" onClick="addInputNominator('extraInputs');">
+        <input type="button" value="Add Another Nominee" onClick="addInputAddNominee('extraInputs');">
 
         <!-- Tells the controller which function to call -->
         <input type="hidden" name="createNominators">
         <!-- Increment after each dynamically added nominator form -->
         <input type="hidden" name="NomCount" value="1" id="count">
 
-        <input type="submit" value="Submit">
+
+
+        <p class="submit" align="center">
+            <input type="submit" value="Create">
+        </p>
+
 
         </form>
         </p>
@@ -108,7 +121,7 @@ if($_SESSION['role'] != 3)
 </div>
 
 <!--javascript-->
-<script src="public/js/addInputNominator.js" language="Javascript" type="text/javascript"></script>
+<script src="public/js/addInputAddNominee.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

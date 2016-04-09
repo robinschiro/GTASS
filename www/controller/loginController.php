@@ -12,13 +12,15 @@
 
 require_once('../model/implementation/userServiceImp.php');
 
-if(isset($_POST['login'])){
+if (isset($_POST['login']))
+{
     $loginCtrl = new loginController();
     $loginCtrl->login();
 }
 //assume logout is called
 //else if(isset($_GET['logout'])){
-else{
+else
+{
     $loginCtrl = new loginController();
     $loginCtrl->logout();
 }
@@ -40,33 +42,41 @@ class loginController
 
     function login()
     {
-        //echo 'login function called <br>';
         $this->userSrv->login($_POST['username'], $_POST['password']);
 
         //successful login??
-        if(isset($_SESSION['userID'])){
+        if (isset($_SESSION['userID']))
+        {
+            if ( isset($_POST['goToAccount']) )
+            {
+                header("Location: /account");
+                return;
+            }
 
             //if logged in user is an admin
-            if($_SESSION['role'] == 1){
+            if ($_SESSION['role'] == 1)
+            {
                 //redirect to admin view
-                header("Location: /adminForm");  //go go admin page
+                header("Location: /adminHome");  //go go admin page
             }
             //if logged in user is a GC member
-            else if($_SESSION['role'] == 2){
+            else if ($_SESSION['role'] == 2)
+            {
                 //redirect to GC view
-                header("Location: /GC");
+                header("Location: /gcHome");
             }
             // If logged in as nominator
             else if ($_SESSION['role'] == 3)
             {
-                header("Location: /addNominees");
+                header("Location: /nominatorHome");
             }
             //something went wrong session value role is not valid
-            else{
+            else
+            {
                 //do something not sure yet
             }
-        }
-        else{
+        } else
+        {
             //return error
             echo 'username session variable not set<br>';
         }

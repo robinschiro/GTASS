@@ -29,6 +29,12 @@
         <input type="hidden" name="login">
         <!--    <p class="submit" align="center">-->
 
+        <?php
+            if ( isset($_GET['goToAccount']) )
+            {
+                echo '<input type="hidden" name="goToAccount">';
+            }
+        ?>
 
         <!--    </p>-->
     </form>

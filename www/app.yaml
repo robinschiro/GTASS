@@ -16,6 +16,12 @@ handlers:
 - url: /nomCtrl
   script: controller/nominatorController.php
 
+- url: /accountCtrl
+  script: controller/accountController.php
+
+- url: /account
+  script: view/account.php
+
 - url: /addNominees
   script: view/addNomineesForm.php
 
@@ -25,8 +31,8 @@ handlers:
 - url: /addNominators
   script: view/addNominatorsForm.php
 
-- url: /GC
-  script: view/gcHomeView.php
+- url: /gcHome
+  script: view/gcHome.php
 
 - url: /login
   script: controller/loginController.php
@@ -40,14 +46,11 @@ handlers:
 - url: /nomineeForm
   script: view/nomineeForm.php
 
-- url: /nominatorForm
-  script: view/nominatorForm.php
+- url: /nominatorHome
+  script: view/nominatorHome.php
 
-- url: /adminForm
-  script: view/adminForm.php
-
-- url: /gcForm
-  script: view/gcForm.php
+- url: /adminHome
+  script: view/adminHome.php
 
 - url: /public
   static_dir: view/public
