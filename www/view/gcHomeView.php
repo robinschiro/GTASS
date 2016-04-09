@@ -31,6 +31,7 @@ require_once ('../controller/gcMemberController.php');
 $controller = new gcMemberController();
 $currentSession = $controller->sessionServ->getCurrentSession();
 $sessionID = $currentSession->getSemester();
+
 ?>
 
 

@@ -49,4 +49,15 @@ interface userService {
     function verifyPassword($passIn, $passDB);
 
 
+    /**
+     * Will update the user's username and/or password.  If you want to keep
+     * one or the other the same simply pass the same password or username.
+     *
+     * @param $username The new username
+     * @param $password The new password
+     * @param $userid The user's id
+     */
+    function updateUser($username, $password, $id);
+
+
 }

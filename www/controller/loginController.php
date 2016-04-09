@@ -40,6 +40,10 @@ class loginController
 
     function login()
     {
+
+        //hash password
+        //$hashpass = password_hash(, PASSWORD_BCRYPT);
+
         //echo 'login function called <br>';
         $this->userSrv->login($_POST['username'], $_POST['password']);
 

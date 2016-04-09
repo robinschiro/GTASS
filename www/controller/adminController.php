@@ -130,7 +130,7 @@ class adminController
         for ($i = 0; $i < $_POST['gcCount']; $i++) {
             $this->userServ->createUser(
                 $unameList[$i],
-                $pass[$i],
+                password_hash($pass[$i], PASSWORD_BCRYPT),
                 $fnameList[$i],
                 $lnameList[$i],
                 $email[$i],
@@ -208,7 +208,7 @@ class adminController
         for ($i = 0; $i < $_POST['count']; $i++) {
             $this->userServ->createUser(
                 $unameList[$i],
-                $pass[$i],
+                password_hash($pass[$i], PASSWORD_BCRYPT),  //insert hashed password
                 $fnameList[$i],
                 $lnameList[$i],
                 $email[$i],
