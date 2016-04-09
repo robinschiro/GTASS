@@ -69,7 +69,7 @@ session_start();
             <input type="text" placeholder="first name" name="firstname[0]">
             <input type="text" placeholder="last name" name="lastname[0]">
             <input type="text" placeholder="email" name="email[0]">
-            Chairman <input type="radio" value="0" name="chairmanBool" checked="checked">
+            Chairman <input type="radio" value="0" id ="chair[0]" name="chairmanBool" checked="checked">
 			<input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
             <br><br>
         </div>

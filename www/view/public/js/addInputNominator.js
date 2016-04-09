@@ -33,4 +33,5 @@ function removeFirst(divName)
   var ele = document.getElementById('dynamicInput');
   ele.parentNode.removeChild(ele);
   counter--;
+  document.getElementById('gcCount').setAttribute('value', counter);
 }
