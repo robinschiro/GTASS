@@ -108,18 +108,18 @@ require_once ('../controller/adminController.php');
                     </tr>
                     <?php
 
-                    // Sample data for format testing.
-//                        for ($i = 0; $i < 10; $i ++ )
-//                        {
-//                            echo '<tr>' .
-//                                '<td>' . $i . 'SampleName</td>' .
-//                                '<td>First Name</td>' .
-//                                '<td>Last Name</td>' .
-//                                '<td>sample@sample.com</td>' .
-//                                '</tr>';
-//                        }
-
-                        // Iterate through each member and display the corresponding data.
+//                    // Sample data for format testing.
+////                        for ($i = 0; $i < 10; $i ++ )
+////                        {
+////                            echo '<tr>' .
+////                                '<td>' . $i . 'SampleName</td>' .
+////                                '<td>First Name</td>' .
+////                                '<td>Last Name</td>' .
+////                                '<td>sample@sample.com</td>' .
+////                                '</tr>';
+////                        }
+//
+//                        // Iterate through each member and display the corresponding data.
                         foreach ($session->gcUsersList as $gcUser )
                         {
                             echo '<tr>' .
@@ -131,7 +131,7 @@ require_once ('../controller/adminController.php');
                         }
                     ?>
 
-                </table>
+<!--                </table>-->
                 <br><br>
             </div>
 

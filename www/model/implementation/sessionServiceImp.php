@@ -18,8 +18,8 @@ class sessionServiceImp implements sessionService
     {
         return DateTime::createFromFormat('Y-m-d H:i:s', $dateSQL)->format('m/d/Y');
     }
-    
-    
+
+
     /**
      * @param $sessionID
      * @param $nominationDeadline
@@ -195,7 +195,7 @@ class sessionServiceImp implements sessionService
             $gcMemberUsers = array();
 
             // Query for the usernames of all GC members in this session.
-            $statement = $db->prepare('SELECT GCMemberID
+            $statement = $db->prepare('SELECT GCMemberID 
                                    FROM   GCMembersInSession 
                                    WHERE  SessionID = :id');
             $statement->execute(array(':id' => htmlspecialchars($sessionID)));
@@ -224,4 +224,94 @@ class sessionServiceImp implements sessionService
             print_r($statement->errorInfo());
         }
     }
+
+
+    /**
+     * Will query for all gc members in a session and return object array
+     */
+    function allGCPerSession($sessionID, $gcChairID)
+    {
+
+        $db = db_connect();
+
+        $userServ = new userServiceImp();
+
+        //returned with array[0] = chairman and array[1] = gc member objects
+        $data = array();
+        $gcMemberUsers = array();
+
+        try {
+            // Query for the usernames of all GC members in this session.
+            $statement = $db->prepare('SELECT GCMemberID
+                                   FROM   GCMembersInSession 
+                                   WHERE  SessionID = :id');
+            $statement->execute(array(':id' => htmlspecialchars($sessionID)));
+            $resultTable = $statement->fetchAll();
+        } catch (PDOException $ex) {
+            echo "Error finding all gc members in session: " . $sessionID . '<br><br>';
+            print_r($statement->errorInfo());
+        }
+
+        $numMembers = sizeof($resultTable);
+        for ($i = 0; $i < $numMembers; $i++) {
+            $gcUserID = $resultTable[$i]['GCMemberID'];
+            $gcMember = $userServ->getUserByID($gcUserID);
+
+            if ($gcChairID == $gcUserID) {
+                $gcChairUser = $gcMember;
+            } else {
+                array_push($gcMemberUsers, $gcMember);
+            }
+        }
+
+        array_push($data, $gcChairUser);
+        array_push($data, $gcMemberUsers);
+
+        return $data;
+    }
+
+    /**
+     * Will return an array of session objects for all sessions stored in the db
+     *
+     * @return Array of session objects
+     */
+    function getAllSessions()
+    {
+
+        $db = db_connect();
+        $sessionArr = array();
+
+        try {
+            $statement = $db->prepare('SELECT *
+                                       FROM Session');
+            $statement->execute();
+            $resultTable = $statement->fetchAll();
+        } catch (PDOException $ex) {
+            echo 'Exception when retrieving current session: ';
+            print_r($statement->errorInfo());
+        }
+
+        $numofSessions = sizeof($resultTable);
+        for ($i = 0; $i < $numofSessions; $i++) {
+            //get the gc members object array and gc chair object
+            $sessionGCData = $this->allGCPerSession($resultTable[$i]['SessionID'], $resultTable[$i]['GCChairID']);
+
+            //create new session
+            $tempSession = new session(
+                $resultTable[$i]['SessionID'],
+                $sessionGCData[0],
+                $resultTable[$i]['NominationDeadline'],
+                $resultTable[$i]['ResponseDeadline'],
+                $resultTable[$i]['VerificationDeadline'],
+                $sessionGCData[1]
+            );
+
+            //Push initialized session into session object array
+            array_push($sessionArr, $tempSession);
+        }
+
+        return $sessionArr;
+
+    }
+
 }

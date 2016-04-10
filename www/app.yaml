@@ -43,6 +43,9 @@ handlers:
 - url: /currentSession
   script: view/currentSession.php
 
+- url: /allSessions
+  script: view/allSessionsView.php
+
 - url: /nomineeForm
   script: view/nomineeForm.php
 
