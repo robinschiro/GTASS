@@ -55,5 +55,8 @@ handlers:
 - url: /adminHome
   script: view/adminHome.php
 
+- url: /incompleteNominations
+  script: view/incompleteNominations.php
+
 - url: /public
   static_dir: view/public

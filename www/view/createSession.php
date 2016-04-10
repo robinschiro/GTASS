@@ -2,6 +2,21 @@
 
 session_start();
 
+//check role of user
+if ($_SESSION['role'] != 1) {
+    //if logged in user is a GC member
+    if ($_SESSION['role'] == 2) {
+        //redirect to GC view
+        header("Location: /gcHome");
+    } // If logged in as nominator
+    else if ($_SESSION['role'] == 3) {
+        header("Location: /addNominees");
+    } //Session variable role not recognized as valid
+    else {
+        //user must resign in
+        header("Location: /");
+    }
+}
 ?>
 
 <html>

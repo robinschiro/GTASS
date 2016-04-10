@@ -38,7 +38,7 @@ $sessionID = $currentSession->getSemester();
 <html>
     <head>
         <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
-        <title>Score Table</title>
+        <title>Incomplete Nominations</title>
     </head>
 
     <body>
@@ -49,19 +49,22 @@ $sessionID = $currentSession->getSemester();
             </div>
 
             <div class="LEFT">
-                <p class="sidebar_selected" align="center">Score Table</p>
-                <p class="sidebar" align="center"><a href="/incompleteNominations">Incomplete Nominations</a></p>
+                <p class="sidebar" align="center"><a href="/gcHome">Score Table</a></p>
+                <p class="sidebar_selected" align="center">Incomplete Nominations</p>
             </div>
 
             <div class="CENTER">
                 <p class="Form" align="left">
-                    <?php echo 'Score Table for ' . $sessionID; ?>
+                    <?php echo 'Incomplete Nominations for ' . $sessionID; ?>
                 </p>
 
+                <p class="information">
+
                 <?php
-                    include '../view/scoreTable.php';
+                    include 'incompleteNominationsTable.php';
                 ?>
 
+                </p>
 
                 <br><br>
             </div>
