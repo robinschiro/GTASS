@@ -21,17 +21,23 @@ function addInputNominator(divName)
   "<input type='radio' value='1' name='newgrad[" + counter + "]' id='yesnew" + counter  + "'>" + " " +
   "<label for='nonew" + counter  + "'>no </label>" +
   "<input type='radio' value='0' name='newgrad[" + counter + "]' id='nonew" + counter  + "' >" +
-  "<input type='button' value='Remove' name='remove['" + counter + "']' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'> " + " <br><br>";
+  "<input type='button' value='Remove' name='remove['" + counter + "']' onclick='this.parentNode.parentNode.removeChild(this.parentNode);removeOthers();'> " + " <br><br>";
 
   document.getElementById(divName).appendChild(newdiv);
   counter++;
   document.getElementById('count').setAttribute('value', counter);
 }
 
-function removeFirst(divName)
+function removeFirst()
 {
   var ele = document.getElementById('dynamicInput');
   ele.parentNode.removeChild(ele);
+  counter--;
+  document.getElementById('gcCount').setAttribute('value', counter);
+}
+
+function removeOthers()
+{
   counter--;
   document.getElementById('gcCount').setAttribute('value', counter);
 }
