@@ -20,6 +20,7 @@
 	<body>
 		<!--javascript-->
 		<script src="public/js/addCourse.js" language="Javascript" type="text/javascript"></script>
+		<script src="public/js/addPublication.js" language="Javascript" type="text/javascript"></script>
 
 		<div class="WRAPPER">
 			<div class="TOP" align="right">
@@ -44,23 +45,24 @@
 						Nominee First Name: <span class="permanent"><span id="inside"> <?php echo $nominationForm->getNomineeFirstName(); ?></span> </span>
 						Nominee Last Name: <span class="permanent"> <span id="inside"><?php echo $nominationForm->getNomineeLastName(); ?>  </span> </span> <br>
 
+						PID: <span class="permanent"><span id="inside"><?php echo $_GET["pid"]; ?></span></span>  <br>
+
+						<input type="hidden" name="nomineePID" value=<?php echo '"' . $_GET["pid"] . '"'; ?> >
+
+						Email Address: <span class="permanent"> <span id="inside"><?php echo $nominationForm->getNomineeEmail(); ?></span></span>  <br>
+
+						Are you a PhD student in Computer Science?:<span class="permanent"> <?php echo ( 1 == $nominationForm->getNomineeIsCS()) ? 'Yes' : 'No'; ?></span><br>
+
 						Nominator First Name: <span class="permanent"> <span id="inside"><?php echo $nominatorUser->getFirstName(); ?> </span> </span>
 						Nominator Last Name: <span class="permanent"> <span id="inside"><?php echo $nominatorUser->getLastName(); ?></span> </span>  <br>
 
 						Advisor First Name: <input type="text" placeholder="First Name" name="advisorFirstName">
 						Advisor Last Name: <input type="text" placeholder="Last Name" name="advisorLastName"> <br>
 
-						PID: <span class="permanent"><span id="inside"><?php echo $_GET["pid"]; ?></span></span>  <br>
+						Phone Number: <input type="text" placeholder="Phone Number" name="phoneNumber"><br>
 
-						<input type="hidden" name="nomineePID" value=<?php echo '"' . $_GET["pid"] . '"'; ?> >
 
-						Email: <span class="permanent"> <span id="inside"><?php echo $nominationForm->getNomineeEmail(); ?></span></span>  <br>
-
-						Phone: <input type="text" placeholder="Phone Number" name="phoneNumber"><br>
-
-						Are you a PhD student in Computer Science?:<span class="permanent"> <?php echo ( 1 == $nominationForm->getNomineeIsCS()) ? 'Yes' : 'No'; ?></span><br>
-
-						Passed SPEAK Test:
+						Have you passed the SPEAK test?:
 						<select name="passedSPEAK">
 							<option value="0">No</option>
 							<option value="1">Yes</option>
@@ -82,8 +84,18 @@
 
 						G.P.A For Above Courses: <input type="text" name="GPA" /> <br>
 
-						List of Publications: <br>
+						List of Publications: <input type="button" value="Add Publication" onClick="addPublication();"><br><br>
 						<input type="hidden" name="numPublications" value="0" />
+
+						<!-- Create a table to contain the information for each publication -->
+						<table id="publicationTable" class="neatTable">
+							<tr>
+								<th></th>
+								<th>Title</th>
+								<th>Citation</th>
+							</tr>
+
+						</table> <br>
 
 						Semesters as Graduate Student: <input type="number" name="numberOfSemestersAsGradStudent" min="0" /> <br>
 

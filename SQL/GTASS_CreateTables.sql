@@ -38,6 +38,7 @@ CREATE TABLE Session
     VerificationDeadline    DATETIME,
     GCChairID               INT,
     IsCurrent               TINYINT(1),
+    ReminderSent            TINYINT(1),
         
     PRIMARY KEY (SessionID),
     FOREIGN KEY (GCChairID) REFERENCES User(UserID)
@@ -74,7 +75,7 @@ CREATE TABLE NomineeInfoForm
 (
     SessionID               VARCHAR(10),
     PID                     VARCHAR(10),
-    PhoneNumber             VARCHAR(10),
+    PhoneNumber             VARCHAR(20),
     AdvisorFirstName        VARCHAR(20),
     AdvisorLastName         VARCHAR(20),
     NumberOfSemestersAsGTA  INTEGER,
@@ -106,22 +107,24 @@ CREATE TABLE CourseRecord
 (
     SessionID           VARCHAR(10),
     PID                 VARCHAR(10),
-    CourseName          VARCHAR(10),
+    CourseName          VARCHAR(100),
     Grade               VARCHAR(2)      NOT NULL,
     
     PRIMARY KEY (SessionID, PID, CourseName),
     FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)   
+        ON DELETE CASCADE
 );
 
 CREATE TABLE PublicationRecord
 (
     SessionID           VARCHAR(10),
     PID                 VARCHAR(10),
-    Title               VARCHAR(100),
+    Title               VARCHAR(200),
     Citation            VARCHAR(1000),
     
     PRIMARY KEY (SessionID, PID, Title),
     FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)  
+        ON DELETE CASCADE
 );
 
 /*

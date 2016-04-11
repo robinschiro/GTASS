@@ -14,7 +14,7 @@ interface nominatorService
      */
     function createNominationForm($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
 
-    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades);
+    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
 
     /**
      * Retrieve a NominationForm object from the database given its primary key.

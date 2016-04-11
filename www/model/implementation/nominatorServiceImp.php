@@ -54,7 +54,7 @@ class nominatorServiceImp implements nominatorService
         }
     }
 
-    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades)
+    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations)
     {
         // Retrieve access to the database.
         $db = db_connect();
@@ -86,12 +86,61 @@ class nominatorServiceImp implements nominatorService
         }
         catch (PDOException $ex)
         {
-            echo 'Exception when nominating nominee with PID = ' . $PID . ': ';
+            echo 'Exception when creating info form for nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
 
-        // Update the Courses table.
+        // Update the CourseRecord table.
+        try
+        {
+            for ( $i = 0; $i < sizeof($courseNames); $i++ )
+            {
+                $courseName = $courseNames[$i];
+                $grade = $courseGrades[$i];
 
+                $statement = $db->prepare('INSERT INTO CourseRecord (SessionID, PID, CourseName, Grade)
+                                           VALUES ( :sessionID, :pid, :courseName, :grade )');
+                $statement->execute(
+                    array(
+                        ':sessionID' => htmlspecialchars($sessionID),
+                        ':pid' => htmlspecialchars($PID),
+                        ':courseName' => htmlspecialchars($courseName),
+                        ':grade' => htmlspecialchars($grade)
+                    )
+                );
+            }
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when creating records for courses';
+            print_r($statement->errorInfo());
+        }
+
+        // Update PublicationRecord table.
+        try
+        {
+            for ( $i = 0; $i < sizeof($pubTitles); $i++ )
+            {
+                $pubTitle = $pubTitles[$i];
+                $pubCitation = $pubCitations[$i];
+
+                $statement = $db->prepare('INSERT INTO PublicationRecord (SessionID, PID, Title, Citation)
+                                           VALUES ( :sessionID, :pid, :title, :citation )');
+                $statement->execute(
+                    array(
+                        ':sessionID' => htmlspecialchars($sessionID),
+                        ':pid' => htmlspecialchars($PID),
+                        ':title' => htmlspecialchars($pubTitle),
+                        ':citation' => htmlspecialchars($pubCitation)
+                    )
+                );
+            }
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when creating records for publications';
+            print_r($statement->errorInfo());
+        }
     }
 
     /**
