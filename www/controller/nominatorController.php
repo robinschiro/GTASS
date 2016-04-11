@@ -100,7 +100,7 @@ class nominatorController
             //correct info found
             //echo "<br>" . $i . ") " . $currentSession . " " . $pidList[$i] . " " . $_SESSION['userID'] . " " . $fnameList[$i] . " " . $lnameList[$i] . " " . $emailList[$i] . " " . $rankList[$i] . " " . $csGradList[$i] . " " . $newGradList[$i];
 
-            $this->nominationServ->nominateUser
+            $this->nominationServ->createNominationForm
             (
                 $currentSession,
                 $pidList[$i],

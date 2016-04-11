@@ -66,7 +66,7 @@ class emailServiceImp implements emailService
 
     function sendEmailtoNominees($to, $data)
     {
-        $body = "You have been nominated to become a GTA!<br>Follow the link below:<br><br>gtass-1256.appspot.com/nomineeForm?id=" . $data;
+        $body = "You have been nominated to become a GTA!<br>Follow the link below:<br><br>gtass-1256.appspot.com/nomineeForm?pid=" . $data;
 
         try {
             $message = new Message();
