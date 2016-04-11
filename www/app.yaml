@@ -52,6 +52,9 @@ handlers:
 - url: /nomineeForm
   script: view/nomineeForm.php
 
+- url: /nomineeReminderTask
+  script: resources/scripts/nominee2dayNotificationEmail.php
+
 - url: /nominatorHome
   script: view/nominatorHome.php
 
