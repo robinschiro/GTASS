@@ -1,12 +1,19 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Robin
- * Date: 4/11/2016
- * Time: 12:36 AM
- */
+require_once('../model/implementation/nominatorServiceImp.php');
+require_once('../model/implementation/sessionServiceImp.php');
+require_once('../model/implementation/userServiceImp.php');
+
 class nomineeController
 {
+    var $nominatorServ;
+    var $sessionServ;
+    var $userServ;
 
+    public function __construct()
+    {
+        $this->nominatorServ = new nominatorServiceImp();
+        $this->sessionServ = new sessionServiceImp();
+        $this->userServ = new userServiceImp();
+    }
 }

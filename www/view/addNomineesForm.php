@@ -53,7 +53,7 @@ if($_SESSION['role'] != 3)
      <p class="addNomineeForm" align="left">
          Add Nominees
 
-        <form action="/nomCtrl" method="post">
+        <form action="/nominatorCtrl" method="post">
 
         <p class="information">
             <?php
@@ -99,7 +99,7 @@ if($_SESSION['role'] != 3)
         <input type="button" value="Add Another Nominee" onClick="addInputAddNominee('extraInputs');">
 
         <!-- Tells the controller which function to call -->
-        <input type="hidden" name="createNominators">
+        <input type="hidden" name="createNominationForms">
         <!-- Increment after each dynamically added nominator form -->
         <input type="hidden" name="NomCount" value="1" id="count">
 
@@ -121,7 +121,7 @@ if($_SESSION['role'] != 3)
 </div>
 
 <!--javascript-->
-<script src="public/js/addInputAddNominee.js" language="Javascript" type="text/javascript"></script>
+<script src="public/js/addInputAddNominees.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

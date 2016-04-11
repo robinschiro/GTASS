@@ -12,8 +12,8 @@ require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
 require_once('../model/implementation/nominatorServiceImp.php');
 
-if (isset($_POST['createNominators'])) {
-    //echo "createNominators is set<br>";
+if (isset($_POST['createNominationForms'])) {
+    
     $nomCtrl = new nominatorController();
     $nomCtrl->nominateUsers();
 }
@@ -115,7 +115,7 @@ class nominatorController
 
             //Send email to existing students
             //pid used in link
-            if($csGradList[$i] == 1)
+            if($newGradList[$i] == 0)
             {
                 $this->emailServ->sendEmail($emailList[$i], 2, $pidList[$i]);
             }

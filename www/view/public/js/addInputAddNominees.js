@@ -1,5 +1,5 @@
 var counter = 1;
-function addInputNominator(divName)
+function addInputAddNominee(divName)
 {
   var newdiv = document.createElement('div');
 
@@ -33,11 +33,11 @@ function removeFirst()
   var ele = document.getElementById('dynamicInput');
   ele.parentNode.removeChild(ele);
   counter--;
-  document.getElementById('gcCount').setAttribute('value', counter);
+  document.getElementById('count').setAttribute('value', counter);
 }
 
 function removeOthers()
 {
   counter--;
-  document.getElementById('gcCount').setAttribute('value', counter);
+  document.getElementById('count').setAttribute('value', counter);
 }

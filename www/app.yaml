@@ -13,8 +13,11 @@ handlers:
 - url: /adminCtrl
   script: controller/adminController.php
 
-- url: /nomCtrl
+- url: /nominatorCtrl
   script: controller/nominatorController.php
+
+- url: /nomineeCtrl
+  script: controller/nomineeController.php
 
 - url: /accountCtrl
   script: controller/accountController.php
