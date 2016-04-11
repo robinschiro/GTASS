@@ -21,13 +21,15 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db) {
+        if (NULL == $db)
+        {
             echo '<br> Null db <br>';
             return;
         }
 
         // Attempt to insert into NominationForm
-        try {
+        try
+        {
             $statement = $db->prepare('INSERT INTO NominationForm (SessionID, PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp)
                                        VALUES (:id, :pid, :nomID, :fname, :lname, :email, :rank, :csGrad, :newGrad, NOW() )');
             $statement->execute(
@@ -44,10 +46,52 @@ class nominatorServiceImp implements nominatorService
                 )
             );
 
-        } catch (PDOException $ex) {
+        }
+        catch (PDOException $ex)
+        {
             echo 'Exception when nominating nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
+    }
+
+    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        // Attempt to insert into the NomineeInfoForm table.
+        try
+        {
+            $statement = $db->prepare('INSERT INTO NomineeInfoForm (SessionID, PID, PhoneNumber, AdvisorFirstName, AdvisorLastName, NumberOfSemestersAsGTA, NumberOfSemestersAsGrad, PassedSpeak, GPA, Timestamp)
+                                       VALUES (:id, :pid, :phoneNumber, :advFirstName, :advLastName, :semsAsGTA, :semsAsGrad, :passedSPEAK, :gpa, NOW() )');
+            $statement->execute(
+                array(
+                    ':id' => htmlspecialchars($sessionID),
+                    ':pid' => htmlspecialchars($PID),
+                    ':phoneNumber' => htmlspecialchars($phoneNumber),
+                    ':advFirstName' => htmlspecialchars($advisorFirstName),
+                    ':advLastName' => htmlspecialchars($advisorLastName),
+                    ':semsAsGTA' => htmlspecialchars($numSemestersGTA),
+                    ':semsAsGrad' => htmlspecialchars($numSemestersGrad),
+                    ':passedSPEAK' => htmlspecialchars($passedSPEAK),
+                    ':gpa' => htmlspecialchars($GPA)
+                )
+            );
+
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when nominating nominee with PID = ' . $PID . ': ';
+            print_r($statement->errorInfo());
+        }
+
+        // Update the Courses table.
+
     }
 
     /**
@@ -62,7 +106,7 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if ( NULL == $db )
+        if (NULL == $db)
         {
             echo '<br> Null db <br>';
             return;
@@ -74,7 +118,7 @@ class nominatorServiceImp implements nominatorService
                                        FROM   NominationForm 
                                        WHERE  SessionID = :sessionID AND PID = :PID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                                      ':PID'       => htmlspecialchars($PID)));
+                ':PID' => htmlspecialchars($PID)));
             $resultTable = $statement->fetchAll();
 
             // Create a NominationForm object from the results.
@@ -89,7 +133,7 @@ class nominatorServiceImp implements nominatorService
 
             return new nominationForm($sessionID, $PID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $timestamp);
         }
-        catch ( PDOException $ex )
+        catch (PDOException $ex)
         {
             echo 'Exception when retrieving nomination form with session ID = ' . $sessionID . ' and student PID = ' . $PID . ': <br>';
             print_r($statement->errorInfo());

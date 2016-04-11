@@ -43,7 +43,7 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                     }
             ?>
         </div>
-        <table class="userList">
+        <table class="neatTable">
             <tr>
                 <th colspan="2">Nominator Name</th>
                 <th colspan="2">Nominee Name</th>

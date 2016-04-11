@@ -1,9 +1,9 @@
-table.userList
+table.neatTable
 {
     border-collapse: collapse;
 }
 
-table.userList td, table.userList th
+table.neatTable td, table.neatTable th
 {
     border: 1px solid black;
     padding: 5px;

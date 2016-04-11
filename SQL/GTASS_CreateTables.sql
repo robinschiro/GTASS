@@ -57,6 +57,7 @@ CREATE TABLE NominationForm
     IsNewGradStudent        TINYINT(1),
     ApplicationReceived     TINYINT(1),
     ApplicationVerified     TINYINT(1),
+    ExpectedGTAHours        INTEGER,
     Timestamp               DATETIME,
 
     PRIMARY KEY (SessionID, PID),
@@ -77,6 +78,7 @@ CREATE TABLE NomineeInfoForm
     AdvisorFirstName        VARCHAR(20),
     AdvisorLastName         VARCHAR(20),
     NumberOfSemestersAsGTA  INTEGER,
+    NumberOfSemestersAsGrad INTEGER,
     PassedSpeak             INTEGER,
     GPA                     REAL,
     Timestamp               DATETIME        NOT NULL,  

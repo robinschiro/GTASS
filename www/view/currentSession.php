@@ -98,8 +98,8 @@ require_once ('../controller/adminController.php');
                     </table>
                     <br><br>
 
-                <b>GC Members</b> <br><br>
-                <table class="userList">
+                <b>GC Members</b> <br>
+                <table class="neatTable">
                     <tr>
                         <th>Username</th>
                         <th>First Name</th>
@@ -108,18 +108,6 @@ require_once ('../controller/adminController.php');
                     </tr>
                     <?php
 
-//                    // Sample data for format testing.
-////                        for ($i = 0; $i < 10; $i ++ )
-////                        {
-////                            echo '<tr>' .
-////                                '<td>' . $i . 'SampleName</td>' .
-////                                '<td>First Name</td>' .
-////                                '<td>Last Name</td>' .
-////                                '<td>sample@sample.com</td>' .
-////                                '</tr>';
-////                        }
-//
-//                        // Iterate through each member and display the corresponding data.
                         foreach ($session->gcUsersList as $gcUser )
                         {
                             echo '<tr>' .
@@ -131,7 +119,7 @@ require_once ('../controller/adminController.php');
                         }
                     ?>
 
-<!--                </table>-->
+                </table>
                 <br><br>
             </div>
 
