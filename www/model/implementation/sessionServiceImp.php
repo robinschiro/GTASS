@@ -124,7 +124,7 @@ class sessionServiceImp implements sessionService
 
         try
         {
-            // Only one session should be 'Current' at a time.
+            // Create a Session object from the results of the query that selects a Session with the given ID.
             $statement = $db->prepare('SELECT NominationDeadline, ResponseDeadline, VerificationDeadline, GCChairID, IsCurrent
                                    FROM   Session 
                                    WHERE  SessionID = :sessionID');

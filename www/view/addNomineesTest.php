@@ -49,7 +49,7 @@ session_start();
                 - /nomineeApplication?id={PID}
          -->
 
-        <form action="/nomCtrl" method="post">
+        <form action="/nominatorCtrl" method="post">
 
             <!-- Nominee 1 -->
             <label for="fname">First Name: </label>

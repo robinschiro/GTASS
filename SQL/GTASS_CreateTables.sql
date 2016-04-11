@@ -37,7 +37,7 @@ CREATE TABLE Session
     ResponseDeadline        DATETIME,
     VerificationDeadline    DATETIME,
     GCChairID               INT,
-    IsCurrent               BIT,
+    IsCurrent               TINYINT(1),
         
     PRIMARY KEY (SessionID),
     FOREIGN KEY (GCChairID) REFERENCES User(UserID)
@@ -55,6 +55,9 @@ CREATE TABLE NominationForm
     Ranking                 INTEGER,
     IsCSGradStudent         TINYINT(1),
     IsNewGradStudent        TINYINT(1),
+    ApplicationReceived     TINYINT(1),
+    ApplicationVerified     TINYINT(1),
+    ExpectedGTAHours        INTEGER,
     Timestamp               DATETIME,
 
     PRIMARY KEY (SessionID, PID),
@@ -75,6 +78,7 @@ CREATE TABLE NomineeInfoForm
     AdvisorFirstName        VARCHAR(20),
     AdvisorLastName         VARCHAR(20),
     NumberOfSemestersAsGTA  INTEGER,
+    NumberOfSemestersAsGrad INTEGER,
     PassedSpeak             INTEGER,
     GPA                     REAL,
     Timestamp               DATETIME        NOT NULL,  

@@ -85,7 +85,7 @@ foreach ($allSessions as $session) {
         <br><br>
 
         <b>GC Members</b> <br><br>
-        <table class="userList">
+        <table class="neatTable">
             <tr>
                 <th>Username</th>
                 <th>First Name</th>

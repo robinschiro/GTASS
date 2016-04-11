@@ -12,7 +12,18 @@ interface nominatorService
      * Will insert a nominee into the NominationForm table
      *  
      */
-    function nominateUser($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
+    function createNominationForm($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
+
+    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades);
+
+    /**
+     * Retrieve a NominationForm object from the database given its primary key.
+     *
+     * @param $sessionID
+     * @param $PID
+     * @return mixed
+     */
+    function getNominationForm($sessionID, $PID);
 
     /**
      * Returns a list of nominated users
