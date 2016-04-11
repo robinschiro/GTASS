@@ -40,7 +40,8 @@ if($_SESSION['role'] != 3)
 
     <div class="LEFT">
         <p class="sidebar" align="center"><a href="/nominatorHome">Home</a></p>
-        <p class="sidebar_selected" align="center"><b>Add Nominees</b></p>
+        <p class="sidebar" align="center"><a href="/account">My Account</a></p>
+        <p class="sidebar_selected" align="center">Add Nominees</p>
     </div>
 
     <div class="CENTER">
