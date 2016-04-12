@@ -50,7 +50,7 @@ $sessionID = $currentSession->getSemester();
 
             <div class="LEFT">
                 <p class="sidebar_selected" align="center">Score Table</p>
-                <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>
+                <p class="sidebar" align="center"><a href="/incompleteNominations">Incomplete Nominations</a></p>
             </div>
 
             <div class="CENTER" id="tableview">

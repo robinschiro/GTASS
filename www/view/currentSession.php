@@ -44,11 +44,10 @@ require_once ('../controller/adminController.php');
             </div>
 
             <div class="LEFT">
-                <p class="sidebar" align="center"><a href="/admin/adminHome">Home</a></p>
-                <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
+                <p class="sidebar" align="center"><a href="/adminHome">Home</a></p>
+                <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
                 <p class="sidebar_selected" align="center">Current Session</p>
-                <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
-                <p class="sidebar" align="center"><a href="/admin/allSessions">View All Sessions</a></p>
+                <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
             </div>
 
             <div class="CENTER">
@@ -67,8 +66,8 @@ require_once ('../controller/adminController.php');
                     else
                     {
                         echo '
-
-
+                        
+                        
                         <table>
                             <tr>
                                 <td>Semester and Year: </td>
@@ -88,7 +87,7 @@ require_once ('../controller/adminController.php');
                             </tr>
                         </table>
                         <br><br>
-
+    
                         <b>GC Chair</b> <br><br>
                         <table>
                             <tr>
@@ -109,7 +108,7 @@ require_once ('../controller/adminController.php');
                             </tr>
                         </table>
                         <br><br>
-
+    
                         <b>GC Members<b><br><br>
                         <table class="neatTable">
                             <tr>
