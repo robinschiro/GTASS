@@ -53,7 +53,7 @@ $sessionID = $currentSession->getSemester();
                 <p class="sidebar" align="center"><a href="/incompleteNominations">Incomplete Nominations</a></p>
             </div>
 
-            <div class="CENTER">
+            <div class="CENTER" id="tableview">
                 <p class="Form" align="left">
                     <?php echo 'Score Table for ' . $sessionID; ?>
                 </p>
