@@ -8,11 +8,13 @@
 interface NomineeService
 {
     /*
-     * Retrieve object with nominee info needed for the view given the sessionID and PID
+     * Retrieve object with some info needed in NomineeInfoForm
      */
     function getNomineeInfo($sessionID, $PID);
-    
-    function getcourseRecords();
-    function getpublicationRecords();
-    function getpreviousAdvisorRecords();
+
+
+    /*
+    * Retrieve Entire object with nominee info needed for the view given the sessionID and PID
+    */
+    function getRecords($sessionID, $PID);
 }

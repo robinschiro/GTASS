@@ -18,7 +18,7 @@ class NomineeServiceImp implements NomineeService
         if (NULL == $db)
         {
             echo '<br> Null db <br>';
-            return 1;
+            return;
         }
 
         try
@@ -42,7 +42,7 @@ class NomineeServiceImp implements NomineeService
             $phoneNumber = $resultTable[0]['PhoneNumber'];
 
 
-            return new nomineeInfoForm($sessionID, $pID, $advisorFirstName, $advisorLastName, $numberOfSemestersAsGTA, $passedSpeak, $gpa, $timestamp, $numberOfSemestersAsGrad, $phoneNumber)
+            return new nomineeInfoForm($sessionID, $pID, $advisorFirstName, $advisorLastName, $numberOfSemestersAsGTA, $passedSpeak, $gpa, $timestamp, $numberOfSemestersAsGrad, $phoneNumber);
         }
         catch (PDOException $ex)
         {
@@ -52,18 +52,121 @@ class NomineeServiceImp implements NomineeService
 
     }
 
-    function getcourseRecords()
+    function getRecords($sessionID, $PID)
     {
-        // TODO: Implement getcourseRecords() method.
-    }
+        $recordsArray = array();
 
-    function getpublicationRecords()
-    {
-        // TODO: Implement getpublicationRecords() method.
-    }
+        // Retrieve access to the database.
+        $db = db_connect();
+        if ( NULL == $db )
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
 
-    function getpreviousAdvisorRecords()
-    {
-        // TODO: Implement getpreviousAdvisorRecords() method.
+        $nomineeInfo = $this->getNomineeInfo($sessionID, $PID);
+
+        $nomPID = $nomineeInfo->getNomineePID();
+        $nomPhone = $nomineeInfo->getPhoneNumber();
+        $nomAdvF = $nomineeInfo->getAdvisorFirstName();
+        $nomAdvL = $nomineeInfo->getAdvisorLastName();
+        $nomGTA = $nomineeInfo->getNumSemestersAsGTA();
+        $nomGrad = $nomineeInfo->getNumSemestersAsGrad();
+        $nomTime = $nomineeInfo->getTimestamp();
+
+        array_push($recordsArray, new NomineeInfoForm($nomPID, $nomPhone, $nomAdvF, $nomAdvL, $nomGTA, $nomGrad, $nomTime));
+
+        try {
+            // Select all Course Records entries that match the given session ID and PID.
+            $statement = $db->prepare('SELECT SessionID, PID, CourseName, Grade
+                                   FROM   CourseRecord 
+                                   WHERE  SessionID = :sessionID
+                                   AND    PID = :nomineePID');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                ':nomineePID' => htmlspecialchars($PID)));
+            $resultTable = $statement->fetchAll();
+
+            /*
+            * Array has CourseName as index
+             */
+            $courses = array();
+
+            foreach ($resultTable as $result) 
+            {
+                $courses[$result['CourseName']] = $result['Grade'];
+            }
+            
+            array_push($recordsArray, $courses);
+        }
+        catch ( PDOException $ex )
+        {
+            echo 'Exception when retrieving scores and comments: <br>';
+            print_r($statement->errorInfo());
+        }
+
+        try {
+            // Select all CourseRecord entries that match the given session ID and PID.
+            $statement1 = $db->prepare('SELECT SessionID, PID, Title, Citation
+                                   FROM   PublicationRecord 
+                                   WHERE  SessionID = :sessionID
+                                   AND    PID = :nomineePID');
+            $statement1->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                ':nomineePID' => htmlspecialchars($PID)));
+            $resultTable1 = $statement1->fetchAll();
+
+            /*
+            * Creates array with size of result table
+             * adds each title to the array with index i
+             */
+            $Titles = array();
+
+            $numTitles = sizeof($resultTable1);
+            for ($i = 0; $i < $numTitles; $i++)
+            {
+                $currentTitle = $resultTable1[$i]['Title'];
+                array_push($Titles, $currentTitle);
+            }
+
+            array_push($recordsArray, $Titles);
+        }
+        catch ( PDOException $ex )
+        {
+            echo 'Exception when retrieving scores and comments: <br>';
+            print_r($statement->errorInfo());
+        }
+
+        try {
+            // Select all NominationForm entries that match the given session ID.
+            $statement2 = $db->prepare('SELECT SessionID, PID, StartDate, EndDate, AdvisorFirstName, AdvisorLastName
+                                   FROM   PreviousAdvisorRecord 
+                                   WHERE  SessionID = :sessionID
+                                   AND    PID = :nomineePID');
+            $statement2->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                ':nomineePID' => htmlspecialchars($PID)));
+            $resultTable2 = $statement2->fetchAll();
+
+            $advisor = array();
+
+            $numAdvisors = sizeof($resultTable2);
+            for ($i = 0; $i < $numAdvisors; $i++)
+            {
+                $currentAdvisorFirst = $resultTable2[$i]['AdvisorFirstName'];
+                //$currentAdvisorLast = $resultTable2[$i]['AdvisorLastName'];
+                //$currentAdvisorStart = $resultTable2[$i]['StartDate'];
+                //$currentAdvisorEnd = $resultTable2[$i]['EndDate'];
+                array_push($advisor, $currentAdvisorFirst);
+            }
+
+            array_push($recordsArray, $advisor);
+        }
+        catch ( PDOException $ex )
+        {
+            echo 'Exception when retrieving scores and comments: <br>';
+            print_r($statement2->errorInfo());
+        }
+
+
+        return $recordsArray;
+
     }
 }
