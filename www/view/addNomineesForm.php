@@ -40,7 +40,8 @@ if($_SESSION['role'] != 3)
 
     <div class="LEFT">
         <p class="sidebar" align="center"><a href="/nominatorHome">Home</a></p>
-        <p class="sidebar_selected" align="center"><b>Add Nominees</b></p>
+        <p class="sidebar" align="center"><a href="/accountgit">My Account</a></p>
+        <p class="sidebar_selected" align="center">Add Nominees</p>
     </div>
 
     <div class="CENTER">
@@ -50,7 +51,7 @@ if($_SESSION['role'] != 3)
         in email use pid to create url
             - /nomineeApplication?id={PID}
      -->
-     <p class="addNomineeForm" align="left">
+     <p class="Form" align="left">
          Add Nominees
 
         <form action="/nominatorCtrl" method="post">
@@ -63,15 +64,15 @@ if($_SESSION['role'] != 3)
         </p>
 
         <div id="dynamicInput">
-            <label for="fname">First Name: </label>
+            First Name:
             <input type="text" name="fname[0]" placeholder="Nominee's First Name" id="fname">
-            <label for="lname">Last Name: </label>
+            Last Name:
             <input type="text" name="lname[0]" placeholder="Nominee's Last Name" id="lname">
-            <label for="pid">PID: </label>
+            PID:
             <input type="text" name="pid[0]" placeholder="Nominee's PID" id="pid">
-            <label for="email">Email: </label>
+            Email:
             <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
-            <label for="rank">Rank Nominee: </label>
+            Nominee's Rank:
             <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
 
             CS Graduate:
@@ -93,10 +94,10 @@ if($_SESSION['role'] != 3)
         <div id="extraInputs">
         </div>
 
-        <br>
-
         <!-- button for adding values dynamically -->
-        <input type="button" value="Add Another Nominee" onClick="addInputAddNominee('extraInputs');">
+        <input type="button" value="Add Another Nominee" onClick="addInput('extraInputs');"><br><br>
+
+        <br><br>
 
         <!-- Tells the controller which function to call -->
         <input type="hidden" name="createNominationForms">
