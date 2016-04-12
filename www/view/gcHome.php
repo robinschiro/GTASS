@@ -9,11 +9,11 @@ if($_SESSION['role'] != 2)
     if ($_SESSION['role'] == 1)
     {
         //redirect to GC view
-        header("Location: /adminHome");
+        header("Location: /admin/adminHome");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3)
     {
-        header("Location: /addNominees");
+        header("Location: /nominator/addNominees");
     }
     //Session variable role not recognized as valid
     else{
@@ -37,7 +37,7 @@ $sessionID = $currentSession->getSemester();
 
 <html>
     <head>
-        <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+        <link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet" >
         <title>Score Table</title>
     </head>
 
@@ -50,7 +50,7 @@ $sessionID = $currentSession->getSemester();
 
             <div class="LEFT">
                 <p class="sidebar_selected" align="center">Score Table</p>
-                <p class="sidebar" align="center"><a href="/incompleteNominations">Incomplete Nominations</a></p>
+                <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>
             </div>
 
             <div class="CENTER" id="tableview">

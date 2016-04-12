@@ -8,9 +8,9 @@
 	$currentSessionID = $nomineeCtrl->sessionServ->getCurrentSession()->getSemester();
 	$nominationForm = $nomineeCtrl->nominatorServ->getNominationForm($currentSessionID, $_GET['pid']);
 	$nominatorUser = $nomineeCtrl->userServ->getUserByID($nominationForm->getNominatorID());
-	
+
 ?>
-		
+
 
 <html>
 	<head>
@@ -19,9 +19,9 @@
 	</head>
 	<body>
 		<!--javascript-->
-		<script src="public/js/addCourse.js" language="Javascript" type="text/javascript"></script>
-		<script src="public/js/addPublication.js" language="Javascript" type="text/javascript"></script>
-		<script src="public/js/addAdvisor.js" language="Javascript" type="text/javascript"></script>
+		<script src="../public/js/addCourse.js" language="Javascript" type="text/javascript"></script>
+		<script src="../public/js/addPublication.js" language="Javascript" type="text/javascript"></script>
+		<script src="../public/js/addAdvisor.js" language="Javascript" type="text/javascript"></script>
 
 		<div class="WRAPPER">
 			<div class="TOP" align="right">
@@ -75,12 +75,12 @@
 								<th>Start Date</th>
 								<th>End Date</th>
 							</tr>
-	
+
 						</table> <br>
 
 						Courses Completed: <input type="button" value="Add Course" onClick="addCourse();"><br><br>
 						<input type="hidden" name="numCourses" value="0" />
-						
+
 						<!-- Create a table to contain the information for each course -->
 						<table id="courseTable" class="neatTable">
 							<tr>
@@ -120,7 +120,7 @@
 					</p>
 
 				</div>
-			
+
 				<p class="submit" align="center">
 					<input type="submit" value="Submit">
 				</p>
@@ -129,6 +129,6 @@
 				<input type="hidden" name="createNomineeInfoForms">
 
 			</form>
-		</div>	
+		</div>
 	</body>
 </html>

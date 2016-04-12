@@ -13,7 +13,7 @@ require_once('../model/implementation/userServiceImp.php');
 require_once('../model/implementation/nominatorServiceImp.php');
 
 if (isset($_POST['createNominationForms'])) {
-    
+
     $nomCtrl = new nominatorController();
     $nomCtrl->nominateUsers();
 }
@@ -125,7 +125,7 @@ class nominatorController
         $_SESSION['message'] = '<br> All students have been successfully nominated. <br><br>';
 
         // Redirect to addNominatorsForm page.
-        header('Location: /addNominees');
+        header('Location: /nominator/addNominees');
 
     }
 }

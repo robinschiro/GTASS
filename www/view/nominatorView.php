@@ -6,8 +6,8 @@ session_start();
 
 <html>
 <head>
-<link href="public/stylesheets/nominatorView.css" type="text/css" rel="stylesheet">
-<link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+<link href="../public/stylesheets/nominatorView.css" type="text/css" rel="stylesheet">
+<link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 <title>GTASS</title>
 <!-- Source needed for datepicker-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -108,7 +108,7 @@ session_start();
 
 </div>
 <!--javascript-->
-<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
+<script src="../public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

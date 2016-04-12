@@ -23,7 +23,7 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
 
 <html>
     <head>
-        <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+        <link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 
     </head>
     <body>
@@ -145,7 +145,7 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                 }
                 else
                 {
-                    echo "<td> 
+                    echo "<td>
                     <textarea rows='1' columns='150' placeholder='Enter Text Here' name='comment[$index]'></textarea></td>";
                 }
             }

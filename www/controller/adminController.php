@@ -71,7 +71,7 @@ class adminController
         {
             echo $ex->getMessage();
         }
-        
+
         return $SQLDate;
     }
 
@@ -148,7 +148,7 @@ class adminController
         $this->sessionServ->createSession($sessionID, $nomDeadline, $resDeadline, $verDeadline, $chairman, $unameList);
 
         //redirect to current session static page
-        header('Location: /currentSession');
+        header('Location: /admin/currentSession');
     }
 
     /**
@@ -218,6 +218,6 @@ class adminController
         $_SESSION['message'] = '<br> All nominator accounts have been successfully created. <br><br>';
 
         // Redirect to addNominatorsForm page.
-        header('Location: /addNominators');
+        header('Location: /admin/addNominators');
     }
 }

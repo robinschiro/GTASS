@@ -9,11 +9,11 @@ if($_SESSION['role'] != 3)
     if ($_SESSION['role'] == 2)
     {
         //redirect to GC view
-        header("Location: /gcHome");
+        header("Location: /gc/gcHome");
     } // If logged in as admin
     else if ($_SESSION['role'] == 1)
     {
-        header("Location: /adminHome");
+        header("Location: /admin/adminHome");
     }
     //Session variable role not recognized as valid
     else{
@@ -25,7 +25,7 @@ if($_SESSION['role'] != 3)
 
 <html>
 <head>
-    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet" >
+    <link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet" >
     <title>Add Nominees</title>
 </head>
 
@@ -39,8 +39,8 @@ if($_SESSION['role'] != 3)
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="/nominatorHome">Home</a></p>
-        <p class="sidebar" align="center"><a href="/accountgit">My Account</a></p>
+        <p class="sidebar" align="center"><a href="/nominator/nominatorHome">Home</a></p>
+        <p class="sidebar" align="center"><a href="/nominator/account">My Account</a></p>
         <p class="sidebar_selected" align="center">Add Nominees</p>
     </div>
 
@@ -122,7 +122,7 @@ if($_SESSION['role'] != 3)
 </div>
 
 <!--javascript-->
-<script src="public/js/addInputAddNominees.js" language="Javascript" type="text/javascript"></script>
+<script src="../public/js/addInputAddNominees.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

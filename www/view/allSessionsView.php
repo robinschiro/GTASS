@@ -7,10 +7,10 @@ if ($_SESSION['role'] != 1) {
     //if logged in user is a GC member
     if ($_SESSION['role'] == 2) {
         //redirect to GC view
-        header("Location: /gcHome");
+        header("Location: /gc/gcHome");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3) {
-        header("Location: /addNominees");
+        header("Location: /nominator/addNominees");
     } //Session variable role not recognized as valid
     else {
         //user must resign in
@@ -30,7 +30,7 @@ $sessionNum = 0;
 <html>
 <head>
     <title>All Sessions</title>
-    <link href="public/stylesheets/common.css" type="text/css" rel="stylesheet">
+    <link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>

@@ -120,7 +120,7 @@ session_start();
 
 </div>
 <!--javascript-->
-<script src="public/js/addInput.js" language="Javascript" type="text/javascript"></script>
+<script src="../public/js/addInput.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>
