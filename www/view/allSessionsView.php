@@ -23,6 +23,7 @@ if ($_SESSION['role'] != 1) {
 require_once('../controller/adminController.php');
 $adminCtrl = new adminController();
 $allSessions = $adminCtrl->sessionServ->getAllSessions();
+$sessionNum = 0;
 ?>
 
 <!DOCTYPE HTML>
@@ -36,13 +37,19 @@ $allSessions = $adminCtrl->sessionServ->getAllSessions();
 <?php
 foreach ($allSessions as $session) {
     ?>
-    <div class="CENTER">
+    <div class="CENTER" style="margin-top: 0px";>
         <p class="Form" align="left">
-            Current Session
+            <?php
+            $sessionNum++;
+            if ($sessionNum == 1)
+                echo "Current Session";
+            else
+                echo "Session" .  $sessionNum;
+            ?>
         </p>
 
         <p class="information">
-        <table>
+        <table class="SessionTable">
             <tr>
                 <td>Semester and Year:</td>
                 <td><?php echo $session->id ?></td>
@@ -64,7 +71,7 @@ foreach ($allSessions as $session) {
         <br><br>
 
         <b>GC Chair</b> <br><br>
-        <table>
+        <table class="SessionTable">
             <tr>
                 <td>Username:</td>
                 <td><?php echo $session->gcChair->getUsername() ?></td>
@@ -85,7 +92,7 @@ foreach ($allSessions as $session) {
         <br><br>
 
         <b>GC Members</b> <br><br>
-        <table class="neatTable">
+        <table class="SessionTable" id="gcMembers">
             <tr>
                 <th>Username</th>
                 <th>First Name</th>
@@ -113,6 +120,7 @@ foreach ($allSessions as $session) {
 
 <!--        --><?php //echo '$session->gcUsersList length = ' . count($session->gcUsersList); ?>
         <br><br>
+        <hr size="10" noshade>
     </div>
 
 

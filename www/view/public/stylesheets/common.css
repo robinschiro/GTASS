@@ -181,3 +181,61 @@ p.addNomineeForgotten
 a { color: gray; }
 a:hover { color: red; }
 a{text-decoration:none}
+
+.SessionTable
+{
+    width:100%;
+    border:1px solid #ff0000;
+}
+.SessionTable table{
+     border-collapse: collapse;
+     border-spacing: 0;
+     width:100%;
+     height:100%;
+
+ }
+.SessionTable tr:hover td
+{
+      background-color:#999999;
+}
+.SessionTable td
+{
+    vertical-align:middle;
+    background-color:#666666;
+    border:1px solid #ff0000;
+    border-width:0px 1px 1px 0px;
+    text-align:center;
+    padding:10px;
+    font-size:15px;
+    font-family:Trebuchet MS;
+    font-weight:bold;
+    color:#ffffff;
+}
+.SessionTable tr:last-child td
+{
+     border-width:0px 1px 0px 0px;
+ }
+.SessionTable tr td:last-child
+{
+      border-width:0px 0px 1px 0px;
+}
+.SessionTable#gcMembers tr:first-child td{
+    background-color:#000000;
+    border:0px solid #ff0000;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:23px;
+    font-family:Trebuchet MS;
+    font-weight:bold;
+    color:#ffffff;
+}
+.SessionTable tr:hover td
+{
+    background-color:#000000;
+}
+.SessionTable tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.SessionTable tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
