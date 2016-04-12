@@ -174,12 +174,14 @@ class userServiceImp implements userService
             }
         }
 
+
+
         //passwords don't match up?
         if (!password_verify($password, $hashpassDB))
         {
-            //return some type of error
             return;
         }
+
 
         /*
          * if valid create session
@@ -214,7 +216,7 @@ class userServiceImp implements userService
          * stored password will be hashed
          */
 
-        if ($passIn == $passDB)
+        if (password_hash($passIn, PASSWORD_BCRYPT) == $passDB)
             return true;
 
         return false;
