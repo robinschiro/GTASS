@@ -39,16 +39,29 @@ class nomineeController
         $GPA = $_POST['GPA'];
         $courseNames = array();
         $courseGrades = array();
+        $pubTitles = array();
+        $pubCitations = array();
 
         foreach ($_POST['courseName'] as $name) {
-            array_push($courseNames, $f);
+            array_push($courseNames, $name);
         }
 
         foreach ($_POST['courseGrade'] as $grade) {
-            array_push($courseGrades, $l);
+            array_push($courseGrades, $grade);
         }
-        
-        $this->nominatorServ->createNomineeInfoForm($currentSessionID, $nomineePID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numberOfSemestersAsGradStudent, $numberOfSemestersAsGTA, $GPA, $courseNames, $courseGrades);
+
+        foreach ($_POST['pubTitle'] as $title) {
+            array_push($pubTitles, $title);
+        }
+
+        foreach ($_POST['pubCitation'] as $citation) {
+            array_push($pubCitations, $citation);
+        }
+
+        $this->nominatorServ->createNomineeInfoForm($currentSessionID, $nomineePID, $advisorFirstName, $advisorLastName,
+                                                    $phoneNumber, $passedSPEAK, $numberOfSemestersAsGradStudent,
+                                                    $numberOfSemestersAsGTA, $GPA, $courseNames, $courseGrades,
+                                                    $pubTitles, $pubCitations);
 
         // Display a success message.
         $_SESSION['message'] = '<br> Your information form has been successfully submitted. <br><br>';

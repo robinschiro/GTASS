@@ -83,8 +83,8 @@ if($_SESSION['role'] != 3)
 
             New Graduate:
             <select name="newgrad[0]">
-                <option value="1">Yes</option>
                 <option value="0">No</option>
+                <option value="1">Yes</option>
             </select>
 
             <input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
