@@ -3,6 +3,7 @@
 require_once('../model/implementation/nominatorServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
+require_once('entity/previousAdvisorRecord.php');
 
 if (isset($_POST['createNomineeInfoForms'])) {
 
@@ -41,6 +42,7 @@ class nomineeController
         $courseGrades = array();
         $pubTitles = array();
         $pubCitations = array();
+        $previousAdvisors = array();
 
         foreach ($_POST['courseName'] as $name) {
             array_push($courseNames, $name);
@@ -58,10 +60,12 @@ class nomineeController
             array_push($pubCitations, $citation);
         }
 
-        $this->nominatorServ->createNomineeInfoForm($currentSessionID, $nomineePID, $advisorFirstName, $advisorLastName,
-                                                    $phoneNumber, $passedSPEAK, $numberOfSemestersAsGradStudent,
-                                                    $numberOfSemestersAsGTA, $GPA, $courseNames, $courseGrades,
-                                                    $pubTitles, $pubCitations);
+        for ( $i = 0; $i < sizeof($_POST['advFirstName']); $i++ )
+        {
+            array_push($previousAdvisors, new previousAdvisorRecord($_POST['advFirstName'][$i], $_POST['advLastName'][$i], $_POST['advStartDate'][$i], $_POST['advEndDate'][$i]));
+        }
+
+        $this->nominatorServ->createNomineeInfoForm($currentSessionID, $nomineePID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numberOfSemestersAsGradStudent, $numberOfSemestersAsGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
 
         // Display a success message.
         $_SESSION['message'] = '<br> Your information form has been successfully submitted. <br><br>';

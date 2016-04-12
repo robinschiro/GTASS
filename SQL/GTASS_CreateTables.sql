@@ -101,6 +101,7 @@ CREATE TABLE PreviousAdvisorRecord
     -- Assumption: A nominee cannot have two advisors during same time period
     PRIMARY KEY (SessionID, PID, StartDate, EndDate),
     FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE CourseRecord

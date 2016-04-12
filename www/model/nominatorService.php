@@ -14,7 +14,7 @@ interface nominatorService
      */
     function createNominationForm($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
 
-    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
+    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
 
     /**
      * Retrieve a NominationForm object from the database given its primary key.
@@ -24,6 +24,8 @@ interface nominatorService
      * @return mixed
      */
     function getNominationForm($sessionID, $PID);
+
+    function getNomineeInfoForm($sessionID, $PID);
 
     /**
      * Returns a list of nominated users

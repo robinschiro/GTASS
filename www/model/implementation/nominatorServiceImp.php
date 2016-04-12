@@ -9,6 +9,9 @@
 
 require_once('model/nominatorService.php');
 require_once('entity/nominationForm.php');
+require_once('entity/courseRecord.php');
+require_once('entity/publicationRecord.php');
+require_once('entity/previousAdvisorRecord.php');
 
 class nominatorServiceImp implements nominatorService
 {
@@ -54,7 +57,7 @@ class nominatorServiceImp implements nominatorService
         }
     }
 
-    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations)
+    function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations)
     {
         // Retrieve access to the database.
         $db = db_connect();
@@ -141,6 +144,31 @@ class nominatorServiceImp implements nominatorService
             echo 'Exception when creating records for publications';
             print_r($statement->errorInfo());
         }
+
+        // Update PreviousAdvisorRecord table.
+        try
+        {
+            foreach ( $previousAdvisors as $record )
+            {
+                $statement = $db->prepare('INSERT INTO PreviousAdvisorRecord (SessionID, PID, StartDate, EndDate, AdvisorFirstName, AdvisorLastName)
+                                           VALUES ( :sessionID, :pid, :startDate, :endDate, :firstName, :lastName )');
+                $statement->execute(
+                    array(
+                        ':sessionID' => htmlspecialchars($sessionID),
+                        ':pid' => htmlspecialchars($PID),
+                        ':startDate' => htmlspecialchars($record->advStartDate),
+                        ':endDate' => htmlspecialchars($record->advEndDate),
+                        ':firstName' => htmlspecialchars($record->advFirstName),
+                        ':lastName' => htmlspecialchars($record->advLastName)
+                    )
+                );
+            }
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when creating records for previous advisors';
+            print_r($statement->errorInfo());
+        }
     }
 
     /**
@@ -187,5 +215,10 @@ class nominatorServiceImp implements nominatorService
             echo 'Exception when retrieving nomination form with session ID = ' . $sessionID . ' and student PID = ' . $PID . ': <br>';
             print_r($statement->errorInfo());
         }
+    }
+
+    function getNomineeInfoForm($sessionID, $PID)
+    {
+
     }
 }
