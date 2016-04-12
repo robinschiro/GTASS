@@ -18,7 +18,7 @@ CREATE TABLE User
 (
     UserID          INT             AUTO_INCREMENT,
     Username        VARCHAR(20),
-    Password        VARCHAR(20)     NOT NULL,
+    Password        VARCHAR(256)    NOT NULL,
     FirstName       VARCHAR(20),
     LastName        VARCHAR(20),
     EmailAddress    VARCHAR(40),

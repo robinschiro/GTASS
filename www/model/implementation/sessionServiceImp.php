@@ -187,6 +187,13 @@ class sessionServiceImp implements sessionService
                                    WHERE  IsCurrent = 1');
             $statement->execute();
             $resultTable = $statement->fetchAll();
+
+            // If there is no current session, return NULL.
+            if ( 0 == sizeof($resultTable) )
+            {
+                return null;
+            }
+
             $sessionID = $resultTable[0]['SessionID'];
             $gcChairID = $resultTable[0]['GCChairID'];
             $nominationDeadline = $this->ConvertFromSQLDate($resultTable[0]['NominationDeadline']);

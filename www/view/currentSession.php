@@ -57,56 +57,66 @@ require_once ('../controller/adminController.php');
 
                 <p class="information">
 
-                    <table>
-                        <tr>
-                            <td>Semester and Year: </td>
-                            <td><?php echo $session->id  ?></td>
-                        </tr>
-                        <tr>
-                            <td>Nomination Deadline: </td>
-                            <td><?php echo $session->nominationDeadline ?></td>
-                        </tr>
-                        <tr>
-                            <td>Response Deadline: </td>
-                            <td><?php echo $session->responseDeadline ?></td>
-                        </tr>
-                        <tr>
-                            <td>Verification Deadline: </td>
-                            <td><?php echo $session->verificationDeadline ?></td>
-                        </tr>
-                    </table>
-                    <br><br>
-
-                    <b>GC Chair</b> <br><br>
-                    <table>
-                        <tr>
-                            <td>Username: </td>
-                            <td><?php echo $session->gcChair->getUsername() ?></td>
-                        </tr>
-                        <tr>
-                            <td>First Name: </td>
-                            <td><?php echo $session->gcChair->getFirstName() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Last Name: </td>
-                            <td><?php echo $session->gcChair->getLastName() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Email Address: </td>
-                            <td><?php echo $session->gcChair->getEmail() ?></td>
-                        </tr>
-                    </table>
-                    <br><br>
-
-                <b>GC Members</b> <br>
-                <table class="neatTable">
-                    <tr>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email Address</th>
-                    </tr>
                     <?php
+
+                    if ( is_null($session) )
+                    {
+                        echo 'There is no session that is currently open.';
+                    }
+                    else
+                    {
+                        echo '
+                        
+                        
+                        <table>
+                            <tr>
+                                <td>Semester and Year: </td>
+                                <td>'.$session->id.'</td>
+                            </tr>
+                            <tr>
+                                <td>Nomination Deadline: </td>
+                                <td>'.$session->nominationDeadline.'</td>
+                            </tr>
+                            <tr>
+                                <td>Response Deadline: </td>
+                                <td>'.$session->responseDeadline.'</td>
+                            </tr>
+                            <tr>
+                                <td>Verification Deadline: </td>
+                                <td>'.$session->verificationDeadline.'</td>
+                            </tr>
+                        </table>
+                        <br><br>
+    
+                        <b>GC Chair</b> <br><br>
+                        <table>
+                            <tr>
+                                <td>Username: </td>
+                                <td>'.$session->gcChair->getUsername().'</td>
+                            </tr>
+                            <tr>
+                                <td>First Name: </td>
+                                <td>'.$session->gcChair->getFirstName().'</td>
+                            </tr>
+                            <tr>
+                                <td>Last Name: </td>
+                                <td>'.$session->gcChair->getLastName().'</td>
+                            </tr>
+                            <tr>
+                                <td>Email Address: </td>
+                                <td>'.$session->gcChair->getEmail().'</td>
+                            </tr>
+                        </table>
+                        <br><br>
+    
+                        <b>GC Members<b><br><br>
+                        <table class="neatTable">
+                            <tr>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email Address</th>
+                            </tr>';
 
                         foreach ($session->gcUsersList as $gcUser )
                         {
@@ -117,9 +127,11 @@ require_once ('../controller/adminController.php');
                                       '<td>' . $gcUser->getEmail() . '</td>' .
                                  '</tr>';
                         }
-                    ?>
 
-                </table>
+                        echo '
+                        </table>';
+                    }
+                    ?>
                 <br><br>
             </div>
 

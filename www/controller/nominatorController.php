@@ -95,7 +95,7 @@ class nominatorController
         }
 
 
-        for ($i = 0; $i < $_POST['NomCount']; $i++) {
+        for ($i = 0; $i < sizeof($fnameList); $i++) {
 
             //correct info found
             //echo "<br>" . $i . ") " . $currentSession . " " . $pidList[$i] . " " . $_SESSION['userID'] . " " . $fnameList[$i] . " " . $lnameList[$i] . " " . $emailList[$i] . " " . $rankList[$i] . " " . $csGradList[$i] . " " . $newGradList[$i];

@@ -156,6 +156,9 @@ class userServiceImp implements userService
         $hashpassDB = $result[0]['Password'];
         $userDB = $result[0]['Username'];
         $useridDB = $result[0]['UserID'];
+        $firstName = $result[0]['FirstName'];
+        $lastName = $result[0]['LastName'];
+        $emailAddress = $result[0]['EmailAddress'];
 
         //if password was stored before hashing was implemented
         //hash the password and store it.
@@ -170,7 +173,7 @@ class userServiceImp implements userService
                 //check if update user is called if not updated
 
                 //update with hashed password in DB
-                $this->updateUser($useridDB, $userDB, $hashpassDB);
+                $this->updateUser($useridDB, $userDB, $hashpassDB, $firstName, $lastName, $emailAddress);
             }
         }
 
