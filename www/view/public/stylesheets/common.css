@@ -49,6 +49,12 @@ div.CENTER
     border: 1px solid #FFFFFF;
     background-color: #FFFFFF;
 }
+#tableview
+{
+    display: table;
+    width: auto;
+    margin-right: 50%;
+}
 div.BOTTOM
 {
     width:66%;
