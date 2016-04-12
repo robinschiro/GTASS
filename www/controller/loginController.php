@@ -78,7 +78,8 @@ class loginController
         } else
         {
             //return error
-            echo 'username session variable not set<br>';
+            header("Location: /");
+
         }
     }
 

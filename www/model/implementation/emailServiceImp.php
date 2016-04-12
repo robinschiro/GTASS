@@ -36,6 +36,10 @@ class emailServiceImp implements emailService
         if ($type == 2) {
             $this->sendEmailtoNominees($to, $data);
         }
+        //2 day reminder to nominees
+        if($type == 3){
+            $this->nominee2dayDeadlineReminder($to, $data);
+        }
 
     }
 
@@ -79,4 +83,24 @@ class emailServiceImp implements emailService
             echo $e->getMessage();
         }
     }
+
+    function nominee2dayDeadlineReminder($to, $data)
+    {
+        $body = "Hello " . $data[0] . " " . $data[1] . ",<br><br>
+                The deadline to respond to your GTA nomination is in 2 days! Please<br>
+                go to the following link to fill out your application.<br><br>
+                gtass-1256.appspot.com/nomineeForm?id=" . $data[2];
+
+        try {
+            $message = new Message();
+            $message->setSender("noreply@gtass-1256.appspotmail.com");
+            $message->addTo($to);
+            $message->setSubject("Deadline to respond to your GTA nomination is 2 days away!");
+            $message->setHtmlBody($body);
+            $message->send();
+        } catch (InvalidArgumentException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }

@@ -41,6 +41,7 @@ if ($_SESSION['role'] != 1) {
         <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
         <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
         <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
+        <p class="sidebar" align="center"><a href="/allSessions">View All Sessions</a></p>
     </div>
 
     <div class="CENTER">
@@ -55,6 +56,7 @@ if ($_SESSION['role'] != 1) {
         </p>
         </p>
     </div> <!-- end center div -->
+
 </div>
 
 </body>
