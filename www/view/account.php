@@ -21,9 +21,9 @@ $currentUser = $accountCtrl->getCurrentUser();
         </div>
 
         <div class="LEFT">
-            <p class="sidebar" align="center"><a href="/nominatorHome">Home</a></p>
+            <p class="sidebar" align="center"><a href="/nominator/nominatorHome">Home</a></p>
             <p class="sidebar_selected" align="center">My Account</p>
-            <p class="sidebar" align="center"><a href="/addNominees">Add Nominees</a></p>
+            <p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>
         </div>
 
         <div class="CENTER">

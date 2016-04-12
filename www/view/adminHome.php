@@ -38,10 +38,10 @@ if ($_SESSION['role'] != 1) {
 
     <div class="LEFT">
         <p class="sidebar_selected" align="center">Home</p>
-        <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
-        <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
-        <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
-        <p class="sidebar" align="center"><a href="/allSessions">View All Sessions</a></p>
+        <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
+        <p class="sidebar" align="center"><a href="/admin/currentSession">Current Session</a></p>
+        <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
+        <p class="sidebar" align="center"><a href="/admin/allSessions">View All Sessions</a></p>
     </div>
 
     <div class="CENTER">

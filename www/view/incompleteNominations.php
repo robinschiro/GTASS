@@ -49,7 +49,7 @@ $sessionID = $currentSession->getSemester();
             </div>
 
             <div class="LEFT">
-                <p class="sidebar" align="center"><a href="/gcHome">Score Table</a></p>
+                <p class="sidebar" align="center"><a href="/gc/gcHome">Score Table</a></p>
                 <p class="sidebar_selected" align="center">Incomplete Nominations</p>
             </div>
 

@@ -17,8 +17,8 @@
 
 <div class="LEFT">
     <p class="sidebar_selected" align="center">Home</p>
-    <p class="sidebar" align="center"><a href="/account">My Account</a></p>
-    <p class="sidebar" align="center"><a href="/addNominees">Add Nominees</a></p>
+    <p class="sidebar" align="center"><a href="/nominator/account">My Account</a></p>
+    <p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>
 </div>
 
 <!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED --><!-- FORM ACTION NEEDED -->

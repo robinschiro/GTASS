@@ -7,8 +7,14 @@ handlers:
 - url: /
   script: view/index.php
 
-- url: /createSession
-  script: view/createSession.php
+- url: /login
+  script: controller/loginController.php
+
+- url: /logout
+  script: controller/loginController.php
+
+- url: /public
+  static_dir: view/public
 
 - url: /adminCtrl
   script: controller/adminController.php
@@ -22,47 +28,41 @@ handlers:
 - url: /accountCtrl
   script: controller/accountController.php
 
-- url: /account
+- url: /admin/adminHome
+  script: view/adminHome.php
+
+- url: /admin/createSession
+  script: view/createSession.php
+
+- url: /admin/currentSession
+  script: view/currentSession.php
+
+- url: /admin/addNominators
+  script: view/addNominatorsForm.php
+
+- url: /admin/allSessions
+  script: view/allSessionsView.php
+
+- url: /nominator/nominatorHome
+  script: view/nominatorHome.php
+
+- url: /nominator/account
   script: view/account.php
 
-- url: /addNominees
+- url: /nominator/addNominees
   script: view/addNomineesForm.php
+
+- url: /gc/gcHome
+  script: view/gcHome.php
+
+- url: /gc/incompleteNominations
+  script: view/incompleteNominations.php
 
 - url: /addNomineesTest
   script: view/addNomineesTest.php
-
-- url: /addNominators
-  script: view/addNominatorsForm.php
-
-- url: /gcHome
-  script: view/gcHome.php
-
-- url: /login
-  script: controller/loginController.php
-
-- url: /logout
-  script: controller/loginController.php
-
-- url: /currentSession
-  script: view/currentSession.php
-
-- url: /allSessions
-  script: view/allSessionsView.php
 
 - url: /nomineeForm
   script: view/nomineeForm.php
 
 - url: /nomineeReminderTask
   script: resources/scripts/nominee2dayNotificationEmail.php
-
-- url: /nominatorHome
-  script: view/nominatorHome.php
-
-- url: /adminHome
-  script: view/adminHome.php
-
-- url: /incompleteNominations
-  script: view/incompleteNominations.php
-
-- url: /public
-  static_dir: view/public
