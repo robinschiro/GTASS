@@ -10,7 +10,7 @@ interface nominatorService
 {
     /**
      * Will insert a nominee into the NominationForm table
-     *  
+     *
      */
     function createNominationForm($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
 
@@ -37,6 +37,8 @@ interface nominatorService
      * Returns a list of nominated users
      */
     function getNomineesRequiringApproval($sessionID, $nominatorID);
+
+    // function getNomineesThatNeverResponded($sessionID, $nominatorID);
 
 
 }
