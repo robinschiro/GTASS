@@ -19,6 +19,8 @@ interface sessionService
      */
     function getCurrentSession();
 
+    function closeSession($sessionID);
+
     /**
      * Returns a Session object that contains information about the session with the given SessionID.
      */

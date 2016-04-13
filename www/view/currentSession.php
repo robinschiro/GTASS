@@ -56,6 +56,24 @@ require_once ('../controller/adminController.php');
                     Current Session
                 </p>
 
+                <?php
+
+                if ( !is_null($session) )
+                {
+                    echo '
+                        <form action="/adminCtrl" method="POST">
+                            <p align="right" style="margin-right: 30px" >
+                                <input type="submit" value="Close Session"> 
+                            </p>
+                            
+                            <input type="hidden" name="closeSession">
+                            
+                            <input type="hidden" name="currentSessionID" value="'. $session->getSemester() .'">
+                        </form>';
+                }
+
+                ?>
+
                 <p class="information">
 
                     <?php
@@ -67,7 +85,6 @@ require_once ('../controller/adminController.php');
                     else
                     {
                         echo '
-
 
                         <table>
                             <tr>
@@ -133,6 +150,7 @@ require_once ('../controller/adminController.php');
                         </table>';
                     }
                     ?>
+                </p>
                 <br><br>
             </div>
 

@@ -167,6 +167,32 @@ class sessionServiceImp implements sessionService
         }
     }
 
+    function closeSession($sessionID)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if ( NULL == $db )
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        try
+        {
+
+            // Then, set 'isCurrent' for all existing sessions to 0.
+            $statement = $db->prepare('UPDATE Session
+                                       SET    IsCurrent = 0
+                                       WHERE  SessionID = :sessionID');
+            $statement->execute(array(':sessionID' => $sessionID));
+        }
+        catch( PDOException $ex )
+        {
+            echo 'Exception when closing session: ';
+            print_r($statement->errorInfo());
+        }
+    }
+
     function getCurrentSession()
     {
         // Retrieve access to the database.

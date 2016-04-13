@@ -34,6 +34,12 @@ else if(isset ($_POST['createNominators']))
     $adminCtrl = new adminController();
     $adminCtrl->addNominators();
 }
+else if ( isset ($_POST['closeSession']) && isset ($_POST['currentSessionID']) )
+{
+    // Close the current session.
+    $adminCtrl = new adminController();
+    $adminCtrl->closeCurrentSession();
+}
 
 class adminController
 {
@@ -151,16 +157,13 @@ class adminController
         header('Location: /admin/currentSession');
     }
 
-    /**
-     * Returns a session object
-     *
-     * called in the static session page
-     */
-    function currentSession()
+    // The POST variable 'currentSessionID' should be set before this is called.
+    function closeCurrentSession()
     {
-        //get current session
-        //return $this->sessionServ->getService();
+        $this->sessionServ->closeSession($_POST['currentSessionID']);
 
+        // Redirect user to current session page.
+        header("Location: /admin/currentSession");
     }
 
     /**
