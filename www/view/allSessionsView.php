@@ -55,7 +55,7 @@ $ScoreCtrl = new scoreController();
 <?php
 foreach ($allSessions as $session) {
     ?>
-    <div class="CENTER" style="background-color: #FFFFFF;" ;>
+    <div class="CENTER" style="background-color: #FFFFFF; display: table;" ;>
         <p class="Form" align="left">
             <?php
             $sessionNum++;
@@ -156,7 +156,7 @@ foreach ($allSessions as $session) {
             array_push($idArray, $gcMember->getUserID());
         }
         ?>
-    <table class="neatTable">
+    <table class="neatTable" id="allScoreTables">
         <tr>
             <th colspan="2" rowspan="2">Nominator Name</th>
             <th colspan="2" rowspan="2">Nominee Name</th>
@@ -179,7 +179,7 @@ foreach ($allSessions as $session) {
             <?php
             foreach ($gcMembers as $gcMember) {
 
-                echo '<td>Score</td><td>Comment</td>';
+                echo '<th>Score</th><th>Comment</th>';
             }
 
             ?>

@@ -60,3 +60,6 @@ handlers:
 
 - url: /nomineeReminderTask
   script: resources/scripts/nominee2dayNotificationEmail.php
+
+- url: /clicked
+  script: view/ClickedNom.php

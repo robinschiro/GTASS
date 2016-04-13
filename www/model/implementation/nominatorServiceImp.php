@@ -8,10 +8,11 @@
  */
 
 require_once('model/nominatorService.php');
-require_once('entity/nominationForm.php');
+require_once('entity/nomineeInfoForm.php');
 require_once('entity/courseRecord.php');
 require_once('entity/publicationRecord.php');
 require_once('entity/previousAdvisorRecord.php');
+require_once('entity/nominationForm.php');
 
 class nominatorServiceImp implements nominatorService
 {
