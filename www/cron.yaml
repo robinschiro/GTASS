@@ -1,4 +1,4 @@
 cron:
 - description: Send Notification to nominee if they have not responded to nomination
   url: /nomineeReminderTask
-  schedule: every 5 minutes
+  schedule: every 24 hours

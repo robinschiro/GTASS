@@ -1,7 +1,7 @@
 <?php
 
-require_once('../../model/implementation/emailServiceImp.php');
 require_once('../../model/implementation/sessionServiceImp.php');
+require_once('../../model/implementation/emailServiceImp.php');
 
 $sessionServ = new sessionServiceImp();
 $emailServ = new emailServiceImp();
@@ -15,21 +15,40 @@ $responseDeadlineObj = new DateTime($currentSessionObj->getResponseDeadline());
 $now = new DateTime();
 $diff = $responseDeadlineObj->diff($now);
 
+//is it more than 2 days until the response deadline
 if ($diff->days > 2) {
+    //not time to send out emails
+    return http_response_code();
+}
+
+//check if the current session has already sent out the 2 day reminder
+$statement = $db->prepare('SELECT ReminderSent
+                           FROM Session 
+                           WHERE SessionID = :sid');
+$statement->execute(
+    array(
+        ':sid' => htmlspecialchars($currentSessionObj->getSemester())
+    )
+);
+$resultTable = $statement->fetchAll();
+
+if ($resultTable[0]['ReminderSent'] == 1) {
     return http_response_code();
 }
 
 //Query the NominationForm table for list of nominees in the current session whom have the 'applicationReceived' value as 0
-$statement = $db->prepare('SELECT PID, EmailAddress, FirstName, LastName FROM NominationForm WHERE SessionID = :sid AND ApplicationReceived = 0');
+$statement = $db->prepare('SELECT PID, EmailAddress, FirstName, LastName 
+                           FROM NominationForm 
+                           WHERE SessionID = :sid 
+                            AND ApplicationReceived = 0');
 $statement->execute(
     array(
-        'sid' => htmlspecialchars($currentSessionObj->getSemester())
+        ':sid' => htmlspecialchars($currentSessionObj->getSemester())
     )
 );
 
 $resultTable = $statement->fetchAll();
 $tablesize = sizeof($resultTable);
-
 
 //loop through and email each
 for ($i = 0; $i < $tablesize; $i++) {
@@ -47,37 +66,26 @@ for ($i = 0; $i < $tablesize; $i++) {
     array_push($tempData, $lastName);
     array_push($tempData, $pid);
 
+    //ignore blank or invalid emails
+    if ($to == null || $to == '') {
+        continue;
+    }
+
     //email nominee
-    //$emailServ->nominee2dayDeadlineReminder($to, $tempData);
+    $emailServ->sendEmail($to, 3, $tempData);
 }
 
+//set the current session's ReminderSet value to 1
+$updateSession = $db->prepare('UPDATE Session 
+                               SET ReminderSent = 1 
+                               WHERE SessionID = :sid');
+$updateSession->execute(
+    array(
+        ':sid' => htmlspecialchars($currentSessionObj->getSemester())
+    )
+);
 
 //needed for google cloud cron
 return http_response_code();
-
-/**
- *
- * Will check which/if any nominee is within 2 days of the response deadline
- * if they are they will be send a notification to warn them.
- *
- */
-
-
-/*
- * Steps:
- *  1) Check the response deadline and SessionID for the current session in the Session table
- *      - 4/12/2016 FALL2016
- *  2) Query the NominationForm table for list of nominees in the current session whom have the 'applicationReceived' value as null
- *      - if null
- *          - compare response deadline and now
- *          - if time left <= 2 days
- *              - email user notifying them of this
- *          - else
- *              - continue
- *      - else
- *          - continue
- *
- */
-
 
 ?>
