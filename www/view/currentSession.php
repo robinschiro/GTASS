@@ -48,6 +48,8 @@ require_once ('../controller/adminController.php');
                 <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
                 <p class="sidebar_selected" align="center">Current Session</p>
                 <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
+                <p class="sidebar" align="center"><a href="/allSessions">View All Sessions</a></p>
+
             </div>
 
             <div class="CENTER">

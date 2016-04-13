@@ -54,6 +54,7 @@ div.CENTER
 {
     display: table;
     width: auto;
+    height: 100%;
     /*margin-right: 50%;*/
 }
 div.BOTTOM
