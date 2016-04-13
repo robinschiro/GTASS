@@ -37,9 +37,11 @@
 					</p>
 
 					<p class="information">
-						<table class="neatTable" id="approveNomineesTable" width="800">
+						<table class="neatTable" id="approveNomineesTable" width="400">
 							<tr>
-				                <th>First Name</th>
+								<th>Approve</th>
+								<th>Decline</th>
+								<th>First Name</th>
 				                <th>Last Name</th>
 								<th>PID</th>
 				                <th>Email Address</th>
@@ -49,8 +51,8 @@
 								<th>Passed Speak?</th>
 								<th>GPA</th>
 
-								<th>Approve</th>
-								<th>Decline</th>
+
+
 
 								<!-- can't find a way to access the other information
 								<th>PHD in CS?</th>
@@ -64,8 +66,12 @@
 
 							$nomineeForm = $nominatorCtrl->nominationServ->getNomineeInfoForm($currentSessionID, $nomineePID);
 
-							// just test-data, the actual representation is dependent on the information in $nomineeForm
 							echo "<tr> <td>";
+							echo "<input type='button' value='Approve'>"; echo "</td>";
+							echo "<td>";
+							echo "<input type='button' value='Decline'>"; echo "</td>";
+
+							echo "<td>";
 							echo $nomForms->getNomineeFirstName(); echo "</td>";
 							echo "<td>";
 							echo $nomForms->getNomineeLastName(); echo "</td>";
@@ -83,10 +89,7 @@
 							echo "$nomineeForm->getPassedSPEAK();"; echo "</td>";
 							echo "<td>";
 							echo "$nomineeForm->getGPA();"; echo "</td>";
-							echo "<td>";
-							echo "<input type='button' value='Approve'>"; echo "</td>";
-							echo "<td>";
-							echo "<input type='button' value='Decline'>"; echo "</td>";
+
 							echo "</tr>";
 						}
 						?>
