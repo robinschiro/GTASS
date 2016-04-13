@@ -57,6 +57,44 @@ class nominatorServiceImp implements nominatorService
         }
     }
 
+    function updateNominationFormStatus($sessionID, $PID, $statusType)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        $type = 'ApplicationReceived';
+        if (1 == $statusType)
+        {
+            $type = 'ApplicationVerified';
+        }
+
+        // Attempt to insert into NominationForm
+        try
+        {
+            $statement = $db->prepare('UPDATE NominationForm
+                                       SET '.$type.' = :status
+                                       WHERE SessionID = :sessionID AND PID = :pid');
+            $statement->execute(
+                array(
+                    ':status' => '1',
+                    ':sessionID' => htmlspecialchars($sessionID),
+                    ':pid' => htmlspecialchars($PID)
+                )
+            );
+
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when setting '.$type.' status for nominee with PID = ' . $PID . ': ';
+            print_r($statement->errorInfo());
+        }
+    }
+
     function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations)
     {
         // Retrieve access to the database.
@@ -169,6 +207,9 @@ class nominatorServiceImp implements nominatorService
             echo 'Exception when creating records for previous advisors';
             print_r($statement->errorInfo());
         }
+
+        // Update the associated NominationForm entry now that the application has been received.
+        $this->updateNominationFormStatus($sessionID, $PID, 0);
     }
 
     /**
