@@ -23,7 +23,7 @@ class nominationForm
     var $timestamp;
 
     /**
-     * nominationForm constructor.
+     * nomineeForm constructor.
      * @param $sessionID
      * @param $nomineePID
      * @param $nominatorID

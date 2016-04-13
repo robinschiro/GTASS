@@ -1,6 +1,7 @@
 <?php
 
 require_once('../model/implementation/sessionServiceImp.php');
+require_once('../model/implementation/nominatorServiceImp.php');
 
 /**
  * Created by PhpStorm.
@@ -11,9 +12,11 @@ require_once('../model/implementation/sessionServiceImp.php');
 class gcMemberController
 {
     var $sessionServ;
+    var $nominationServ;
 
     public function __construct()
     {
-        $this->sessionServ = new sessionServiceImp();;
+        $this->sessionServ = new sessionServiceImp();
+        $this->nominatorServ = new nominatorServiceImp();
     }
 }

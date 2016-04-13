@@ -6,8 +6,8 @@
 
 	$nomineeCtrl = new nomineeController();
 	$currentSessionID = $nomineeCtrl->sessionServ->getCurrentSession()->getSemester();
-	$nominationForm = $nomineeCtrl->nominatorServ->getNominationForm($currentSessionID, $_GET['pid']);
-	$nominatorUser = $nomineeCtrl->userServ->getUserByID($nominationForm->getNominatorID());
+	$nomineeForm = $nomineeCtrl->nominatorServ->getNominationForm($currentSessionID, $_GET['pid']);
+	$nominatorUser = $nomineeCtrl->userServ->getUserByID($nomineeForm->getNominatorID());
 
 ?>
 
@@ -43,16 +43,16 @@
 
 					<p class="information">
 
-						Nominee Name: <span class="permanent"><span id="inside"> <?php echo $nominationForm->getNomineeFirstName(); ?></span> </span>
-											<span class="permanent"> <span id="inside"><?php echo $nominationForm->getNomineeLastName(); ?></span></span> <br><br>
+						Nominee Name: <span class="permanent"><span id="inside"> <?php echo $nomineeForm->getNomineeFirstName(); ?></span> </span>
+											<span class="permanent"> <span id="inside"><?php echo $nomineeForm->getNomineeLastName(); ?></span></span> <br><br>
 
 						PID: <span class="permanent"><span id="inside"><?php echo $_GET["pid"]; ?></span></span>  <br><br>
 
 						<input type="hidden" name="nomineePID" value=<?php echo '"' . $_GET["pid"] . '"'; ?> >
 
-						Email Address: <span class="permanent"> <span id="inside"><?php echo $nominationForm->getNomineeEmail(); ?></span></span>  <br><br>
+						Email Address: <span class="permanent"> <span id="inside"><?php echo $nomineeForm->getNomineeEmail(); ?></span></span>  <br><br>
 
-						Are you a PhD student in Computer Science?:<span class="permanent"> <?php echo ( 1 == $nominationForm->getNomineeIsCS()) ? 'Yes' : 'No'; ?></span><br><br>
+						Are you a PhD student in Computer Science?:<span class="permanent"> <?php echo ( 1 == $nomineeForm->getNomineeIsCS()) ? 'Yes' : 'No'; ?></span><br><br>
 
 						Phone Number: <input type="text" placeholder="Phone Number" name="phoneNumber"><br><br>
 

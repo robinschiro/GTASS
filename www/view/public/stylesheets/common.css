@@ -247,3 +247,40 @@ a{text-decoration:none}
 .SessionTable tr:first-child td:last-child{
     border-width:0px 0px 1px 1px;
 }
+
+.neatTable#allScoreTables
+{
+
+    font-size:12px;
+    color:#fbfbfb;
+    width:100%;
+    border-width: 1px;
+    border-color: #686767;
+    border-collapse: collapse;
+}
+.neatTable#allScoreTables th
+{
+    font-size:12px;
+    background-color:#171515;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #686767;
+    text-align:left;
+}
+.neatTable#allScoreTables tr
+{
+    background-color:#2f2f2f;
+}
+.neatTable#allScoreTables td
+{
+    font-size:12px;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #686767;
+}
+.neatTable#allScoreTables tr:hover td
+{
+    background-color:#171515;
+}
