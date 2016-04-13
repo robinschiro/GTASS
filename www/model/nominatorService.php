@@ -36,7 +36,7 @@ interface nominatorService
     /**
      * Returns a list of nominated users
      */
-    function nominatedUsers();
+    function getNomineesRequiringApproval($sessionID, $nominatorID);
 
 
 }

@@ -17,6 +17,9 @@ class nominationForm
     var $nomineeRank;
     var $nomineeIsCS;
     var $nomineeIsNew;
+    var $applicationReceived;
+    var $applicationVerified;
+    var $expectedGTAHours;
     var $timestamp;
 
     /**
@@ -30,9 +33,12 @@ class nominationForm
      * @param $nomineeRank
      * @param $nomineeIsCS
      * @param $nomineeIsNew
+     * @param $applicationReceived
+     * @param $applicationVerified
+     * @param $expectedGTAHours
      * @param $timestamp
      */
-    public function __construct($sessionID, $nomineePID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $timestamp)
+    public function __construct($sessionID, $nomineePID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $applicationReceived, $applicationVerified, $expectedGTAHours, $timestamp)
     {
         $this->sessionID = $sessionID;
         $this->nomineePID = $nomineePID;
@@ -43,8 +49,12 @@ class nominationForm
         $this->nomineeRank = $nomineeRank;
         $this->nomineeIsCS = $nomineeIsCS;
         $this->nomineeIsNew = $nomineeIsNew;
+        $this->applicationReceived = $applicationReceived;
+        $this->applicationVerified = $applicationVerified;
+        $this->expectedGTAHours = $expectedGTAHours;
         $this->timestamp = $timestamp;
     }
+
 
     /**
      * @return mixed

@@ -212,12 +212,44 @@ class nominatorServiceImp implements nominatorService
         $this->updateNominationFormStatus($sessionID, $PID, 0);
     }
 
-    /**
-     * Returns a list of nominated users
-     */
-    function nominatedUsers()
+    function getNomineesRequiringApproval($sessionID, $nominatorID)
     {
-        // TODO: Implement nominatedUsers() method.
+        // Retrieve access to the database.
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        try
+        {
+            $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
+                                       FROM   NominationForm 
+                                       WHERE  SessionID = :sessionID 
+                                       AND NominatorID = :nominatorID
+                                       AND ApplicationReceived = :appReceivedStatus
+                                       AND ApplicationVerified = :appVerifiedStatus');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                                      ':nominatorID' => htmlspecialchars($nominatorID),
+                                      ':appReceivedStatus' => '1',
+                                      ':appVerifiedStatus' => '0'));
+            $resultTable = $statement->fetchAll();
+
+            $nomForms = array();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($nomForms, new nominationForm($sessionID, $result['PID'], $nominatorID, $result['FirstName'], $result['LastName'], $result['EmailAddress'], $result['Ranking'], $result['IsCSGradStudent'], $result['IsNewGradStudent'], $result['ApplicationReceived'], $result['ApplicationVerified'], $result['ExpectedGTAHours'], $result['Timestamp']));
+            }
+
+            return $nomForms;
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID .'<br>';
+            print_r($statement->errorInfo());
+        }
     }
 
     function getNominationForm($sessionID, $PID)
@@ -232,7 +264,7 @@ class nominatorServiceImp implements nominatorService
 
         try
         {
-            $statement = $db->prepare('SELECT NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp
+            $statement = $db->prepare('SELECT NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
                                        FROM   NominationForm 
                                        WHERE  SessionID = :sessionID AND PID = :PID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
@@ -248,8 +280,11 @@ class nominatorServiceImp implements nominatorService
             $nomineeIsCS = $resultTable[0]['IsCSGradStudent'];
             $nomineeIsNew = $resultTable[0]['IsNewGradStudent'];
             $timestamp = $resultTable[0]['Timestamp'];
+            $appReceived = $resultTable[0]['ApplicationReceived'];
+            $appVerified = $resultTable[0]['ApplicationVerified'];
+            $expectedGTAHours = $resultTable[0]['ExpectedGTAHours'];
 
-            return new nominationForm($sessionID, $PID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $timestamp);
+            return new nominationForm($sessionID, $PID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $timestamp, $appReceived, $appVerified, $expectedGTAHours);
         }
         catch (PDOException $ex)
         {
