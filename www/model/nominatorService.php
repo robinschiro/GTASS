@@ -14,6 +14,12 @@ interface nominatorService
      */
     function createNominationForm($session, $PID, $nominatorID, $firstname, $lastname, $email, $ranking, $iscsgrad, $isnewgrad);
 
+    /**
+     * Set either ApplicationReceived or ApplicationVerified of a nomination form to '1'.
+     * Set $statusType to 0 to update ApplicationReceived or 1 to update ApplicationVerified.
+     */
+    function updateNominationFormStatus($sessionID, $PID, $statusType);
+
     function createNomineeInfoForm($sessionID, $PID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numSemestersGrad, $numSemestersGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
 
     /**
