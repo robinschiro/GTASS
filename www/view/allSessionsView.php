@@ -41,10 +41,10 @@ $sessionNum = 0;
         <a href="/logout">Sign out</a>
     </div>
     <div class="LEFT">
-    <p class="sidebar" align="center"><a href="/adminHome">Home</a></p>
-    <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
-    <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
-    <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
+    <p class="sidebar" align="center"><a href="/admin/adminHome">Home</a></p>
+    <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
+    <p class="sidebar" align="center"><a href="/admin/currentSession">Current Session</a></p>
+    <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
     <p class="sidebar_selected" align="center">View All Sessions</p>
     </div>
 
