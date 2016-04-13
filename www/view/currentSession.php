@@ -61,7 +61,7 @@ require_once ('../controller/adminController.php');
                 if ( !is_null($session) )
                 {
                     echo '
-                        <form action="/adminCtrl" method="POST">
+                        <form onsubmit="return confirm(\'Are you sure you want to close the session?\');" action="/adminCtrl" method="POST">
                             <p align="right" style="margin-right: 30px" >
                                 <input type="submit" value="Close Session"> 
                             </p>

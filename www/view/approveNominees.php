@@ -22,7 +22,15 @@
 			    <a href="/logout">Sign out</a>
 			</div>
 
+			<div class="LEFT">
+				<p class="sidebar" align="center"><a href="/account">My Account</a></p>
+				<p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>
+				<p class="sidebar_selected" align="center">Pending Approvals</p>
+			</div>
+
 			<form action="/nomineeCtrl" method="POST">
+
+
 
 				<div class="CENTER" >
 					<p class="Form" align="left">
