@@ -71,7 +71,7 @@ if($_SESSION['role'] != 3)
             Email:
             <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
             Nominee's Rank:
-            <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
+            <input type="number" name="rank[0]" placeholder="Rank" min="0" id="rank">
 
             CS Graduate:
             <select name="csgrad[0]">
