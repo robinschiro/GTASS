@@ -49,6 +49,9 @@ handlers:
 - url: /nominator/approveNominees
   script: view/approveNominees.php
 
+- url: /nominator/incompleteNominations
+  script: view/incompleteNominations.php
+
 - url: /gc/gcHome
   script: view/gcHome.php
 

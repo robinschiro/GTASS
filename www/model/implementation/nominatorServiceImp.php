@@ -226,8 +226,8 @@ class nominatorServiceImp implements nominatorService
         try
         {
             $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
-                                       FROM   NominationForm 
-                                       WHERE  SessionID = :sessionID 
+                                       FROM   NominationForm
+                                       WHERE  SessionID = :sessionID
                                        AND NominatorID = :nominatorID
                                        AND ApplicationReceived = :appReceivedStatus
                                        AND ApplicationVerified = :appVerifiedStatus');
@@ -235,6 +235,44 @@ class nominatorServiceImp implements nominatorService
                                       ':nominatorID' => htmlspecialchars($nominatorID),
                                       ':appReceivedStatus' => '1',
                                       ':appVerifiedStatus' => '0'));
+            $resultTable = $statement->fetchAll();
+
+            $nomForms = array();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($nomForms, new nominationForm($sessionID, $result['PID'], $nominatorID, $result['FirstName'], $result['LastName'], $result['EmailAddress'], $result['Ranking'], $result['IsCSGradStudent'], $result['IsNewGradStudent'], $result['ApplicationReceived'], $result['ApplicationVerified'], $result['ExpectedGTAHours'], $result['Timestamp']));
+            }
+
+            return $nomForms;
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID .'<br>';
+            print_r($statement->errorInfo());
+        }
+    }
+
+    function getNomineesThatNeverResponded($sessionID, $nominatorID)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        try
+        {
+            $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
+                                       FROM   NominationForm
+                                       WHERE  SessionID = :sessionID
+                                       AND NominatorID = :nominatorID
+                                       AND ApplicationReceived = :appReceivedStatus'); // don't care about verification at all
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                                      ':nominatorID' => htmlspecialchars($nominatorID),
+                                      ':appReceivedStatus' => '0'));
             $resultTable = $statement->fetchAll();
 
             $nomForms = array();
@@ -266,7 +304,7 @@ class nominatorServiceImp implements nominatorService
         try
         {
             $statement = $db->prepare('SELECT NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
-                                       FROM   NominationForm 
+                                       FROM   NominationForm
                                        WHERE  SessionID = :sessionID AND PID = :PID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
                 ':PID' => htmlspecialchars($PID)));
@@ -334,7 +372,7 @@ class nominatorServiceImp implements nominatorService
 
             // Select all Course Records entries that match the given session ID and PID.
             $statement = $db->prepare('SELECT SessionID, PID, CourseName, Grade
-                                       FROM   CourseRecord 
+                                       FROM   CourseRecord
                                        WHERE  SessionID = :sessionID
                                        AND    PID = :nomineePID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
@@ -359,7 +397,7 @@ class nominatorServiceImp implements nominatorService
 
             // Select all Publication Records entries that match the given session ID and PID.
             $statement = $db->prepare('SELECT SessionID, PID, Title, Citation
-                                        FROM   PublicationRecord 
+                                        FROM   PublicationRecord
                                         WHERE  SessionID = :sessionID
                                         AND    PID = :nomineePID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
@@ -384,7 +422,7 @@ class nominatorServiceImp implements nominatorService
 
             // Select all previousAdvisor Records entries that match the given session ID and PID.
             $statement = $db->prepare('SELECT SessionID, PID, StartDate, EndDate, AdvisorFirstName, AdvisorLastName
-                                   FROM   PreviousAdvisorRecord 
+                                   FROM   PreviousAdvisorRecord
                                    WHERE  SessionID = :sessionID
                                    AND    PID = :nomineePID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
@@ -404,6 +442,6 @@ class nominatorServiceImp implements nominatorService
 
         // Assemble the nomineeInfoForm object.
         return new nomineeInfoForm($sessionID, $PID, $phoneNumber, $advisorFirstName, $advisorLastName, $numberOfSemestersAsGTA, $numberOfSemestersAsGrad, $passedSpeak, $gpa, $timestamp, $courseRecords, $publicationRecords, $previousAdvisorRecords);
-        
+
     }
 }
