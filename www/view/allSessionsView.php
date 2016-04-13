@@ -34,10 +34,26 @@ $sessionNum = 0;
 </head>
 
 <body>
-<?php
+
+
+    <div class="TOP" align="right">
+        <?php echo 'Signed in as ' . $_SESSION['username'] . ' (admin)'; ?><br>
+        <a href="/logout">Sign out</a>
+    </div>
+    <div class="LEFT">
+    <p class="sidebar" align="center"><a href="/adminHome">Home</a></p>
+    <p class="sidebar" align="center"><a href="/createSession">Create Session</a></p>
+    <p class="sidebar" align="center"><a href="/currentSession">Current Session</a></p>
+    <p class="sidebar" align="center"><a href="/addNominators">Add Nominators</a></p>
+    <p class="sidebar_selected" align="center">View All Sessions</p>
+    </div>
+
+
+
+    <?php
 foreach ($allSessions as $session) {
     ?>
-    <div class="CENTER" style="margin-top: 0px";>
+    <div class="CENTER" style="background-color: #FFFFFF;";>
         <p class="Form" align="left">
             <?php
             $sessionNum++;
