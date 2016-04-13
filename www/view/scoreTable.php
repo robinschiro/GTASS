@@ -28,7 +28,6 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
     </head>
     <body>
     <form action="/" method="POST">
-        <div>
             <?php
 
             //variables needed to traverse arrays
@@ -42,7 +41,6 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                         array_push($idArray, $gcMember->getUserID());
                     }
             ?>
-        </div>
         <table class="neatTable">
             <tr>
                 <th colspan="2">Nominator Name</th>

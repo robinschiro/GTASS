@@ -62,7 +62,8 @@ $currentUser = $accountCtrl->getCurrentUser();
                 case 3:
                 {
                     echo '
-                    <p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>';
+                    <p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>
+                    <p class="sidebar" align="center"><a href="/nominator/approveNominees">Pending Approvals</a></p>';
 
                     break;
                 }

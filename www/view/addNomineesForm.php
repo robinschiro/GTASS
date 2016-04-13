@@ -40,7 +40,7 @@ if($_SESSION['role'] != 3)
     <div class="LEFT">
         <p class="sidebar" align="center"><a href="/account">My Account</a></p>
         <p class="sidebar_selected" align="center">Add Nominees</p>
-        <p class="sidebar" align="center"><a href="/nominator/incompleteNominations">Incomplete Nominations</a></p>
+        <p class="sidebar" align="center"><a href="/nominator/approveNominees">Pending Approvals</a></p>
     </div>
 
     <div class="CENTER">
@@ -72,7 +72,7 @@ if($_SESSION['role'] != 3)
             Email:
             <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
             Nominee's Rank:
-            <input type="number" name="rank[0]" placeholder="Rank" min="0" max="100" id="rank">
+            <input type="number" name="rank[0]" placeholder="Rank" min="0" id="rank">
 
             CS Graduate:
             <select name="csgrad[0]">
