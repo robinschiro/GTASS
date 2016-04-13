@@ -15,38 +15,46 @@ class nomineeInfoForm
     var $advisorLastName;
     var $numSemestersAsGTA;
     var $numSemestersAsGrad;
+    var $passedSPEAK;
+    var $GPA;
     var $timestamp;
     var $courseRecords;
     var $publicationRecords;
     var $previousAdvisorRecords;
 
-
     /**
-     * nominationForm constructor.
+     * nomineeInfoForm constructor.
      * @param $sessionID
      * @param $nomineePID
-     * @param $nominatorID
-     * @param $nomineeFirstName
-     * @param $nomineeLastName
-     * @param $nomineeEmail
-     * @param $nomineeRank
-     * @param $nomineeIsCS
-     * @param $nomineeIsNew
+     * @param $phoneNumber
+     * @param $advisorFirstName
+     * @param $advisorLastName
+     * @param $numSemestersAsGTA
+     * @param $numSemestersAsGrad
+     * @param $passedSPEAK
+     * @param $GPA
      * @param $timestamp
+     * @param $courseRecords
+     * @param $publicationRecords
+     * @param $previousAdvisorRecords
      */
-    public function __construct($sessionID, $nomineePID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $timestamp)
+    public function __construct($sessionID, $nomineePID, $phoneNumber, $advisorFirstName, $advisorLastName, $numSemestersAsGTA, $numSemestersAsGrad, $passedSPEAK, $GPA, $timestamp, $courseRecords, $publicationRecords, $previousAdvisorRecords)
     {
         $this->sessionID = $sessionID;
         $this->nomineePID = $nomineePID;
-        $this->nominatorID = $nominatorID;
-        $this->nomineeFirstName = $nomineeFirstName;
-        $this->nomineeLastName = $nomineeLastName;
-        $this->nomineeEmail = $nomineeEmail;
-        $this->nomineeRank = $nomineeRank;
-        $this->nomineeIsCS = $nomineeIsCS;
-        $this->nomineeIsNew = $nomineeIsNew;
+        $this->phoneNumber = $phoneNumber;
+        $this->advisorFirstName = $advisorFirstName;
+        $this->advisorLastName = $advisorLastName;
+        $this->numSemestersAsGTA = $numSemestersAsGTA;
+        $this->numSemestersAsGrad = $numSemestersAsGrad;
+        $this->passedSPEAK = $passedSPEAK;
+        $this->GPA = $GPA;
         $this->timestamp = $timestamp;
+        $this->courseRecords = $courseRecords;
+        $this->publicationRecords = $publicationRecords;
+        $this->previousAdvisorRecords = $previousAdvisorRecords;
     }
+
 
     /**
      * @return mixed

@@ -128,19 +128,6 @@ CREATE TABLE PublicationRecord
         ON DELETE CASCADE
 );
 
-/*
-    Nominator verifies nominees inputted data
- */
-CREATE TABLE VerificationRecord
-(
-    SessionID           VARCHAR(10),
-    PID                 VARCHAR(10),
-    Timestamp           DATETIME        NOT NULL,
-
-    PRIMARY KEY (SessionID, PID),
-    FOREIGN KEY (SessionID, PID) REFERENCES NomineeInfoForm(SessionID, PID)
-);
-
 CREATE TABLE Score
 (
     SessionID           VARCHAR(10),

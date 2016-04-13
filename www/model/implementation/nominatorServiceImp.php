@@ -260,6 +260,114 @@ class nominatorServiceImp implements nominatorService
 
     function getNomineeInfoForm($sessionID, $PID)
     {
+        //Retrieve access to database
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
 
+        try
+        {
+            $statement = $db->prepare('SELECT AdvisorFirstName, AdvisorLastName, NumberOfSemestersAsGTA, PassedSpeak, GPA, Timestamp, NumberOfSemestersAsGrad, PhoneNumber
+                                        FROM NomineeInfoForm
+                                        WHERE SessionID = :sessionID AND PID = :PID');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID), ':PID' => htmlspecialchars($PID)));
+            $resultTable = $statement->fetchAll();
+
+            $advisorFirstName = $resultTable[0]['AdvisorFirstName'];
+            $advisorLastName = $resultTable[0]['AdvisorLastName'];
+            $numberOfSemestersAsGTA = $resultTable[0]['NumberOfSemestersAsGTA'];
+            $passedSpeak = $resultTable[0]['PassedSpeak'];
+            $gpa = $resultTable[0]['GPA'];
+            $timestamp = $resultTable[0]['Timestamp'];
+            $numberOfSemestersAsGrad = $resultTable[0]['NumberOfSemestersAsGrad'];
+            $phoneNumber = $resultTable[0]['PhoneNumber'];
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieve nominee info form for nominee with PID = ' . $PID . ': ';
+            print_r($statement->errorInfo());
+        }
+
+        // Retrieve all the courseRecords.
+        try
+        {
+            $courseRecords = array();
+
+            // Select all Course Records entries that match the given session ID and PID.
+            $statement = $db->prepare('SELECT SessionID, PID, CourseName, Grade
+                                       FROM   CourseRecord 
+                                       WHERE  SessionID = :sessionID
+                                       AND    PID = :nomineePID');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                ':nomineePID' => htmlspecialchars($PID)));
+            $resultTable = $statement->fetchAll();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($courseRecords, new courseRecord($result['Name'], $result['Grade']));
+            }
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving records for courses';
+            print_r($statement->errorInfo());
+        }
+
+        // Retrieve all the publicationRecords.
+        try
+        {
+            $publicationRecords = array();
+
+            // Select all Publication Records entries that match the given session ID and PID.
+            $statement = $db->prepare('SELECT SessionID, PID, Title, Citation
+                                        FROM   PublicationRecord 
+                                        WHERE  SessionID = :sessionID
+                                        AND    PID = :nomineePID');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                                      ':nomineePID' => htmlspecialchars($PID)));
+            $resultTable = $statement->fetchAll();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($publicationRecords, new publicationRecord($result['Title'], $result['Citation']));
+            }
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving records for publications';
+            print_r($statement->errorInfo());
+        }
+
+        // Retrieve all the previousAdvisorRecords.
+        try
+        {
+            $previousAdvisorRecords = array();
+
+            // Select all previousAdvisor Records entries that match the given session ID and PID.
+            $statement = $db->prepare('SELECT SessionID, PID, StartDate, EndDate, AdvisorFirstName, AdvisorLastName
+                                   FROM   PreviousAdvisorRecord 
+                                   WHERE  SessionID = :sessionID
+                                   AND    PID = :nomineePID');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                                      ':nomineePID' => htmlspecialchars($PID)));
+            $resultTable = $statement->fetchAll();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($previousAdvisorRecords, new previousAdvisorRecord($result['AdvisorFirstName'], $result['AdvisorLastName'], $result['StartDate'], $result['EndDate']));
+            }
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving records for previous advisors';
+            print_r($statement->errorInfo());
+        }
+
+        // Assemble the nomineeInfoForm object.
+        return new nomineeInfoForm($sessionID, $PID, $phoneNumber, $advisorFirstName, $advisorLastName, $numberOfSemestersAsGTA, $numberOfSemestersAsGrad, $passedSpeak, $gpa, $timestamp, $courseRecords, $publicationRecords, $previousAdvisorRecords);
+        
     }
 }
