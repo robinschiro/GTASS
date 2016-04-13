@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once('../model/implementation/userServiceImp.php');
 
 if (isset($_POST['changeCredentials']))

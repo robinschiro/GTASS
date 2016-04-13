@@ -9,7 +9,7 @@ function addInput(divName)
   "Email: <input type='text' name='email[" + counter  + "]' placeholder='Nominee&#39s Email' id='email'>" + " " + "<br>" +
   "Nominee's Rank: <input type='number' name='rank[" + counter  + "]' placeholder='Rank'  min='0' max='100' id='rank'>" + " " +
   "CS Graduate:  <select name='csgrad['" + counter + "']'> <option value='1'>Yes</option> <option value='0'>No</option>" + "</select>" + " " +
-  "New Graduate:  <select name='newgrad['" + counter + "']'> <option value='1'>Yes</option> <option value='0'>No</option>" + "</select>" + " " +
+  "New Graduate:  <select name='newgrad['" + counter + "']'> <option value='0'>No</option> <option value='1'>Yes</option>" + "</select>" + " " +
   "<input type='button' value='Remove' name='remove['" + counter + "']' onclick='this.parentNode.parentNode.removeChild(this.parentNode);removeOthers();'> " + " <br><br>";
 
   document.getElementById(divName).appendChild(newdiv);

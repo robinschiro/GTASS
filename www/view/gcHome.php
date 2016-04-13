@@ -9,7 +9,7 @@ if($_SESSION['role'] != 2)
     if ($_SESSION['role'] == 1)
     {
         //redirect to GC view
-        header("Location: /admin/adminHome");
+        header("Location: /admin/currentSession");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3)
     {
@@ -49,6 +49,7 @@ $sessionID = $currentSession->getSemester();
             </div>
 
             <div class="LEFT">
+                <p class="sidebar" align="center"><a href="/account">My Account</a></p>
                 <p class="sidebar_selected" align="center">Score Table</p>
                 <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>
             </div>

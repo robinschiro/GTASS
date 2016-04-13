@@ -213,7 +213,7 @@ class adminController
 
             //Send email to users using above arrays to create email
             //$this->emailServ->sendEmail($email[$i], "GTASS Account Created", "You are now a nominator. Your GTASS account has been created.");
-            $this->emailServ->sendEmail($email[$i], 2, $tempData);
+            $this->emailServ->sendEmail($email[$i], 1, $tempData);
             //echo 'Sent email to ' . $unameList[$i] + '<br>';
         }
 

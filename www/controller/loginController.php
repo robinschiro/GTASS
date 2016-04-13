@@ -57,7 +57,7 @@ class loginController
             if ($_SESSION['role'] == 1)
             {
                 //redirect to admin view
-                header("Location: /admin/adminHome");  //go go admin page
+                header("Location: /admin/currentSession");  //go go admin page
             }
             //if logged in user is a GC member
             else if ($_SESSION['role'] == 2)
@@ -68,7 +68,7 @@ class loginController
             // If logged in as nominator
             else if ($_SESSION['role'] == 3)
             {
-                header("Location: /nominator/nominatorHome");
+                header("Location: /nominator/addNominees");
             }
             //something went wrong session value role is not valid
             else

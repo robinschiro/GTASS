@@ -37,7 +37,7 @@ if ($_SESSION['role'] != 1) {
 </div>
 
 <div class="LEFT">
-    <p class="sidebar" align="center"><a href="/admin/adminHome">Home</a></p>
+    <p class="sidebar" align="center"><a href="/account">My Account</a></p>
     <p class="sidebar_selected" align="center">Create Session</p>
     <p class="sidebar" align="center"><a href="/admin/currentSession">Current Session</a></p>
     <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
@@ -69,9 +69,9 @@ if ($_SESSION['role'] != 1) {
         <br><br>
 
         <!--Date Picker -->
-        Nomination Deadline:   <input type="date" id="datepicker1" placeholder="insert date time" name="nomDeadline"><br>
-        Response Deadline:     <input type="date" id="datepicker2" placeholder="insert date time" name="resDeadline"><br>
-        Verification Deadline: <input type="date" id="datepicker3" placeholder="insert date time" name="verDeadline"><br>
+        Nomination Deadline:   <input type="date" placeholder="insert date time" name="nomDeadline"><br>
+        Response Deadline:     <input type="date" placeholder="insert date time" name="resDeadline"><br>
+        Verification Deadline: <input type="date" placeholder="insert date time" name="verDeadline"><br>
 
         <br><br><br>
 

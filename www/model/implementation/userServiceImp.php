@@ -253,7 +253,7 @@ class userServiceImp implements userService
         }
         catch (PDOException $ex)
         {
-            echo 'Exception when updating user info. <br><br>UserID = ' . $id . '<br>username = ' . $username . '<br>password = ' . $password . '<br><br>';
+            echo 'Exception when updating user info. <br><br>UserID = ' . $id . '<br>username = ' . $username . '<br><br>';
             print_r($statement->errorInfo());
         }
     }

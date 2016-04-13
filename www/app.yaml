@@ -28,9 +28,6 @@ handlers:
 - url: /accountCtrl
   script: controller/accountController.php
 
-- url: /admin/adminHome
-  script: view/adminHome.php
-
 - url: /admin/createSession
   script: view/createSession.php
 
@@ -43,10 +40,7 @@ handlers:
 - url: /admin/allSessions
   script: view/allSessionsView.php
 
-- url: /nominator/nominatorHome
-  script: view/nominatorHome.php
-
-- url: /nominator/account
+- url: /account
   script: view/account.php
 
 - url: /nominator/addNominees

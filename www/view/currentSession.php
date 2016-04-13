@@ -44,7 +44,7 @@ require_once ('../controller/adminController.php');
             </div>
 
             <div class="LEFT">
-                <p class="sidebar" align="center"><a href="/admin/adminHome">Home</a></p>
+                <p class="sidebar" align="center"><a href="/account">My Account</a></p>
                 <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
                 <p class="sidebar_selected" align="center">Current Session</p>
                 <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>

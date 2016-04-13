@@ -89,7 +89,7 @@ class emailServiceImp implements emailService
         $body = "Hello " . $data[0] . " " . $data[1] . ",<br><br>
                 The deadline to respond to your GTA nomination is in 2 days! Please<br>
                 go to the following link to fill out your application.<br><br>
-                gtass-1256.appspot.com/nomineeForm?id=" . $data[2];
+                gtass-1256.appspot.com/nomineeForm?pid=" . $data[2];
 
         try {
             $message = new Message();

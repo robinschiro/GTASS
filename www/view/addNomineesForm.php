@@ -13,7 +13,7 @@ if($_SESSION['role'] != 3)
     } // If logged in as admin
     else if ($_SESSION['role'] == 1)
     {
-        header("Location: /admin/adminHome");
+        header("Location: /admin/currentSession");
     }
     //Session variable role not recognized as valid
     else{
@@ -30,7 +30,6 @@ if($_SESSION['role'] != 3)
 </head>
 
 <body>
-
 <div class="WRAPPER">
     <div class="TOP" align="right">
         <!-- should be variable, but then again, there's only one admin account... -->
@@ -39,8 +38,7 @@ if($_SESSION['role'] != 3)
     </div>
 
     <div class="LEFT">
-        <p class="sidebar" align="center"><a href="/nominator/nominatorHome">Home</a></p>
-        <p class="sidebar" align="center"><a href="/nominator/account">My Account</a></p>
+        <p class="sidebar" align="center"><a href="/account">My Account</a></p>
         <p class="sidebar_selected" align="center">Add Nominees</p>
     </div>
 
