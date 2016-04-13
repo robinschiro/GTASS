@@ -37,10 +37,9 @@
 					</p>
 
 					<p class="information">
-						<table class="neatTable" id="approveNomineesTable" width="400">
+						<table border="1" id="approveNomineesTable" width="400">
 							<tr>
 								<th>Approve</th>
-								<th>Decline</th>
 								<th>First Name</th>
 				                <th>Last Name</th>
 								<th>PID</th>
@@ -49,7 +48,7 @@
 								<th>Number of Semesters As GTA</th>
 								<th>Number of Semesters As Grad</th>
 								<th>Passed Speak?</th>
-								<th>GPA</th>
+								<!-- <th>GPA</th>  when GPA is included, the table bugs out and only prints the first element-->
 
 
 
@@ -60,16 +59,20 @@
 								<th>Passed Speak</th> -->
 				            </tr>
 
+
+
+						<?php $counter = 1; // keeps track of the checkboxes ?>
+
 						<?php foreach ($nomineesApprovalNeeded as $nomForms)
 						{
-							$nomineePID = $nomForms->getNomineePID();
 
+							$nomineePID = $nomForms->getNomineePID();
 							$nomineeForm = $nominatorCtrl->nominationServ->getNomineeInfoForm($currentSessionID, $nomineePID);
 
-							echo "<tr> <td>";
-							echo "<input type='button' value='Approve'>"; echo "</td>";
+							echo "<tr>";
+
 							echo "<td>";
-							echo "<input type='button' value='Decline'>"; echo "</td>";
+							echo "<input type='checkbox' id='" . "$counter	" . "' "; echo "</td>";
 
 							echo "<td>";
 							echo $nomForms->getNomineeFirstName(); echo "</td>";
@@ -80,17 +83,18 @@
 							echo "<td>";
 							echo $nomForms->getNomineeEmail(); echo "</td>";
 							echo "<td>";
-							echo "$nomineeForm->getPhoneNumber();"; echo "</td>";
+							echo $nomineeForm->getPhoneNumber(); echo "</td>";
 							echo "<td>";
-							echo "$nomineeForm->getNumSemestersAsGTA();"; echo "</td>";
+							echo $nomineeForm->getNumSemestersAsGTA(); echo "</td>";
 							echo "<td>";
-							echo "$nomineeForm->getNumSemestersAsGrad();"; echo "</td>";
+							echo $nomineeForm->getNumSemestersAsGrad(); echo "</td>";
 							echo "<td>";
-							echo "$nomineeForm->getPassedSPEAK();"; echo "</td>";
-							echo "<td>";
-							echo "$nomineeForm->getGPA();"; echo "</td>";
+							echo $nomineeForm->getPassedSPEAK(); echo "</td>";
+							// echo "<td>";
+							// echo $nomineeForm->getGPA(); echo "</td>";
 
 							echo "</tr>";
+							$counter++;
 						}
 						?>
 
