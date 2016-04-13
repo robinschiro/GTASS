@@ -83,7 +83,7 @@ foreach ($allSessions as $session) {
             <tr>
                 <td>Verification Deadline:</td>
                 <td><?php echo $session->verificationDeadline ?></td>
-            </tr>
+            </tr> 
         </table>
 
         <br><br>

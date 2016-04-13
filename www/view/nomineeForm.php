@@ -5,7 +5,7 @@
 	require_once('../controller/nomineeController.php');
 
 	$nomineeCtrl = new nomineeController();
-	$currentSessionID = $nomineeCtrl->sessionServ->getCurrentSession()->getSemester();
+	s
 	$nominationForm = $nomineeCtrl->nominatorServ->getNominationForm($currentSessionID, $_GET['pid']);
 	$nominatorUser = $nomineeCtrl->userServ->getUserByID($nominationForm->getNominatorID());
 

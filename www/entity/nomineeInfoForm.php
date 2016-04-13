@@ -168,6 +168,31 @@ class nomineeInfoForm
         $this->numSemestersAsGrad = $numSemestersAsGrad;
     }
 
+
+    public function getPassedSPEAK()
+    {
+        return $this->passedSPEAK;
+    }
+
+    public function setPassedSPEAK()
+    {
+        $this->passedSPEAK = $passedSPEAK;
+    }
+
+
+    public function getGPA()
+    {
+        return $this->$GPA;
+    }
+
+    public function setGPA()
+    {
+        $this->$GPA = $GPA;
+    }
+
+
+
+
     /**
      * @return mixed
      */

@@ -46,6 +46,9 @@ handlers:
 - url: /nominator/addNominees
   script: view/addNomineesForm.php
 
+- url: /nominator/approveNominees
+  script: view/approveNominees.php
+
 - url: /gc/gcHome
   script: view/gcHome.php
 
