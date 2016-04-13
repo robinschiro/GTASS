@@ -24,6 +24,9 @@ require_once('../controller/adminController.php');
 $adminCtrl = new adminController();
 $allSessions = $adminCtrl->sessionServ->getAllSessions();
 $sessionNum = 0;
+
+require_once('../controller/scoreController.php');
+$ScoreCtrl = new scoreController();
 ?>
 
 <!DOCTYPE HTML>
@@ -36,31 +39,30 @@ $sessionNum = 0;
 <body>
 
 
-    <div class="TOP" align="right">
-        <?php echo 'Signed in as ' . $_SESSION['username'] . ' (admin)'; ?><br>
-        <a href="/logout">Sign out</a>
-    </div>
-    <div class="LEFT">
+<div class="TOP" align="right">
+    <?php echo 'Signed in as ' . $_SESSION['username'] . ' (admin)'; ?><br>
+    <a href="/logout">Sign out</a>
+</div>
+<div class="LEFT">
     <p class="sidebar" align="center"><a href="/account">My Account</a></p>
     <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
     <p class="sidebar" align="center"><a href="/admin/currentSession">Current Session</a></p>
     <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
     <p class="sidebar_selected" align="center">View All Sessions</p>
-    </div>
+</div>
 
 
-
-    <?php
+<?php
 foreach ($allSessions as $session) {
     ?>
-    <div class="CENTER" style="background-color: #FFFFFF;";>
+    <div class="CENTER" style="background-color: #FFFFFF;" ;>
         <p class="Form" align="left">
             <?php
             $sessionNum++;
             if ($sessionNum == 1)
                 echo "Current Session";
             else
-                echo "Session" .  $sessionNum;
+                echo "Session" . $sessionNum;
             ?>
         </p>
 
@@ -117,8 +119,6 @@ foreach ($allSessions as $session) {
             </tr>
 
 
-
-
             <?php
 
             // Iterate through each member and display the corresponding data.
@@ -134,9 +134,111 @@ foreach ($allSessions as $session) {
 
         </table>
 
-<!--        --><?php //echo '$session->gcUsersList length = ' . count($session->gcUsersList); ?>
-        <br><br>
-        <hr size="10" noshade>
+
+        <br>
+
+        <?php
+
+        /*
+         * Added by Sammy to show score tables per session
+         */
+
+        $session = $ScoreCtrl->sessionServ->getSpecificSession($session->id);
+        $scoreTableRowArray = $ScoreCtrl->scoreTableServ->getScoreTableRows($session->id);
+
+        //variables needed to traverse arrays
+        $gcMembers = $session->getGcUsersList();
+        array_push($gcMembers, $session->getGcChair());
+        $gcCount = sizeof($gcMembers);
+        $idArray = array();
+        $index = 0;
+        foreach ($gcMembers as $gcMember) {
+            array_push($idArray, $gcMember->getUserID());
+        }
+        ?>
+    <table class="neatTable">
+        <tr>
+            <th colspan="2" rowspan="2">Nominator Name</th>
+            <th colspan="2" rowspan="2">Nominee Name</th>
+            <th rowspan="2">Rank</th>
+            <th rowspan="2">Is New</th>
+            <?php
+            // The current session should be stored in $session at this point.
+            //$gcMembers = $session->getGcUsersList();
+            //array_push($gcMembers, $session->getGcChair());
+            foreach ($gcMembers as $gcMember) {
+
+                echo '<th colspan="2">' . $gcMember->getLastName() . '</th>';
+            }
+            ?>
+            <th rowspan="2">Average Score</th>
+
+        </tr>
+
+        <tr>
+            <?php
+            foreach ($gcMembers as $gcMember) {
+
+                echo '<td>Score</td><td>Comment</td>';
+            }
+
+            ?>
+
+        </tr>
+
+        <?php
+
+        $scoreRows = $scoreTableRowArray;
+
+        foreach ($scoreRows as $scoreRow) {
+
+            $tempSum = 0;
+
+            echo '<tr>';
+            echo '<td>' . $scoreRow->getNominatorFirstName() . '</td>';
+            echo '<td>' . $scoreRow->getNominatorLastName() . '</td>';
+            echo '<td>' . $scoreRow->getNominationForm()->getNomineeFirstName() . '</td>';
+            echo '<td>' . $scoreRow->getNominationForm()->getNomineeLastName() . '</td>';
+            echo '<td>' . $scoreRow->getNominationForm()->getNomineeRank() . '</td>';
+            echo '<td>' . $scoreRow->getNominationForm()->getNomineeIsNew() . '</td>';
+
+            //addScores($gcCount, $scoreRow)
+
+            for ($i = 0; $i < $gcCount; $i++) {
+
+                $scoreOut = $scoreRow->getScores()[$gcMembers[$i]->getUserID()];
+                $commentOut = $scoreRow->getComments()[$gcMembers[$i]->getUserID()];
+
+                if ($commentOut == null || $commentOut == '') {
+                    $commentOut = 'No Comment';
+                }
+                if ($scoreOut == null || $scoreOut == 0) {
+                    $scoreOut = 0;
+                }
+
+                //increase sum
+                $tempSum += $scoreOut;
+
+//            echo '<td>Temp Score</td>';
+//            echo '<td>Temp Comment</td>';
+
+                echo '<td>' . $scoreOut . '</td>';
+                echo '<td>' . $commentOut . '</td>';
+            }
+
+            echo '<td>' . $tempSum/$gcCount . '</td>';
+
+            echo '</tr>';
+            //$index++;
+        }
+        ?>
+
+    </table>
+
+
+    <!--        --><?php //echo '$session->gcUsersList length = ' . count($session->gcUsersList); ?>
+    <br><br>
+    <hr size="10" noshade>
     </div>
 
 
