@@ -28,6 +28,9 @@ handlers:
 - url: /accountCtrl
   script: controller/accountController.php
 
+- url: /scoreCtrl
+  script: controller/scoreController.php
+
 - url: /admin/createSession
   script: view/createSession.php
 

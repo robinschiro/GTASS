@@ -60,6 +60,7 @@ $sessionID = $currentSession->getSemester();
                 </p>
 
                 <?php
+                    $isReadOnly = false;
                     include '../view/scoreTable.php';
                 ?>
 
