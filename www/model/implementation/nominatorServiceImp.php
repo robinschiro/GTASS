@@ -345,7 +345,9 @@ class nominatorServiceImp implements nominatorService
             );
             $resultTable = $statement->fetchAll();
 
-            foreach ($resultTable as $result) {
+
+            foreach ($resultTable as $result)
+            {
                 array_push($courseRecords, new courseRecord($result['CourseName'], $result['Grade']));
             }
         } catch (PDOException $ex) {

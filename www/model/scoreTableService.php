@@ -18,4 +18,6 @@ interface scoreTableService
      */
     function getScoreTableRows($sessionID);
 
+    function updateRowsInScoreTable($gcID, $nomineePIDs, $scores, $comments);
+
 }
