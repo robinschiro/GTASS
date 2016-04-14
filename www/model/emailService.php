@@ -34,12 +34,17 @@ interface emailService
      */
     function sendEmailtoNominatorsandGC($to, $data);
 
+    function sendEmailForNomineeApproval($to, $data);
 
     /**
      * @param $to email to send messsage to
      * @param $data pid of student used in link
      */
     function sendEmailtoNominees($to, $data);
+
+    function nominee2dayDeadlineReminder($to, $data);
+
+    function sendEmailThroughSendGrid($to, $subject, $body);
 }
 
 

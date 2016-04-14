@@ -3,6 +3,7 @@
 require_once('../model/implementation/nominatorServiceImp.php');
 require_once('../model/implementation/sessionServiceImp.php');
 require_once('../model/implementation/userServiceImp.php');
+require_once('../model/implementation/emailServiceImp.php');
 require_once('entity/previousAdvisorRecord.php');
 
 if (isset($_POST['createNomineeInfoForms'])) {
@@ -16,12 +17,14 @@ class nomineeController
     var $nominatorServ;
     var $sessionServ;
     var $userServ;
+    var $emailServ;
 
     public function __construct()
     {
         $this->nominatorServ = new nominatorServiceImp();
         $this->sessionServ = new sessionServiceImp();
         $this->userServ = new userServiceImp();
+        $this->emailServ = new emailServiceImp();
     }
 
     function createNomineeInfoForms()
@@ -67,6 +70,10 @@ class nomineeController
 
         $this->nominatorServ->createNomineeInfoForm($currentSessionID, $nomineePID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numberOfSemestersAsGradStudent, $numberOfSemestersAsGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
 
+        // Send email to nominator.
+        $nominatorEmailAddress = $this->userServ->getUserByID($this->nominatorServ->getNominationForm($currentSessionID, $nomineePID)->getNominatorID())->getEmail();
+        $this->emailServ->sendEmail($nominatorEmailAddress, 4, $nomineePID);
+        
         // Display a success message.
         $_SESSION['message'] = '<br> Your information form has been successfully submitted. <br><br>';
 
