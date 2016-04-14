@@ -253,6 +253,45 @@ class nominatorServiceImp implements nominatorService
         }
     }
 
+    function getAllNomineesRequiringApproval($sessionID, $nominatorID)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        try
+        {
+            $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
+                                       FROM   NominationForm
+                                       WHERE  SessionID = :sessionID
+                                       AND ApplicationReceived = :appReceivedStatus
+                                       AND ApplicationVerified = :appVerifiedStatus');
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                                      ':nominatorID' => htmlspecialchars($nominatorID),
+                                      ':appReceivedStatus' => '1',
+                                      ':appVerifiedStatus' => '0'));
+            $resultTable = $statement->fetchAll();
+
+            $nomForms = array();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($nomForms, new nominationForm($sessionID, $result['PID'], $nominatorID, $result['FirstName'], $result['LastName'], $result['EmailAddress'], $result['Ranking'], $result['IsCSGradStudent'], $result['IsNewGradStudent'], $result['ApplicationReceived'], $result['ApplicationVerified'], $result['ExpectedGTAHours'], $result['Timestamp']));
+            }
+
+            return $nomForms;
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID .'<br>';
+            print_r($statement->errorInfo());
+        }
+    }
+
     function getNomineesThatNeverResponded($sessionID, $nominatorID)
     {
         // Retrieve access to the database.
@@ -290,6 +329,44 @@ class nominatorServiceImp implements nominatorService
             print_r($statement->errorInfo());
         }
     }
+
+    function getAllNomineesThatNeverResponded($sessionID, $nominatorID)
+    {
+        // Retrieve access to the database.
+        $db = db_connect();
+        if (NULL == $db)
+        {
+            echo '<br> Null db <br>';
+            return;
+        }
+
+        try
+        {
+            $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
+                                       FROM   NominationForm
+                                       WHERE  SessionID = :sessionID
+                                       AND ApplicationReceived = :appReceivedStatus'); // don't care about verification at all
+            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
+                                      ':nominatorID' => htmlspecialchars($nominatorID),
+                                      ':appReceivedStatus' => '0'));
+            $resultTable = $statement->fetchAll();
+
+            $nomForms = array();
+
+            foreach ($resultTable as $result)
+            {
+                array_push($nomForms, new nominationForm($sessionID, $result['PID'], $nominatorID, $result['FirstName'], $result['LastName'], $result['EmailAddress'], $result['Ranking'], $result['IsCSGradStudent'], $result['IsNewGradStudent'], $result['ApplicationReceived'], $result['ApplicationVerified'], $result['ExpectedGTAHours'], $result['Timestamp']));
+            }
+
+            return $nomForms;
+        }
+        catch (PDOException $ex)
+        {
+            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID .'<br>';
+            print_r($statement->errorInfo());
+        }
+    }
+
 
     function getNominationForm($sessionID, $PID)
     {

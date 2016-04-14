@@ -6,8 +6,8 @@
     $nominatorCtrl = new nominatorController();
     $currentSessionID = $nominatorCtrl->sessionServ->getCurrentSession()->getSemester();
     // using $_SESSION['userID'] because it's assumed only nominators may get to this page
-    $nomineesApprovalNeeded = $nominatorCtrl->nominationServ->getNomineesRequiringApproval($currentSessionID, $_SESSION['userID']);
-    $nomineesResponseNeeded = $nominatorCtrl->nominationServ->getNomineesRequiringApproval($currentSessionID, $_SESSION['userID']);
+    $nomineesApprovalNeeded = $nominatorCtrl->nominationServ->getAllNomineesRequiringApproval($currentSessionID, $_SESSION['userID']);
+    $nomineesResponseNeeded = $nominatorCtrl->nominationServ->getAllNomineesThatNeverResponded($currentSessionID, $_SESSION['userID']);
 ?>
 
 
@@ -59,6 +59,6 @@
 
         echo "</tr>";
     }
-    
+
 ?>
 </table>

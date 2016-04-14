@@ -38,7 +38,11 @@ interface nominatorService
      */
     function getNomineesRequiringApproval($sessionID, $nominatorID);
 
-    // function getNomineesThatNeverResponded($sessionID, $nominatorID);
+    function getAllNomineesRequiringApproval($sessionID, $nominatorID);
+
+    function getNomineesThatNeverResponded($sessionID, $nominatorID);
+
+    function getAllNomineesThatNeverResponded($sessionID, $nominatorID);
 
 
 }
