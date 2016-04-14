@@ -25,7 +25,6 @@
 
 	$nominatorCtrl = new nominatorController();
 	$currentSessionID = $nominatorCtrl->sessionServ->getCurrentSession()->getSemester();
-	$nomineesApprovalNeeded = $nominatorCtrl->nominationServ->getNomineesRequiringApproval($currentSessionID, $_SESSION['userID']);
 
 ?>
 

@@ -186,9 +186,13 @@ p.addNomineeForgotten
 }
 
 /* styling links*/
-a { color: gray; }
+a
+{
+    color: gray;
+    /*text-decoration: underline;*/
+}
 a:hover { color: red; }
-a{text-decoration:none}
+/*a{text-decoration:none}*/
 
 .SessionTable
 {
