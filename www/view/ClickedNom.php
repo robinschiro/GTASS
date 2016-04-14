@@ -9,23 +9,10 @@
 session_start();
 
 //check role of user
-if($_SESSION['role'] != 2)
+$roleID = $_SESSION['role'];
+if( ($roleID < 1) || ($roleID > 3) )
 {
-    //if logged in user is a GC member
-    if ($_SESSION['role'] == 1)
-    {
-        //redirect to GC view
-        header("Location: /admin/currentSession");
-    } // If logged in as nominator
-    else if ($_SESSION['role'] == 3)
-    {
-        header("Location: /nominator/addNominees");
-    }
-    //Session variable role not recognized as valid
-    else{
-        //user must resign in
-        header("Location: /");
-    }
+    header("Location: /");
 }
 
 require_once ('../controller/gcMemberController.php');

@@ -27,6 +27,20 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
     <head>
         <link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet" >
 
+        <SCRIPT TYPE="text/javascript">
+            function popup(mylink, windowname)
+            {
+                if (! window.focus)
+                    return true;
+                var href;
+                if (typeof(mylink) == 'string')
+                    href=mylink;
+                else href=mylink.href;
+                window.open(href, windowname, 'width=800,height=600,scrollbars=yes');
+                return false;
+            }
+        </SCRIPT>
+
     </head>
     <body>
     <form action="/scoreCtrl" method="POST">
@@ -46,8 +60,8 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
 
         <table class="neatTable" id="allScoreTables">
             <tr>
-                <th colspan="2" rowspan="2">Nominator Name</th>
-                <th colspan="2" rowspan="2">Nominee Name</th>
+                <th colspan="1" rowspan="2">Nominator Name</th>
+                <th colspan="1" rowspan="2">Nominee Name</th>
                 <th rowspan="2">Rank</th>
                 <th rowspan="2">Is New</th>
                 <?php
@@ -84,10 +98,8 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
                 $tempSum = 0;
 
                 echo '<tr>';
-                echo '<td>' . $scoreRow->getNominatorFirstName() . '</td>';
-                echo '<td>' . $scoreRow->getNominatorLastName() . '</td>';
-                echo '<td>' . $scoreRow->getNominationForm()->getNomineeFirstName() . '</td>';
-                echo '<td>' . $scoreRow->getNominationForm()->getNomineeLastName() . '</td>';
+                echo '<td>' . $scoreRow->getNominatorFirstName() . ' ' . $scoreRow->getNominatorLastName() . '</td>';
+                echo '<td><a href="/clicked?pid='. $scoreRow->getNominationForm()->getNomineePID() .'" onClick="return popup(this, \'Nominee Information\')">' . $scoreRow->getNominationForm()->getNomineeFirstName() . ' ' . $scoreRow->getNominationForm()->getNomineeLastName() . '</a></td>';
                 echo '<td>' . $scoreRow->getNominationForm()->getNomineeRank() . '</td>';
                 echo '<td>' . $scoreRow->getNominationForm()->getNomineeIsNew() . '</td>';
 
@@ -134,121 +146,14 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
 
         </table>
 
-<!--        <table class="neatTable">-->
-<!--            <tr>-->
-<!--                <th colspan="2">Nominator Name</th>-->
-<!--                <th colspan="2">Nominee Name</th>-->
-<!--                <th>Rank</th>-->
-<!--                <th>Is New</th>-->
-<!--                --><?php
-//                    // The current session should be stored in $session at this point.
-//                    //$gcMembers = $session->getGcUsersList();
-//                    //array_push($gcMembers, $session->getGcChair());
-//                    $activeGcPosition;
-//                    $currentPosition = 0;
-//                    foreach( $gcMembers as $gcMember )
-//                    {
-//                        $currentPosition++;
-//
-//                        echo '<th>' . $gcMember->getLastName() . '</th>';
-//                        if($gcMember->getLastName() == $gcCurrentMember->getLastName())
-//                        {
-//                            $activeGcPosition = $currentPosition;
-//                        }
-//                    }
-//                ?>
-<!--                <th>Average Score</th>-->
-<!--                <th>Comment</th>-->
-<!---->
-<!---->
-<!---->
-<!--            </tr>-->
-<!--            --><?php
-//            //
-//            $scoreRows = $scoreTableRowArray;
-//
-//
-//
-//            foreach( $scoreRows as $scoreRow )
-//            {
-//                echo  '<tr>';
-//                echo  '<td>' . $scoreRow->getNominatorFirstName() . '</td>';
-//                echo  '<td>' . $scoreRow->getNominatorLastName() . '</td>';
-//                echo  '<td>' . $scoreRow->getNominationForm()->getNomineeFirstName() . '</td>';
-//                echo  '<td>' . $scoreRow->getNominationForm()->getNomineeLastName() . '</td>';
-//                echo  '<td>' . $scoreRow->getNominationForm()->getNomineeRank() . '</td>';
-//                echo  '<td>' . $scoreRow->getNominationForm()->getNomineeIsNew() . '</td>';
-//                addScores($gcCount, $scoreRows, $activeGcPosition, $idArray, $index);
-//                printAverages($scoreRow,$idArray);
-//                addComments($scoreRow, $gcCurrentMember,$index);
-//                echo '</tr>';
-//                $index++;
-//            }
-//            ?>
-<!---->
-<!--            --><?php
-//            function printAverages($scoreRow,$idArray)
-//            {
-//                $sum = 0;
-//                foreach ($idArray as $idItem) {
-//                    if ($scoreRow->getScores()[$idItem] != NULL)
-//                    {
-//                    $sum += $scoreRow->getScores()[$idItem];
-//                    }
-//                }
-//                echo '<td>' . $sum/sizeof($idArray) . '</td>';
-//            }
-//
-//            function addScores($gcCount, $scoreRows, $activeGcPosition, $idArray, $index)
-//            {
-//                $iterator =0;
-//                $counter = 0;
-//                foreach ($scoreRows as $scoreRow) {
-//
-//                    $counter++;
-//
-//                    if ($counter <= $gcCount)
-//                    {
-//                        if ($scoreRow->getScores()[$idArray[$iterator]] != 0)
-//                        {
-//                            echo '<td>' . $scoreRow->getScores()[$idArray[$iterator]] . '</td>';
-//                        }
-//                        else if (($scoreRow->getScores()[$idArray[$iterator]] == 0) & ($counter == $activeGcPosition))
-//                        {
-//                            echo "<td><input type='number' name='rank[$index]' min='0' max='100' id='rank'></td>";
-//                        }
-//                        else
-//                        {
-//                                echo '<td>' . 0 . '</td>';
-//                        }
-//
-//                    }
-//
-//                }
-//            }
-//            //takes current ScoreRow and logged on GC member
-//
-//            function addComments($scoreRow, $gcCurrentMember, $index)
-//            {
-//                if ($scoreRow->getComments()[$gcCurrentMember->getUserID()] != 0)
-//                {
-//                    echo '<td>' . $scoreRow->getComments()[$gcCurrentMember->getUserID()] . '</td>';
-//                }
-//                else
-//                {
-//                    echo "<td>
-//                    <textarea rows='1' columns='150' placeholder='Enter Text Here' name='comment[$index]'></textarea></td>";
-//                }
-//            }
-//            ?>
-<!---->
-<!--        </table>-->
-
         <?php if (!$isReadOnly)
               {
                   echo '<input type="hidden" name="updateScoresAndComments">';
 
-                  echo '<input type = "submit" value = "Submit Changes">';
+                  echo '
+                        <p class="submit" align="center"> 
+                        <input type = "submit" value = "Submit Changes">
+                        </p>';
               }; ?>
 
     </form>

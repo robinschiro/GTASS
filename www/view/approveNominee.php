@@ -1,5 +1,26 @@
 <?php
 	session_start();
+
+	//check role of user
+	if($_SESSION['role'] != 3)
+	{
+		//if logged in user is a GC member
+		if ($_SESSION['role'] == 2)
+		{
+			//redirect to GC view
+			header("Location: /gc/gcHome");
+		} // If logged in as admin
+		else if ($_SESSION['role'] == 1)
+		{
+			header("Location: /admin/currentSession");
+		}
+		//Session variable role not recognized as valid
+		else{
+			//user must resign in
+			header("Location: /");
+		}
+	}
+
 	require_once('../controller/nominatorController.php');
 
 	$nominatorCtrl = new nominatorController();
