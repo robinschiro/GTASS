@@ -44,15 +44,6 @@ $nominationForm = $controller->nominatorServ->getNominationForm($currentSessionI
 </head>
 <body>
 <div class="WRAPPER" >
-<div class="LEFT">
-    <p class="sidebar" align="center"><a href="/account">My Account</a></p>
-    <p class="sidebar" align="center"><a href="/gc/gcHome">Score Table</a></p>
-    <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>
-</div>
-<div class="TOP" align="right">
-    <?php echo 'Signed in as ' . $_SESSION['username'] . ' GC member'; ?><br>
-    <a href="/logout">Sign out</a>
-</div>
 <div class="CENTER" style="background-color: #FFFFFF; display: table;" ;>
 
     <table class="neatTable" id="allScoreTables">

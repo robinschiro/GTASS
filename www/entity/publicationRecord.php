@@ -22,5 +22,36 @@ class publicationRecord
         $this->citation = $citation;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCitation()
+    {
+        return $this->citation;
+    }
+
+    /**
+     * @param mixed $citation
+     */
+    public function setCitation($citation)
+    {
+        $this->citation = $citation;
+    }
+    
 }

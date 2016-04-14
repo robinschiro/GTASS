@@ -49,8 +49,8 @@ handlers:
 - url: /nominator/addNominees
   script: view/addNomineesForm.php
 
-- url: /nominator/approveNominees
-  script: view/approveNominees.php
+- url: /nominator/approveNominee
+  script: view/approveNominee.php
 
 - url: /nominator/incompleteNominations
   script: view/incompleteNominations.php
