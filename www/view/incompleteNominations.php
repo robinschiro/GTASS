@@ -33,6 +33,7 @@ $sessionID = $currentSession->getSemester();
                 <p class="sidebar" align="center"><a href="/account">My Account</a></p>
                 <p class="sidebar" align="center"><a href="/gc/gcHome">Score Table</a></p>
                 <p class="sidebar_selected" align="center">Incomplete Nominations</p>
+                <p class="sidebar" align="center"><a href="/gc/allSessions">View All Sessions</a></p>';
             </div>
 
             <div class="CENTER">

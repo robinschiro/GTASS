@@ -25,15 +25,13 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
         // Attempt to insert into NominationForm
-        try
-        {
+        try {
             $statement = $db->prepare('INSERT INTO NominationForm (SessionID, PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp)
                                        VALUES (:id, :pid, :nomID, :fname, :lname, :email, :rank, :csGrad, :newGrad, NOW() )');
             $statement->execute(
@@ -50,9 +48,7 @@ class nominatorServiceImp implements nominatorService
                 )
             );
 
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when nominating nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
@@ -62,23 +58,20 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
         $type = 'ApplicationReceived';
-        if (1 == $statusType)
-        {
+        if (1 == $statusType) {
             $type = 'ApplicationVerified';
         }
 
         // Attempt to insert into NominationForm
-        try
-        {
+        try {
             $statement = $db->prepare('UPDATE NominationForm
-                                       SET '.$type.' = :status
+                                       SET ' . $type . ' = :status
                                        WHERE SessionID = :sessionID AND PID = :pid');
             $statement->execute(
                 array(
@@ -88,10 +81,8 @@ class nominatorServiceImp implements nominatorService
                 )
             );
 
-        }
-        catch (PDOException $ex)
-        {
-            echo 'Exception when setting '.$type.' status for nominee with PID = ' . $PID . ': ';
+        } catch (PDOException $ex) {
+            echo 'Exception when setting ' . $type . ' status for nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
     }
@@ -100,15 +91,13 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
         // Attempt to insert into the NomineeInfoForm table.
-        try
-        {
+        try {
             $statement = $db->prepare('INSERT INTO NomineeInfoForm (SessionID, PID, PhoneNumber, AdvisorFirstName, AdvisorLastName, NumberOfSemestersAsGTA, NumberOfSemestersAsGrad, PassedSpeak, GPA, Timestamp)
                                        VALUES (:id, :pid, :phoneNumber, :advFirstName, :advLastName, :semsAsGTA, :semsAsGrad, :passedSPEAK, :gpa, NOW() )');
             $statement->execute(
@@ -125,18 +114,14 @@ class nominatorServiceImp implements nominatorService
                 )
             );
 
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when creating info form for nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
 
         // Update the CourseRecord table.
-        try
-        {
-            for ( $i = 0; $i < sizeof($courseNames); $i++ )
-            {
+        try {
+            for ($i = 0; $i < sizeof($courseNames); $i++) {
                 $courseName = $courseNames[$i];
                 $grade = $courseGrades[$i];
 
@@ -151,18 +136,14 @@ class nominatorServiceImp implements nominatorService
                     )
                 );
             }
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when creating records for courses';
             print_r($statement->errorInfo());
         }
 
         // Update PublicationRecord table.
-        try
-        {
-            for ( $i = 0; $i < sizeof($pubTitles); $i++ )
-            {
+        try {
+            for ($i = 0; $i < sizeof($pubTitles); $i++) {
                 $pubTitle = $pubTitles[$i];
                 $pubCitation = $pubCitations[$i];
 
@@ -177,18 +158,14 @@ class nominatorServiceImp implements nominatorService
                     )
                 );
             }
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when creating records for publications';
             print_r($statement->errorInfo());
         }
 
         // Update PreviousAdvisorRecord table.
-        try
-        {
-            foreach ( $previousAdvisors as $record )
-            {
+        try {
+            foreach ($previousAdvisors as $record) {
                 $statement = $db->prepare('INSERT INTO PreviousAdvisorRecord (SessionID, PID, StartDate, EndDate, AdvisorFirstName, AdvisorLastName)
                                            VALUES ( :sessionID, :pid, :startDate, :endDate, :firstName, :lastName )');
                 $statement->execute(
@@ -202,9 +179,7 @@ class nominatorServiceImp implements nominatorService
                     )
                 );
             }
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when creating records for previous advisors';
             print_r($statement->errorInfo());
         }
@@ -217,14 +192,12 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
-        try
-        {
+        try {
             $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
                                        FROM   NominationForm
                                        WHERE  SessionID = :sessionID
@@ -232,23 +205,20 @@ class nominatorServiceImp implements nominatorService
                                        AND ApplicationReceived = :appReceivedStatus
                                        AND ApplicationVerified = :appVerifiedStatus');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                                      ':nominatorID' => htmlspecialchars($nominatorID),
-                                      ':appReceivedStatus' => '1',
-                                      ':appVerifiedStatus' => '0'));
+                ':nominatorID' => htmlspecialchars($nominatorID),
+                ':appReceivedStatus' => '1',
+                ':appVerifiedStatus' => '0'));
             $resultTable = $statement->fetchAll();
 
             $nomForms = array();
 
-            foreach ($resultTable as $result)
-            {
+            foreach ($resultTable as $result) {
                 array_push($nomForms, new nominationForm($sessionID, $result['PID'], $nominatorID, $result['FirstName'], $result['LastName'], $result['EmailAddress'], $result['Ranking'], $result['IsCSGradStudent'], $result['IsNewGradStudent'], $result['ApplicationReceived'], $result['ApplicationVerified'], $result['ExpectedGTAHours'], $result['Timestamp']));
             }
 
             return $nomForms;
-        }
-        catch (PDOException $ex)
-        {
-            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID .'<br>';
+        } catch (PDOException $ex) {
+            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID . '<br>';
             print_r($statement->errorInfo());
         }
     }
@@ -296,36 +266,31 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
-        try
-        {
+        try {
             $statement = $db->prepare('SELECT PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
                                        FROM   NominationForm
                                        WHERE  SessionID = :sessionID
                                        AND NominatorID = :nominatorID
                                        AND ApplicationReceived = :appReceivedStatus'); // don't care about verification at all
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                                      ':nominatorID' => htmlspecialchars($nominatorID),
-                                      ':appReceivedStatus' => '0'));
+                ':nominatorID' => htmlspecialchars($nominatorID),
+                ':appReceivedStatus' => '0'));
             $resultTable = $statement->fetchAll();
 
             $nomForms = array();
 
-            foreach ($resultTable as $result)
-            {
+            foreach ($resultTable as $result) {
                 array_push($nomForms, new nominationForm($sessionID, $result['PID'], $nominatorID, $result['FirstName'], $result['LastName'], $result['EmailAddress'], $result['Ranking'], $result['IsCSGradStudent'], $result['IsNewGradStudent'], $result['ApplicationReceived'], $result['ApplicationVerified'], $result['ExpectedGTAHours'], $result['Timestamp']));
             }
 
             return $nomForms;
-        }
-        catch (PDOException $ex)
-        {
-            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID .'<br>';
+        } catch (PDOException $ex) {
+            echo 'Exception when retrieving nomination forms with session ID = ' . $sessionID . '<br>';
             print_r($statement->errorInfo());
         }
     }
@@ -372,14 +337,12 @@ class nominatorServiceImp implements nominatorService
     {
         // Retrieve access to the database.
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
-        try
-        {
+        try {
             $statement = $db->prepare('SELECT NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp, ApplicationReceived, ApplicationVerified, ExpectedGTAHours
                                        FROM   NominationForm
                                        WHERE  SessionID = :sessionID AND PID = :PID');
@@ -401,9 +364,7 @@ class nominatorServiceImp implements nominatorService
             $expectedGTAHours = $resultTable[0]['ExpectedGTAHours'];
 
             return new nominationForm($sessionID, $PID, $nominatorID, $nomineeFirstName, $nomineeLastName, $nomineeEmail, $nomineeRank, $nomineeIsCS, $nomineeIsNew, $timestamp, $appReceived, $appVerified, $expectedGTAHours);
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving nomination form with session ID = ' . $sessionID . ' and student PID = ' . $PID . ': <br>';
             print_r($statement->errorInfo());
         }
@@ -413,18 +374,21 @@ class nominatorServiceImp implements nominatorService
     {
         //Retrieve access to database
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
-        try
-        {
+        try {
             $statement = $db->prepare('SELECT AdvisorFirstName, AdvisorLastName, NumberOfSemestersAsGTA, PassedSpeak, GPA, Timestamp, NumberOfSemestersAsGrad, PhoneNumber
                                         FROM NomineeInfoForm
                                         WHERE SessionID = :sessionID AND PID = :PID');
-            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID), ':PID' => htmlspecialchars($PID)));
+            $statement->execute(
+                array(
+                    ':sessionID' => htmlspecialchars($sessionID),
+                    ':PID' => htmlspecialchars($PID)
+                )
+            );
             $resultTable = $statement->fetchAll();
 
             $advisorFirstName = $resultTable[0]['AdvisorFirstName'];
@@ -435,16 +399,14 @@ class nominatorServiceImp implements nominatorService
             $timestamp = $resultTable[0]['Timestamp'];
             $numberOfSemestersAsGrad = $resultTable[0]['NumberOfSemestersAsGrad'];
             $phoneNumber = $resultTable[0]['PhoneNumber'];
-        }
-        catch (PDOException $ex)
-        {
+
+        } catch (PDOException $ex) {
             echo 'Exception when retrieve nominee info form for nominee with PID = ' . $PID . ': ';
             print_r($statement->errorInfo());
         }
 
         // Retrieve all the courseRecords.
-        try
-        {
+        try {
             $courseRecords = array();
 
             // Select all Course Records entries that match the given session ID and PID.
@@ -452,24 +414,26 @@ class nominatorServiceImp implements nominatorService
                                        FROM   CourseRecord
                                        WHERE  SessionID = :sessionID
                                        AND    PID = :nomineePID');
-            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                ':nomineePID' => htmlspecialchars($PID)));
+            $statement->execute(
+                array(
+                    ':sessionID' => htmlspecialchars($sessionID),
+                    ':nomineePID' => htmlspecialchars($PID)
+                )
+            );
             $resultTable = $statement->fetchAll();
+
 
             foreach ($resultTable as $result)
             {
-                array_push($courseRecords, new courseRecord($result['Name'], $result['Grade']));
+                array_push($courseRecords, new courseRecord($result['CourseName'], $result['Grade']));
             }
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving records for courses';
             print_r($statement->errorInfo());
         }
 
         // Retrieve all the publicationRecords.
-        try
-        {
+        try {
             $publicationRecords = array();
 
             // Select all Publication Records entries that match the given session ID and PID.
@@ -477,24 +441,24 @@ class nominatorServiceImp implements nominatorService
                                         FROM   PublicationRecord
                                         WHERE  SessionID = :sessionID
                                         AND    PID = :nomineePID');
-            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                                      ':nomineePID' => htmlspecialchars($PID)));
+            $statement->execute(
+                array(
+                    ':sessionID' => htmlspecialchars($sessionID),
+                    ':nomineePID' => htmlspecialchars($PID)
+                )
+            );
             $resultTable = $statement->fetchAll();
 
-            foreach ($resultTable as $result)
-            {
+            foreach ($resultTable as $result) {
                 array_push($publicationRecords, new publicationRecord($result['Title'], $result['Citation']));
             }
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving records for publications';
             print_r($statement->errorInfo());
         }
 
         // Retrieve all the previousAdvisorRecords.
-        try
-        {
+        try {
             $previousAdvisorRecords = array();
 
             // Select all previousAdvisor Records entries that match the given session ID and PID.
@@ -503,16 +467,13 @@ class nominatorServiceImp implements nominatorService
                                    WHERE  SessionID = :sessionID
                                    AND    PID = :nomineePID');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                                      ':nomineePID' => htmlspecialchars($PID)));
+                ':nomineePID' => htmlspecialchars($PID)));
             $resultTable = $statement->fetchAll();
 
-            foreach ($resultTable as $result)
-            {
+            foreach ($resultTable as $result) {
                 array_push($previousAdvisorRecords, new previousAdvisorRecord($result['AdvisorFirstName'], $result['AdvisorLastName'], $result['StartDate'], $result['EndDate']));
             }
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving records for previous advisors';
             print_r($statement->errorInfo());
         }

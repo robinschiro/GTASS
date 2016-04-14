@@ -41,6 +41,10 @@ class emailServiceImp implements emailService
         if($type == 3){
             $this->nominee2dayDeadlineReminder($to, $data);
         }
+        if($type == 4)
+        {
+            $this->sendEmailForNomineeApproval($to, $data);
+        }
 
     }
 
@@ -69,6 +73,17 @@ class emailServiceImp implements emailService
 //        } catch (InvalidArgumentException $e) {
 //            echo $e->getMessage() . 'Recipient: ' . $to;
 //        }
+    }
+
+    function sendEmailForNomineeApproval($to, $data)
+    {
+        $body = "Once of your nominees has submitted his/her information form.<br>
+                 Please click the following link to approve it: <br><br>
+                  
+                 gtass-1256.appspot.com?goToApproval=&pid=".$data[0]."&sessionID=".$data[1];
+        $subject = "Approval for Nominee Needed";
+            
+        $this->sendEmailThroughSendGrid($to, $subject, $body);
     }
 
     function sendEmailtoNominees($to, $data)

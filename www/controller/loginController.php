@@ -52,6 +52,12 @@ class loginController
                 header("Location: /account");
                 return;
             }
+            
+            if ( isset($_GET['approveNominee']) )
+            {
+                header('Location: /nominator/approveNominee?pid='.$_GET['pid'].'&sessionID='.$_GET['sessionID']);
+                return;
+            }
 
             //if logged in user is an admin
             if ($_SESSION['role'] == 1)

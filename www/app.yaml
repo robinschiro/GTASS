@@ -28,6 +28,9 @@ handlers:
 - url: /accountCtrl
   script: controller/accountController.php
 
+- url: /scoreCtrl
+  script: controller/scoreController.php
+
 - url: /admin/createSession
   script: view/createSession.php
 
@@ -37,7 +40,7 @@ handlers:
 - url: /admin/addNominators
   script: view/addNominatorsForm.php
 
-- url: /admin/allSessions
+- url: /gc/allSessions
   script: view/allSessionsView.php
 
 - url: /account
@@ -46,8 +49,8 @@ handlers:
 - url: /nominator/addNominees
   script: view/addNomineesForm.php
 
-- url: /nominator/approveNominees
-  script: view/approveNominees.php
+- url: /nominator/approveNominee
+  script: view/approveNominee.php
 
 - url: /nominator/incompleteNominations
   script: view/incompleteNominations.php

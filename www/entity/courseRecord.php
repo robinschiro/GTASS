@@ -22,5 +22,39 @@ class courseRecord
         $this->grade = $grade;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrade()
+    {
+        return $this->grade;
+    }
+
+    /**
+     * @param mixed $grade
+     */
+    public function setGrade($grade)
+    {
+        $this->grade = $grade;
+    }
+
+    
+
 
 }

@@ -44,8 +44,7 @@ $currentUser = $accountCtrl->getCurrentUser();
                     echo '
                     <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
                     <p class="sidebar" align="center"><a href="/admin/currentSession">Current Session</a></p>
-                    <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
-                    <p class="sidebar" align="center"><a href="/admin/allSessions">View All Sessions</a></p>';
+                    <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>';
 
                     break;
                 }
@@ -54,16 +53,15 @@ $currentUser = $accountCtrl->getCurrentUser();
                 {
                     echo '
                     <p class="sidebar" align="center"><a href="/gc/gcHome">Score Table</a></p>
-                    <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>';
-
+                    <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>
+                    <p class="sidebar" align="center"><a href="/gc/allSessions">View All Sessions</a></p>';
                     break;
                 }
 
                 case 3:
                 {
                     echo '
-                    <p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>
-                    <p class="sidebar" align="center"><a href="/nominator/approveNominees">Pending Approvals</a></p>';
+                    <p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>';
 
                     break;
                 }
