@@ -40,7 +40,7 @@ handlers:
 - url: /admin/addNominators
   script: view/addNominatorsForm.php
 
-- url: /admin/allSessions
+- url: /gc/allSessions
   script: view/allSessionsView.php
 
 - url: /account
