@@ -97,6 +97,17 @@ class nominatorController
             array_push($emailList, $e);
         }
 
+//        echo 'POST Data: <br>';
+//        print_r($_POST);
+//        echo '<br><br>';
+//
+//        echo 'CS Grad responses: <br>';
+//        print_r($csGradList);
+//        echo '<br><br>';
+//
+//        echo 'New Grad responses: <br>';
+//        print_r($newGradList);
+//        echo '<br><br>';
 
         for ($i = 0; $i < sizeof($fnameList); $i++) {
 
