@@ -64,11 +64,60 @@ $nominationForm = $controller->nominatorServ->getNominationForm($sessionID, $_GE
     echo '</tr>';
     echo '<tr>';
         echo '<td>COMPUTER SCIENCE MAJOR?</td>';
-        echo '<td>'; echo $nominationForm->nomineeIsCS; echo '<br>';
+        echo '<td>';
+
+            if (1 == $nominationForm->nomineeIsCS)
+            {
+                echo 'Yes';
+            }
+            else
+            {
+                echo 'No';
+            }
+
+        echo '</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td>NEW PHD STUDENT?</td>';
-        echo '<td>'; echo $nominationForm->nomineeIsNew;  echo '</td>';
+        echo '<td>NEW PHD STUDENT?</td>';
+        echo '<td>';
+
+            if (1 == $nominationForm->nomineeIsNew)
+            {
+                echo 'Yes';
+            }
+            else
+            {
+                echo 'No';
+            }
+
+        echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+        echo '<td>PASSED SPEAK EXAM?</td>';
+        echo '<td>';
+
+        switch ($nomineeInfoForm->passedSPEAK)
+        {
+            case 0:
+            {
+                echo 'No';
+                break;
+            }
+
+            case 1:
+            {
+                echo 'Yes';
+                break;
+            }
+
+            case 2:
+            {
+                echo 'Graduated from U.S. institution';
+                break;
+            }
+        }
+
+        echo '</td>';
     echo '</tr>';
     echo '<tr>';
         echo '<td>STUDENT RANK</td>';

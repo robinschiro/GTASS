@@ -32,9 +32,14 @@ class scoreTableServiceImp implements scoreTableService
         try
         {
             // Select all NominationForm entries that match the given session ID.
-            $statement = $db->prepare('SELECT SessionID, PID, NominatorID, FirstName, LastName, EmailAddress, Ranking, IsCSGradStudent, IsNewGradStudent, Timestamp
-                                   FROM   NominationForm 
-                                   WHERE  SessionID = :sessionID');
+            $statement = $db->prepare('SELECT U.LastName as NominatorLast, U.FirstName as NominatorFirst,  NF.Ranking,
+                                               NF.SessionID, NF.PID, NF.NominatorID, NF.FirstName, 
+                                               NF.LastName, NF.EmailAddress, NF.IsCSGradStudent, 
+                                               NF.IsNewGradStudent, NF.Timestamp 
+                                        FROM   NominationForm NF, User U
+                                        WHERE  SessionID = :sessionID
+                                        AND    NF.NominatorID = U.UserID
+                                        ORDER BY NominatorLast, NominatorFirst, NF.Ranking');
             $statement->execute(array(':sessionID' => htmlspecialchars($sessionID)));
             $resultTable = $statement->fetchAll();
 
