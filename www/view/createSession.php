@@ -47,7 +47,7 @@ if ($_SESSION['role'] != 1) {
 <div class="CENTER">
 <p class="Form" align="left">
   Session Creation
-  <form action="/adminCtrl" method="POST">
+  <form action="/adminCtrl" method="POST" onsubmit="return validateForms();">
       <p class="information">
         Semester:
         <select name="Semester">
@@ -69,9 +69,9 @@ if ($_SESSION['role'] != 1) {
         <br><br>
 
         <!--Date Picker -->
-        Nomination Deadline:   <input type="date" placeholder="insert date time" name="nomDeadline"><br>
-        Response Deadline:     <input type="date" placeholder="insert date time" name="resDeadline"><br>
-        Verification Deadline: <input type="date" placeholder="insert date time" name="verDeadline"><br>
+        Nomination Deadline:   <input type="date" id="requi" placeholder="insert date time" name="nomDeadline"><br>
+        Response Deadline:     <input type="date" id="requi" placeholder="insert date time" name="resDeadline"><br>
+        Verification Deadline: <input type="date" id="requi" placeholder="insert date time" name="verDeadline"><br>
 
         <br><br><br>
 
@@ -79,11 +79,11 @@ if ($_SESSION['role'] != 1) {
 
         <!--dynamically adding new fields-->
         <div id="dynamicInput">
-            GC: <input type="text" placeholder="username" name="uname[0]">
-            <input type="password" placeholder="password" name="password[0]">
-            <input type="text" placeholder="first name" name="firstname[0]">
-            <input type="text" placeholder="last name" name="lastname[0]">
-            <input type="text" placeholder="email" name="email[0]">
+            GC: <input type="text" id="requi" placeholder="username" name="uname[0]">
+            <input type="password" id="requi" placeholder="password" name="password[0]">
+            <input type="text" id="requi" placeholder="first name" name="firstname[0]">
+            <input type="text" id="requi" placeholder="last name" name="lastname[0]">
+            <input type="text" id="requi" placeholder="email" name="email[0]">
             Chairman <input type="radio" value="0" id ="chair[0]" name="chairmanBool" checked="checked">
 			<input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
             <br><br>
@@ -116,6 +116,7 @@ if ($_SESSION['role'] != 1) {
 </div>
 <!--javascript-->
 <script src="../public/js/addInput.js" language="Javascript" type="text/javascript"></script>
+<script src="../public/js/InputValidation.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

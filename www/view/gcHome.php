@@ -39,6 +39,11 @@ $sessionID = $currentSession->getSemester();
     <head>
         <link href="../public/stylesheets/common.css" type="text/css" rel="stylesheet" >
         <title>Score Table</title>
+        <!--<script>
+            function myFunction() {
+
+            }
+        </script>-->
     </head>
 
     <body>
@@ -55,19 +60,28 @@ $sessionID = $currentSession->getSemester();
                 <p class="sidebar" align="center"><a href="/gc/allSessions">View All Sessions</a></p>
             </div>
 
-            <div class="CENTER" id="tableview">
-                <p class="Form" align="left">
-                    <?php echo 'Score Table for ' . $sessionID; ?>
-                </p>
+
 
                 <?php
                     $isReadOnly = false;
-                    include '../view/scoreTable.php';
+                if ( is_null($session) )
+                {
+                    echo "<script> alert('There Is No Session That Is Currently Open'); </script>";
+                }
+                else
+                {
+                echo '<div class="CENTER" id="tableview">
+                        <p class="Form" align="left">
+                        Score Table for ' . $sessionID;
+                echo '</p>
+                    include "../view/scoreTable.php"';
+
+                    echo '<br><br>
+                    </div>';
+                }
                 ?>
 
 
-                <br><br>
-            </div>
 
 
             <!-- end center div -->
