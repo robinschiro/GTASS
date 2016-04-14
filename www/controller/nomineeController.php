@@ -72,7 +72,10 @@ class nomineeController
 
         // Send email to nominator.
         $nominatorEmailAddress = $this->userServ->getUserByID($this->nominatorServ->getNominationForm($currentSessionID, $nomineePID)->getNominatorID())->getEmail();
-        $this->emailServ->sendEmail($nominatorEmailAddress, 4, $nomineePID);
+        $data = array();
+        $data[0] = $nomineePID;
+        $data[1] = $currentSessionID;
+        $this->emailServ->sendEmail($nominatorEmailAddress, 4, $data);
         
         // Display a success message.
         $_SESSION['message'] = '<br> Your information form has been successfully submitted. <br><br>';

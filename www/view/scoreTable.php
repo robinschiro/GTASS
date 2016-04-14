@@ -99,7 +99,7 @@ $gcCurrentMember = $controller->userServ->getUserByUsername($_SESSION['username'
 
                 echo '<tr>';
                 echo '<td>' . $scoreRow->getNominatorFirstName() . ' ' . $scoreRow->getNominatorLastName() . '</td>';
-                echo '<td><a href="/clicked?pid='. $scoreRow->getNominationForm()->getNomineePID() .'" onClick="return popup(this, \'Nominee Information\')">' . $scoreRow->getNominationForm()->getNomineeFirstName() . ' ' . $scoreRow->getNominationForm()->getNomineeLastName() . '</a></td>';
+                echo '<td><a href="/clicked?pid='. $scoreRow->getNominationForm()->getNomineePID() .'&sessionID='.$sessionID.'" onClick="return popup(this, \'Nominee Information\')">' . $scoreRow->getNominationForm()->getNomineeFirstName() . ' ' . $scoreRow->getNominationForm()->getNomineeLastName() . '</a></td>';
                 echo '<td>' . $scoreRow->getNominationForm()->getNomineeRank() . '</td>';
                 echo '<td>' . $scoreRow->getNominationForm()->getNomineeIsNew() . '</td>';
 

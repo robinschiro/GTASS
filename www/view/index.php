@@ -18,7 +18,15 @@
     <p class="login">
         User Login
     </p>
-    <form action="/login" method="POST">
+
+    <?php
+    if ( isset($_GET['goToApproval']) )
+    {
+        $GETVariableString = '?approveNominee=&pid='.$_GET['pid'].'&sessionID='.$_GET['sessionID'];
+    }
+    ?>
+
+    <form <?php echo 'action="/login'.$GETVariableString.'"'; ?> method="POST">
         <div class="inputBoxBorders">
             Username: <input id="username" type="text" name="username" class="textBoxes" required="required">
             <br><br>

@@ -18,9 +18,9 @@ if( ($roleID < 1) || ($roleID > 3) )
 require_once ('../controller/gcMemberController.php');
 
 $controller = new gcMemberController();
-$currentSessionID = $controller->sessionServ->getCurrentSession()->getSemester();
-$nomineeInfoForm = $controller->nominatorServ->getNomineeInfoForm($currentSessionID, $_GET['pid']);
-$nominationForm = $controller->nominatorServ->getNominationForm($currentSessionID, $_GET['pid']);
+$sessionID = $_GET['sessionID'];
+$nomineeInfoForm = $controller->nominatorServ->getNomineeInfoForm($sessionID, $_GET['pid']);
+$nominationForm = $controller->nominatorServ->getNominationForm($sessionID, $_GET['pid']);
 ?>
 
 

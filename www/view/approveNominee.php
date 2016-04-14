@@ -46,7 +46,7 @@
 			<div class="LEFT">
 				<p class="sidebar" align="center"><a href="/account">My Account</a></p>
 				<p class="sidebar" align="center"><a href="/nominator/addNominees">Add Nominees</a></p>
-				<p class="sidebar_selected" align="center">Pending Approvals</p>
+				<p class="sidebar_selected" align="center">Pending Approval</p>
 			</div>
 
 			<?php

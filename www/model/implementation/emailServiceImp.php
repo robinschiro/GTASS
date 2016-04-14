@@ -80,7 +80,7 @@ class emailServiceImp implements emailService
         $body = "Once of your nominees has submitted his/her information form.<br>
                  Please click the following link to approve it: <br><br>
                   
-                 gtass-1256.appspot.com/nominator/approveNominee?pid=".$data;
+                 gtass-1256.appspot.com?goToApproval=&pid=".$data[0]."&sessionID=".$data[1];
         $subject = "Approval for Nominee Needed";
             
         $this->sendEmailThroughSendGrid($to, $subject, $body);
