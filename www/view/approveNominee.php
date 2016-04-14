@@ -49,19 +49,40 @@
 			</div>
 
 			<?php
-				include_once 'ClickedNom.php';
+				if ( isset($_GET ['approvalSubmitted']) )
+				{
+					?>
+
+					<div class="CENTER">
+
+						<p class="Form" align="left">
+							<?php echo $_SESSION['message'];?>
+						</p>
+					</div>
+					<?php
+				}
+				else
+				{
+					?>
+
+					<?php
+					include_once 'ClickedNom.php';
+					?>
+
+					<form action="/nominatorCtrl" method="POST">
+
+						<input type="hidden" name="sid" value="<?php echo $currentSessionID ?>" readonly>
+						<input type="hidden" name="pid" value="<?php echo $_GET['pid'] ?>" readonly>
+						<input type="hidden" name="approve">
+
+						<p class="submit" align="center">
+							<input type="submit" value="Approve">
+						</p>
+					</form>
+
+					<?php
+				}
 			?>
-
-			<form action="/nominatorCtrl" method="POST">
-
-				<input type="hidden" name="sid" value="<?php echo $currentSessionID ?>" readonly>
-				<input type="hidden" name="pid" value="<?php echo $_GET['pid'] ?>" readonly>
-				<input type="hidden" name="approve">
-
-				<p class="submit" align="center">
-					<input type="submit" value="Approve">
-				</p>
-			</form>
 		</div>
 	</body>
 </html>

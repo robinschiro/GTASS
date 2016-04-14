@@ -43,12 +43,7 @@ if($_SESSION['role'] != 3)
     </div>
 
     <div class="CENTER">
-    <!--
-        get username from session variable
-        get session from query
-        in email use pid to create url
-            - /nomineeApplication?id={PID}
-     -->
+
      <p class="Form" align="left">
          Add Nominees
 

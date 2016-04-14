@@ -72,7 +72,19 @@ class nomineeController
         $this->nominatorServ->createNomineeInfoForm($currentSessionID, $nomineePID, $advisorFirstName, $advisorLastName, $previousAdvisors, $phoneNumber, $passedSPEAK, $numberOfSemestersAsGradStudent, $numberOfSemestersAsGTA, $GPA, $courseNames, $courseGrades, $pubTitles, $pubCitations);
 
         // Send email to nominator.
-        $nominatorEmailAddress = $this->userServ->getUserByID($this->nominatorServ->getNominationForm($currentSessionID, $nomineePID)->getNominatorID())->getEmail();
+        $nomForm = $this->nominatorServ->getNominationForm($currentSessionID, $nomineePID);
+        $nomUser = $this->userServ->getUserByID($nomForm->getNominatorID());
+        $nominatorEmailAddress = $nomUser->getEmail();
+
+//        echo 'Form: <br><br>';
+//        print_r($nomForm);
+//
+//        echo 'User: <br><br>';
+//        print_r($nomUser);
+//
+//        echo 'Email: <br><br>';
+//        print_r($nominatorEmailAddress);
+
         $data = array();
         $data[0] = $nomineePID;
         $data[1] = $currentSessionID;
@@ -82,10 +94,12 @@ class nomineeController
         //compare response deadline to now
         $responseDeadlineObj = new DateTime($currentSession->getResponseDeadline());
         $now = new DateTime();
-        $diff = $now->diff($responseDeadlineObj);
+        $diff = $responseDeadlineObj->diff($now);
+        $dayDiff = (int)$diff->format("%r%a");
 
-        //is it more than 2 days until the response deadline
-        if ($diff->days > 0) {
+        //If it is past the deadline.
+        if ($dayDiff > 0)
+        {
             //not time to send out emails
             $additionalMsg = 'Missed Deadline: Your form has been submitted past the response deadline.<br><br>';
         }

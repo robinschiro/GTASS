@@ -306,6 +306,11 @@ class nominatorServiceImp implements nominatorService
                 ':PID' => htmlspecialchars($PID)));
             $resultTable = $statement->fetchAll();
 
+//            echo 'Arguments: <br><br>'.'SessionID: '.$sessionID.'<br> PID: '.$PID;
+//
+//            echo 'Results: <br><br>';
+//            print_r($resultTable);
+
             // Create a NominationForm object from the results.
             $nominatorID = $resultTable[0]['NominatorID'];
             $nomineeFirstName = $resultTable[0]['FirstName'];

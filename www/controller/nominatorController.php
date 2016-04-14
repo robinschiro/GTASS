@@ -136,14 +136,14 @@ class nominatorController
         }
 
         // Check if the form has been submitted before the deadline.
-        //compare response deadline to now
         $nomDeadlineObj = new DateTime($currentSession->getNominationDeadline());
         $now = new DateTime();
-        $diff = $now->diff($nomDeadlineObj);
+        $diff = $nomDeadlineObj->diff($now);
+        $dayDiff = (int)$diff->format("%r%a");
 
-        //is it more than 2 days until the response deadline
-        if ($diff->days > 0) {
-            //not time to send out emails
+        //If it is past the deadline.
+        if ($dayDiff > 0)
+        {
             $additionalMsg = 'Missed Deadline: Your nominations have been submitted past the nomination deadline.<br><br>';
         }
 
@@ -163,12 +163,25 @@ class nominatorController
         $sid = $_POST['sid'];
         $pid = $_POST['pid'];
 
-        //echo '<br>sid = ' . $sid . '<br>pid = ' . $pid;
-
         $this->nominationServ->updateNominationFormStatus($sid, $pid, 1);
 
+        // Check if the form has been submitted before the deadline.
+        $verificationDeadlineObj = new DateTime($this->sessionServ->getCurrentSession()->getVerificationDeadline());
+        $now = new DateTime();
+        $diff = $verificationDeadlineObj->diff($now);
+        $dayDiff = (int)$diff->format("%r%a");
+
+        //is it more than 2 days until the deadline
+        if ($dayDiff > 0)
+        {
+            $additionalMsg = 'Missed Deadline: Your approval has been submitted past the verification deadline.<br><br>';
+        }
+
+        // Display a success message.
+        $_SESSION['message'] = '<br> Your approval has been successfully submitted. <br><br>'.$additionalMsg;
+
         // Redirect to addNominatorsForm page.
-        header('Location: /nominator/addNominees');
+        header('Location: /nominator/approveNominee?approvalSubmitted=');
     }
 
 }
