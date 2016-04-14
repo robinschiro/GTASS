@@ -16,6 +16,9 @@ if (isset($_POST['createNominationForms'])) {
 
     $nomCtrl = new nominatorController();
     $nomCtrl->nominateUsers();
+} elseif (isset($_POST['approve'])) {
+    $nomCtrl = new nominatorController();
+    $nomCtrl->approveNominee();
 }
 
 class nominatorController
@@ -115,8 +118,7 @@ class nominatorController
 
             //Send email to existing students
             //pid used in link
-            if($newGradList[$i] == 0)
-            {
+            if ($newGradList[$i] == 0) {
                 $this->emailServ->sendEmail($emailList[$i], 2, $pidList[$i]);
             }
         }
@@ -128,4 +130,21 @@ class nominatorController
         header('Location: /nominator/addNominees');
 
     }
+
+    /**
+     * Approves the application submitted by the nominee
+     */
+    function approveNominee()
+    {
+        $sid = $_POST['sid'];
+        $pid = $_POST['pid'];
+
+        //echo '<br>sid = ' . $sid . '<br>pid = ' . $pid;
+
+        $this->nominationServ->updateNominationFormStatus($sid, $pid, 1);
+
+        // Redirect to addNominatorsForm page.
+        header('Location: /nominator/addNominees');
+    }
+
 }

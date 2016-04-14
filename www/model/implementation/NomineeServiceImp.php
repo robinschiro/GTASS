@@ -13,16 +13,14 @@ class NomineeServiceImp implements NomineeService
 {
     function getNomineeInfo($sessionID, $PID)
     {
-      //Retrieve access to database
+        //Retrieve access to database
         $db = db_connect();
-        if (NULL == $db)
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
 
-        try
-        {
+        try {
             $statement = $db->prepare('SELECT SessionID, PID, AdvisorFirstName, AdvisorLastName, NumberOfSemestersAsGTA, PassedSpeak, GPA, Timestamp, NumberOfSemestersAsGrad, PhoneNumber
                                         FROM NomineeInfoForm
                                         WHERE SessionID = :sessionID AND PID = :PID');
@@ -43,9 +41,7 @@ class NomineeServiceImp implements NomineeService
 
 
             return new nomineeInfoForm($sessionID, $pID, $advisorFirstName, $advisorLastName, $numberOfSemestersAsGTA, $passedSpeak, $gpa, $timestamp, $numberOfSemestersAsGrad, $phoneNumber);
-        }
-        catch (PDOException $ex)
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving nomination form with session ID = ' . $sessionID . ' and student PID = ' . $PID . ': <br>';
             print_r($statement->errorInfo());
         }
@@ -58,8 +54,7 @@ class NomineeServiceImp implements NomineeService
 
         // Retrieve access to the database.
         $db = db_connect();
-        if ( NULL == $db )
-        {
+        if (NULL == $db) {
             echo '<br> Null db <br>';
             return;
         }
@@ -82,8 +77,12 @@ class NomineeServiceImp implements NomineeService
                                    FROM   CourseRecord 
                                    WHERE  SessionID = :sessionID
                                    AND    PID = :nomineePID');
-            $statement->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                ':nomineePID' => htmlspecialchars($PID)));
+            $statement->execute(
+                array(
+                    ':sessionID' => htmlspecialchars($sessionID),
+                    ':nomineePID' => htmlspecialchars($PID)
+                )
+            );
             $resultTable = $statement->fetchAll();
 
             /*
@@ -91,15 +90,12 @@ class NomineeServiceImp implements NomineeService
              */
             $courses = array();
 
-            foreach ($resultTable as $result) 
-            {
+            foreach ($resultTable as $result) {
                 $courses[$result['CourseName']] = $result['Grade'];
             }
-            
+
             array_push($recordsArray, $courses);
-        }
-        catch ( PDOException $ex )
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving scores and comments: <br>';
             print_r($statement->errorInfo());
         }
@@ -121,16 +117,13 @@ class NomineeServiceImp implements NomineeService
             $Titles = array();
 
             $numTitles = sizeof($resultTable1);
-            for ($i = 0; $i < $numTitles; $i++)
-            {
+            for ($i = 0; $i < $numTitles; $i++) {
                 $currentTitle = $resultTable1[$i]['Title'];
                 array_push($Titles, $currentTitle);
             }
 
             array_push($recordsArray, $Titles);
-        }
-        catch ( PDOException $ex )
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving scores and comments: <br>';
             print_r($statement->errorInfo());
         }
@@ -141,15 +134,18 @@ class NomineeServiceImp implements NomineeService
                                    FROM   PreviousAdvisorRecord 
                                    WHERE  SessionID = :sessionID
                                    AND    PID = :nomineePID');
-            $statement2->execute(array(':sessionID' => htmlspecialchars($sessionID),
-                ':nomineePID' => htmlspecialchars($PID)));
+            $statement2->execute(
+                array(
+                    ':sessionID' => htmlspecialchars($sessionID),
+                    ':nomineePID' => htmlspecialchars($PID)
+                )
+            );
             $resultTable2 = $statement2->fetchAll();
 
             $advisor = array();
 
             $numAdvisors = sizeof($resultTable2);
-            for ($i = 0; $i < $numAdvisors; $i++)
-            {
+            for ($i = 0; $i < $numAdvisors; $i++) {
                 $currentAdvisorFirst = $resultTable2[$i]['AdvisorFirstName'];
                 //$currentAdvisorLast = $resultTable2[$i]['AdvisorLastName'];
                 //$currentAdvisorStart = $resultTable2[$i]['StartDate'];
@@ -158,14 +154,16 @@ class NomineeServiceImp implements NomineeService
             }
 
             array_push($recordsArray, $advisor);
-        }
-        catch ( PDOException $ex )
-        {
+        } catch (PDOException $ex) {
             echo 'Exception when retrieving scores and comments: <br>';
             print_r($statement2->errorInfo());
         }
 
-
+        /*
+         * $recordsArray[0] => NomineeInfoForm object
+         * $recordsArray[1] =>
+         *
+         */
         return $recordsArray;
 
     }
