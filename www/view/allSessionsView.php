@@ -3,11 +3,11 @@
 session_start();
 
 //check role of user
-if ($_SESSION['role'] != 1) {
-    //if logged in user is a GC member
-    if ($_SESSION['role'] == 2) {
-        //redirect to GC view
-        header("Location: /gc/gcHome");
+if ($_SESSION['role'] != 2) {
+    //if logged in user is ADMIN
+    if ($_SESSION['role'] == 1) {
+        //redirect to ADMIN home view
+        header("Location: /admin/currentSession");
     } // If logged in as nominator
     else if ($_SESSION['role'] == 3) {
         header("Location: /nominator/addNominees");
@@ -40,14 +40,13 @@ $ScoreCtrl = new scoreController();
 
 
 <div class="TOP" align="right">
-    <?php echo 'Signed in as ' . $_SESSION['username'] . ' (admin)'; ?><br>
+    <?php echo 'Signed in as ' . $_SESSION['username']; ?><br>
     <a href="/logout">Sign out</a>
 </div>
 <div class="LEFT">
     <p class="sidebar" align="center"><a href="/account">My Account</a></p>
-    <p class="sidebar" align="center"><a href="/admin/createSession">Create Session</a></p>
-    <p class="sidebar" align="center"><a href="/admin/currentSession">Current Session</a></p>
-    <p class="sidebar" align="center"><a href="/admin/addNominators">Add Nominators</a></p>
+    <p class="sidebar" align="center"><a href="/gc/gcHome">Score Table</a></p>
+    <p class="sidebar" align="center"><a href="/gc/incompleteNominations">Incomplete Nominations</a></p>
     <p class="sidebar_selected" align="center">View All Sessions</p>
 </div>
 
