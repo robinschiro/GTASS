@@ -53,7 +53,7 @@ if($_SESSION['role'] != 3)
      <p class="Form" align="left">
          Add Nominees
 
-        <form action="/nominatorCtrl" method="post">
+        <form action="/nominatorCtrl" method="post" onsubmit="return validateForms();">
 
         <p class="information">
             <?php
@@ -64,15 +64,15 @@ if($_SESSION['role'] != 3)
 
         <div id="dynamicInput">
             First Name:
-            <input type="text" name="fname[0]" placeholder="Nominee's First Name" id="fname">
+            <input type="text" id="requi" name="fname[0]" placeholder="Nominee's First Name" id="fname">
             Last Name:
-            <input type="text" name="lname[0]" placeholder="Nominee's Last Name" id="lname">
+            <input type="text" id="requi" name="lname[0]" placeholder="Nominee's Last Name" id="lname">
             PID:
-            <input type="text" name="pid[0]" placeholder="Nominee's PID" id="pid">
+            <input type="text" id="requi" name="pid[0]" placeholder="Nominee's PID" id="pid">
             Email:
-            <input type="text" name="email[0]" placeholder="Nominee's Email" id="email"><br>
+            <input type="text" id="requi" name="email[0]" placeholder="Nominee's Email" id="email"><br>
             Nominee's Rank:
-            <input type="number" name="rank[0]" placeholder="Rank" min="0" id="rank">
+            <input type="number" id="requi" name="rank[0]" placeholder="Rank" min="0" id="rank">
 
             CS Graduate:
             <select name="csgrad[0]">
@@ -122,6 +122,7 @@ if($_SESSION['role'] != 3)
 
 <!--javascript-->
 <script src="../public/js/addInputAddNominees.js" language="Javascript" type="text/javascript"></script>
+<script src="../public/js/InputValidation.js" language="Javascript" type="text/javascript"></script>
 
 </body>
 </html>

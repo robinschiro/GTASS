@@ -22,6 +22,13 @@ if($_SESSION['role'] != 1)
     }
 }
 ?>
+<?php
+require_once ('../controller/adminController.php');
+
+$controller = new adminController();
+$session = $controller->sessionServ->getCurrentSession();
+
+?>
 
 <html>
 <head>
@@ -47,8 +54,16 @@ if($_SESSION['role'] != 1)
     <div class="CENTER">
         <p class="Form" align="left">
             Add Nominators
-        <form action="/adminCtrl" method="POST">
+        <form name="test" action="/adminCtrl" method="POST" onsubmit="return validateForms();">
+            <?php
 
+            if ( is_null($session) )
+            {
+            echo 'There is no session that is currently open.';
+            }
+            else
+            {
+                ?>
             <p class="information">
                 <?php
                     echo $_SESSION['message'];
@@ -58,11 +73,11 @@ if($_SESSION['role'] != 1)
 
             <div id="dynamicInput">
                 <!--dynamically adding new fields-->
-                Nominator: <input type="text" placeholder="username" name="uname[0]">
-                <input type="password" placeholder="password" name="password[0]">
-                <input type="text" placeholder="first name" name="firstname[0]">
-                <input type="text" placeholder="last name" name="lastname[0]">
-                <input type="text" placeholder="email" name="email[0]">
+                Nominator: <input type="text" id="requi" placeholder="username" name="uname[0]">
+                <input type="password" id="requi" placeholder="password" name="password[0]">
+                <input type="text" id="requi" placeholder="first name" name="firstname[0]">
+                <input type="text" id="requi" placeholder="last name" name="lastname[0]">
+                <input type="text" id="requi" placeholder="email" name="email[0]">
                 <input type="button" value="Remove" name="remove[0]" onclick="removeFirst('dynamicInput');">
                 <br><br>
             </div>
@@ -84,6 +99,9 @@ if($_SESSION['role'] != 1)
 
             <!-- Initially 1 will be incremented each time a new gc member is added -->
             <input type="hidden" name="count" value="1" id="gcCount">
+        <?php
+        }
+        ?>
 
         </form>
 
@@ -96,6 +114,6 @@ if($_SESSION['role'] != 1)
 
 <!--javascript-->
 <script src="../public/js/addInputAddNominators.js" language="Javascript" type="text/javascript"></script>
-
+<script src="../public/js/InputValidation.js" language="Javascript" type="text/javascript"></script>
 </body>
 </html>

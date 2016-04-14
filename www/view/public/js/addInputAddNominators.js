@@ -4,11 +4,11 @@ function addInput(divName)
   var newdiv = document.createElement('div');
 
   newdiv.innerHTML = "Nominator: " +
-  "<input type='text' placeholder='username' name='uname[" + counter + "]'>" + " " +
-  "<input type='password' placeholder='password' name='password[" + counter + "]'>" + " " +
-  "<input type='text' placeholder='first name' name='firstname[" + counter + "]'>" + " " +
-  "<input type='text' placeholder='last name' name='lastname[" + counter + "]'>" + " " +
-  "<input type='text' placeholder='email' name='email[" + counter + "]'>" + " " +
+  "<input type='text'  id='requi' placeholder='username' name='uname[" + counter + "]'>" + " " +
+  "<input type='password' id='requi' placeholder='password' name='password[" + counter + "]'>" + " " +
+  "<input type='text' id='requi' placeholder='first name' name='firstname[" + counter + "]'>" + " " +
+  "<input type='text' id='requi' placeholder='last name' name='lastname[" + counter + "]'>" + " " +
+  "<input type='text' id='requi' placeholder='email' name='email[" + counter + "]'>" + " " +
   "<input type='button' value='Remove' name='remove['" + counter + "']' onclick='this.parentNode.parentNode.removeChild(this.parentNode);removeOthers();'> " + " <br><br>";
 
   document.getElementById(divName).appendChild(newdiv);
