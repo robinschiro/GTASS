@@ -30,7 +30,8 @@ class nomineeController
     function createNomineeInfoForms()
     {
         //get current session and pid.
-        $currentSessionID = $this->sessionServ->getCurrentSession()->getSemester();
+        $currentSession = $this->sessionServ->getCurrentSession();
+        $currentSessionID = $currentSession->getSemester();
         $nomineePID = $_POST['nomineePID'];
 
         //initialize arrays for form values
@@ -76,9 +77,21 @@ class nomineeController
         $data[0] = $nomineePID;
         $data[1] = $currentSessionID;
         $this->emailServ->sendEmail($nominatorEmailAddress, 4, $data);
-        
+
+        // Check if the form has been submitted before the deadline.
+        //compare response deadline to now
+        $responseDeadlineObj = new DateTime($currentSession->getResponseDeadline());
+        $now = new DateTime();
+        $diff = $now->diff($responseDeadlineObj);
+
+        //is it more than 2 days until the response deadline
+        if ($diff->days > 0) {
+            //not time to send out emails
+            $additionalMsg = 'Missed Deadline: Your form has been submitted past the response deadline.<br><br>';
+        }
+
         // Display a success message.
-        $_SESSION['message'] = '<br> Your information form has been successfully submitted. <br><br>';
+        $_SESSION['message'] = '<br> Your information form has been successfully submitted. <br><br>'.$additionalMsg;
 
         // Redirect to addNominatorsForm page.
         header('Location: /nomineeForm');

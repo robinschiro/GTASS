@@ -54,7 +54,8 @@ class nominatorController
     function nominateUsers()
     {
         //get current session
-        $currentSession = $this->sessionServ->getCurrentSession()->getSemester();
+        $currentSession = $this->sessionServ->getCurrentSession();
+        $currentSessionID = $currentSession->getSemester();
 
         //initialize arrays for form values
         $fnameList = array();
@@ -116,7 +117,7 @@ class nominatorController
 
             $this->nominationServ->createNominationForm
             (
-                $currentSession,
+                $currentSessionID,
                 $pidList[$i],
                 $_SESSION['userID'],
                 $fnameList[$i],
@@ -134,8 +135,20 @@ class nominatorController
             }
         }
 
+        // Check if the form has been submitted before the deadline.
+        //compare response deadline to now
+        $nomDeadlineObj = new DateTime($currentSession->getNominationDeadline());
+        $now = new DateTime();
+        $diff = $now->diff($nomDeadlineObj);
+
+        //is it more than 2 days until the response deadline
+        if ($diff->days > 0) {
+            //not time to send out emails
+            $additionalMsg = 'Missed Deadline: Your nominations have been submitted past the nomination deadline.<br><br>';
+        }
+
         // Display a success message.
-        $_SESSION['message'] = '<br> All students have been successfully nominated. <br><br>';
+        $_SESSION['message'] = '<br> All students have been successfully nominated. <br><br>'.$additionalMsg;
 
         // Redirect to addNominatorsForm page.
         header('Location: /nominator/addNominees');
