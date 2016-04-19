@@ -1,0 +1,56 @@
+GC MEMBERS
+
+	GCChair2:
+			Rick Stevens
+
+	GCMember3:
+			Arup Guha 
+
+
+NOMINATORS
+
+	Nominator3: 
+			Daniel Smith
+
+	Nominator4:
+			Ashley Williams
+
+
+NOMINEES
+
+	Nominator Three: Daniel Smith
+						Julian Rojas | PID: j123 isNew: YES
+						Robin Schiro | PID: r456 
+						
+	Nominator Four : Ashley Williams
+						Sammy Roman | PID: s789
+						Alex Saint  | PID: a000
+
+
+Go into Link for two students from same Nominator:
+
+Daniel Smith Nominator3
+
+First:
+
+Biology  	A
+Psychology 	C
+GPA: 3
+
+My Advisor1 
+My Advisor2
+
+Title1 Cita1
+
+Second:
+
+Spanish 	D
+Calc1 		A
+GPA: 2.5
+
+My Advisor3
+
+Title2 Cita2
+
+
+
